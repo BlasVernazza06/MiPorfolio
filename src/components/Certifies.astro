@@ -1,0 +1,87 @@
+---
+import { getCollection } from 'astro:content'
+
+const certifiesRaw = await getCollection('certifies')
+const certifies = certifiesRaw.map((item) => item.data)
+---
+
+<div class="">
+    <span class='[&>strong]:text-blue-500 [&>span]:text-orange-500 
+    dark:[&>strong]:text-[#2cc9ff] dark:[&>span]:text-[#f5a563]
+    [&>span]:font-bold'>
+        A lo largo de mi formación profesional, he completado cursos que fortalecieron mis <strong>habilidades técnicas</strong> y <strong>prácticas</strong>. Estas certificaciones respaldan mi conocimiento en tecnologías como JavaScript, React, Node.js, <span>bases de datos</span> y <span>metodologías ágiles</span>, permitiéndome abordar proyectos de forma integral y con una visión moderna del desarrollo web.
+    </span>
+    <div class="grid grid-cols-1 md:grid-cols-2 grid-rows-2 gap-7 pt-6">
+        {certifies.map((certifie) => (
+            <div class="flip-card 
+                bg-[rgba(132,211,145,0.27)]
+                dark:bg-[rgba(176,253,189,0.08)] 
+                border border-transparent 
+                dark:border-[1px] 
+                dark:border-[rgba(171,207,177,0.2)] 
+                shadow-lg 
+                dark:shadow-[0_0_8px_rgba(171,207,177,0.1)] 
+                rounded-2xl 
+                transition-all 
+                duration-300 
+                backdrop-blur-sm
+                p-4 
+                hover:scale-105 
+                hover:shadow-[0_6px_30px_rgba(171,207,177,0.6)] 
+                dark:hover:shadow-[0_0_25px_rgba(0,255,128,0.5)]">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <div class="">
+                            <p class="text-xl font-bold pb-2 dark:text-green-400">{certifie.title}</p>
+                            <span class="text-xs text-gray-500 dark:text-white">{certifie.description}</span>
+                        </div>
+                    </div>
+                    <div class="flip-card-back">
+                        <a href={certifie.pdf} target="_blank" class="flex items-center justify-center h-full">
+                            <div class="text-center">
+                                <p class="text-lg font-semibold">Haz click para descargar certificado</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        ))}
+    </div>
+</div>
+
+<style>
+    .flip-card {
+        perspective: 1000px;
+        height: 200px;
+    }
+
+    .flip-card-inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        transition: transform 0.6s;
+        transform-style: preserve-3d;
+    }
+
+    .flip-card:hover .flip-card-inner {
+        transform: rotateY(180deg);
+    }
+
+    .flip-card-front, .flip-card-back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .flip-card-back {
+        transform: rotateY(180deg);
+        background-color: rgba(90, 129, 97, 0.5);
+        border-radius: 2rem;
+    }
+</style>

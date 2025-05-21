@@ -1,0 +1,119 @@
+---
+import { getCollection } from 'astro:content'
+
+const skillsRaw = await getCollection('techStack')
+const skills = skillsRaw.map((item) => item.data)
+---
+
+<div class="relative gap-20 md:flex-row md:justify-center md:flex-wrap md:items-center md:gap-20">
+    <header class="tech-header-container flex flex-col flex-warp justify-center pb-6">
+            <span class='text-l text-pretty font-normal dark:[&>strong]:text-[#2cc9ff] [&>strong]:text-blue-500 [&>span]:text-orange-500 [&>span]:font-bold dark:[&>strong]:text-p dark:[&>span]:text-[#f5a563]'>
+                Trabajo con herramientas como <strong>React</strong>, <strong>Firebase</strong>, <strong>Tailwind </strong> y <strong>JavaScript</strong> para crear experiencias web dinámicas y eficientes.
+                También tengo habilidades en <span>diseño responsivo</span>, manejo de <span>versionado con Git</span> y enfoque en buenas prácticas de desarrollo.
+            </span>
+    </header>
+    <div class="grid-tech">
+        {skills.map((tech) => (
+            <div class="tech-cards px-[20px] pt-[20px] pb-[40px] rounded-xl bg-white dark:bg-gray-900 dark:border-gray-800 dark:border-[0.5px] shadow-2xl shadow-gray-400 dark:shadow-none transform-transition duration-500 hover:scale-105 will-change-transform">
+                <div class="card-container flex flex-col gap-5">
+                    <div class="header-container flex justify-center">
+                        <p class={`tech-title-${tech.title} text-center font-bold text-[32px]`}>{tech.title}</p>
+                    </div>
+                    <div class="techs-container grid grid-cols-3 grid-rows-3 gap-5 text-center">
+                        {tech.technologies.map((tech) => {
+                            return (
+                                <div class="tech-item w-full flex flex-col justify-center text-center">
+                                    <img src={tech.imagen} alt={tech.nombre} class="h-16 w-full"/>
+                                    <span class="text-black dark:text-gray-300 text-[14px]">{tech.nombre}</span>
+                                </div>
+                            );
+                        })}
+                    </div>
+                </div>
+            </div>
+        ))}
+    </div>
+</div>
+
+
+
+<style>
+    .grid-tech{
+		display: grid;
+		width: 100%;
+		justify-content: center;
+		grid-template-areas: 
+			"card1 card2"
+			"card3 card4"
+		
+		;
+		grid-template-columns: repeat(2, 1fr);
+		grid-template-rows: repeat(2, .5fr);
+		gap: 20px;
+	}
+
+    @media (width <= 768px) {
+        .grid-tech{
+            grid-template-areas: 
+			"card1" 
+            "card2"
+			"card3" 
+            "card4"
+		
+		    ;
+            grid-template-columns: 1fr;
+            grid-template-rows: repeat(4, .2fr);
+        }
+    }
+
+    .header-container{
+        .tech-title-Frontend{
+            letter-spacing: -1px;
+            background: linear-gradient(0deg, #00d9ff 1%, #2cb2f5 58%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .tech-title-Backend{
+            letter-spacing: -1px;
+            background: linear-gradient(0deg, #b1afaf 1%, #2c2c2c 78%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .tech-title-Aprendiendo{
+            letter-spacing: -1px;
+            background: linear-gradient(0deg, #ffc79f 1.44%, #ff6a00 78.37%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .tech-title-Herramientas{
+            letter-spacing: -1px;
+            background: linear-gradient(0deg, #98d5fd 2%, #206a8f 88%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    }
+
+    /* MODO OSCURO */
+    .dark .header-container {
+        .tech-title-Frontend {
+            background: linear-gradient(0deg, #00d9ff 1%, #00597c 58%);
+        }
+
+        .tech-title-Backend {
+            background: linear-gradient(0deg, #d2d2d2 1%, #1a1a1a 78%);
+        }
+
+        .tech-title-Aprendiendo {
+            background: linear-gradient(0deg, #ffc79f 1.44%, #cc4b00 78.37%);
+        }
+
+        .tech-title-Herramientas {
+            background: linear-gradient(0deg, #7fcdfb 2%, #0c4e6e 88%);
+        }
+    }
+</style>

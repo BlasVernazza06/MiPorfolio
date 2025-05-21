@@ -1,0 +1,74 @@
+---
+
+const navItems = [
+  {
+    title: "Inicio",
+    label: "inicio",
+    url: "#Inicio",
+  },
+  {
+    title: "Proyectos",
+    label: "proyectos",
+    url: "#Proyectos",
+  },
+  {
+    title: "Skills",
+    label: "skills",
+    url: "#Skills"
+  },
+  {
+    title: "Sobre mí",
+    label: "sobre-mi",
+    url: "#Sobre mi",
+  },
+  {
+    title: "Certificados",
+    label: "certificados",
+    url: "#Certificados"
+  },
+]
+---
+
+<header class="header fixed top-0 z-10 flex items-center justify-center w-full mx-auto mt-2">
+    <nav class="flex flex-row px-1 sm:px-3 text-sm font-medium rounded-full text-gray-600 dark:bg-gray-800 justify-center items-center">
+        {
+            navItems.map((link)=>(
+                <a
+                class="relative block transition hover:text-blue-500
+    cursor-pointer text-gray-500 dark:hover:text-blue-500 dark:text-white font-medium text-l px-1 sm:px-2 py-2"
+                aria-label={link.label}
+                href={link.url}
+                    
+                >
+                    {link.title}
+                </a>
+        ))}
+    </nav>
+</header>
+
+<style>
+  nav {
+    animation: nav-shadow 1s linear both;
+    animation-timeline: scroll();
+    animation-range: 0 100px;
+  }
+
+  /* Animación con valores CSS explícitos */
+  @keyframes nav-shadow {
+    0% {
+      background-color: rgba(255, 255, 255, 0);
+      --tw-bg-opacity: 0;
+      box-shadow: none;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+    }
+    to {
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2),
+                  0 4px 6px -4px rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(70px);
+      -webkit-backdrop-filter: blur(8px);
+      
+    }
+  }
+
+</style>

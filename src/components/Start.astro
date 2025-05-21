@@ -1,0 +1,33 @@
+---
+import Github3 from "./icons/github3.astro";
+import SocialPill from "./SocialPill.astro";
+
+---
+
+<div class="max-w flex flex-col justify-center items-center text-center">
+    <h1
+        class="text-4xl font-bold tracking-tight sm:text-5xl lg:text-7xl
+        bg-gradient-to-b from-[#1ad101] to-[#abce9c] bg-clip-text text-transparent
+        dark:bg-gradient-to-b dark:from-[#1ad101] dark:to-[#abce9c]"
+    >
+        Software Developer
+    </h1>
+    <p
+        class="mt-2 text-xl font-semibold text-gray-800 dark:text-white"
+    >
+        Blas Vernazza
+    </p>
+    <span class="bg-[linear-gradient(110deg,#64748b,45%,#0f172a,55%,#64748b)]
+    dark:bg-[linear-gradient(110deg,#c6f9c6_45%,#0d4d0d_55%,#c6f9c6)] bg-clip-text animate-background-shine bg-[length:250%_100%] text-gray-500 font-semibold">
+        Full Stack React & Mobile Developer
+    </span>
+    <nav class="flex flex-wrap justify-center mt-4 gap-3">
+        <SocialPill href="/public/files/Curriculum Vitae.pdf">
+            Descargar CV
+        </SocialPill>
+        <SocialPill href="https://github.com/">
+            <Github3 class="size-5"/>
+            Github
+        </SocialPill>
+    </nav>
+</div>

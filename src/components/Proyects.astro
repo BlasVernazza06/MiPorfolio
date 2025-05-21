@@ -1,0 +1,58 @@
+---
+import { getCollection } from 'astro:content'
+import Github3 from './icons/github3.astro'
+import Demo from './icons/Demo.astro'
+
+const proyectsRaw = await getCollection('proyects')
+const proyects = proyectsRaw.map((item) => item.data)
+---
+<div class="flex flex-col gap-20 mt-2 md:flex-row md:justify-center md:flex-wrap md:items-center md:gap-20">
+    {proyects.map((proyecto) => (
+        <div class="max-w md:max-w-[400px] 
+            bg-[rgba(171,207,177,0.15)] 
+            dark:bg-[rgba(176,253,189,0.08)] 
+            border border-transparent 
+            dark:border-[1px] 
+            dark:border-[rgba(171,207,177,0.2)] 
+            shadow-lg 
+            dark:shadow-[0_0_8px_rgba(171,207,177,0.1)] 
+            rounded-2xl 
+            transition-all 
+            duration-300 
+            backdrop-blur-sm">
+            <img src={proyecto.imgInicio} alt="" class="w-full rounded-2xl pl-2 pr-2 pt-2"/>
+        
+            <div class="flex flex-col gap-8 pl-3">
+                <header class="flex flex-col flex-wrap mt-4">
+                    <p class='text-xl font-semibold text-green-700 dark:text-green-400'>{proyecto.title}</p>
+                    <span class="text-[15px] text-pretty pt-2 dark:text-gray-300">{proyecto.description}</span>
+                </header>
+        
+                <div class="flex flex-row flex-wrap gap-3 pr-2">
+                    {proyecto.technologies.map((tech) => (
+                        <div 
+                        class={`tech-logos-cards flex items-center gap-2 px-2 py-1 rounded-3xl ${tech.class} text-white text-xs
+                        transition duration-500 rounded-xl hover:scale-105`}>
+                            <img src={tech.imagen} alt={tech.nombre} class="w-5 h-5"/>
+                            <p>{tech.nombre}</p>
+                        </div>
+                    ))}
+                </div>
+        
+                <div class="flex flex-row gap-3 pb-3">
+                    <a href={proyecto.link} class='flex flex-row items-center gap-2 bg-gray-100 dark:bg-gray-800 border-[0.1px] border-gray-300 dark:border-gray-600 rounded-xl p-2 transition
+                    hover:bg-gray-900 hover:text-white dark:hover:bg-black' target='_blank'>
+                        <Demo />
+                        Ver Demo
+                    </a>
+                    <a href={proyecto.github} class='flex flex-row items-center gap-2 bg-gray-100 dark:bg-gray-800 border-[0.1px] border-gray-300 dark:border-gray-600 rounded-xl p-2 transition
+                    hover:bg-gray-900 hover:text-white dark:hover:bg-black' target='_blank'>
+                        <Github3 class="size-6"/>
+                        Code
+                    </a>
+                </div>
+            </div>
+        </div>
+    ))}
+</div>
+
