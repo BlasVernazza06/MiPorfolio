@@ -1,48 +1,74 @@
-# Astro Starter Kit: Basics
+# 👨🏻‍💻 Porfolio para programadores y desarrolladores
 
-```sh
-npm create astro@latest -- --template basics
+<div align="center">
+<a href="https://porfolio.dev/">
+<img src="./public/porfolio.webp">
+</a>
+<p></p>
+</div>
+
+## 📝 Descripción
+
+Un portafolio moderno y profesional construido con Astro, diseñado para desarrolladores que buscan mostrar su trabajo y habilidades de manera efectiva. Este proyecto ofrece una base sólida y personalizable para crear tu presencia en línea como desarrollador.
+
+## ✨ Características
+
+- 🚀 Construido con Astro para máximo rendimiento
+- 🎨 Estilizado con Tailwind CSS
+- 📱 Diseño responsive y adaptable
+- 🔍 Optimizado para SEO con astro-robots-txt
+- 🎯 Tipografía moderna con Onest Variable Font
+- 📦 TypeScript para un desarrollo más seguro
+- 🏗️ Estructura modular y mantenible
+
+## 🛠️ Tecnologías
+
+- [Astro](https://astro.build/) - Framework web moderno
+- [Tailwind CSS](https://tailwindcss.com/) - Framework CSS
+- [TypeScript](https://www.typescriptlang.org/) - Superset de JavaScript
+- [Onest Variable Font](https://github.com/atelier-anchor/smiley-sans) - Fuente tipográfica moderna
+
+## 🚀 Cómo Comenzar
+
+1. Clona el repositorio:
+```bash
+git clone https://github.com/BlasVernazza06/My-Portfolio.git
 ```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
-
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
+2. Instala las dependencias:
+```bash
+pnpm install
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+3. Inicia el servidor de desarrollo:
+```bash
+pnpm dev
+```
 
-## 🧞 Commands
+4. Abre [http://localhost:4321](http://localhost:4321) en tu navegador.
 
-All commands are run from the root of the project, from a terminal:
+## 📦 Estructura del Proyecto
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+```
+src/
+├── assets/      # Recursos estáticos
+├── components/  # Componentes reutilizables
+├── content/     # Contenido del sitio
+├── layouts/     # Plantillas de diseño
+└── pages/       # Páginas de la aplicación
+```
 
-## 👀 Want to learn more?
+## 📄 Licencia
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Este proyecto está bajo la Licencia MIT - ver el archivo [LICENSE.md](LICENSE.md) para más detalles.
+
+## 🤝 Contribuciones
+
+Las contribuciones son bienvenidas. Por favor, abre un issue primero para discutir los cambios que te gustaría hacer.
+
+## 📬 Contacto
+
+Si tienes alguna pregunta o sugerencia, no dudes en contactarme a través de:
+- Email: [tu@email.com](mailto:tu@email.com)
+- GitHub: [@tu-usuario](https://github.com/tu-usuario)
+
