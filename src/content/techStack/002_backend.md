@@ -6,4 +6,7 @@ technologies:
 
     - nombre: "Firebase" 
       imagen: "/TechIcons/icons-firebase.svg"
+    
+    - nombre: "Supabase" 
+      imagen: "/TechIcons/supabase.svg"
 ---

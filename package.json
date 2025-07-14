@@ -10,8 +10,12 @@
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.7",
-    "astro": "^5.7.13",
-    "miporfolio": "file:",
-    "tailwindcss": "^4.1.7"
+    "astro": "^5.11.1",
+    "miporfolio": "file:"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.11"
   }
 }
