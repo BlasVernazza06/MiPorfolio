@@ -4,6 +4,9 @@ technologies:
     - nombre: "Python" 
       imagen: "/TechIcons/icons-python.svg"
 
-    - nombre: "Astro" 
-      imagen: "/TechIcons/icons-astro.svg"
+    - nombre: "Next Js" 
+      imagen: "/TechIcons/nextjs_icon_dark.svg"
+    
+    - nombre: "TypeScript" 
+      imagen: "/TechIcons/typescript.svg"
 ---

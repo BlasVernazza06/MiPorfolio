@@ -12,6 +12,9 @@ technologies:
 
     - nombre: "Tailwind" 
       imagen: "/TechIcons/icons-tailwind.svg"
+    
+    - nombre: "Astro" 
+      imagen: "/TechIcons/icons-astro.svg"
 
     - nombre: "Bootstrap" 
       imagen: "/TechIcons/icons-bootstrap.svg"
