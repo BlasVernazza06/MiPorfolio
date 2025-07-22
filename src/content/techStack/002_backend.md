@@ -9,4 +9,7 @@ technologies:
     
     - nombre: "Supabase" 
       imagen: "/TechIcons/supabase.svg"
+    
+    - nombre: "PostgreSQL" 
+      imagen: "/TechIcons/postgresql.svg"
 ---
