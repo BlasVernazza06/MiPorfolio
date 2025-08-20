@@ -2,7 +2,7 @@
 
 <div align="center">
 <a href="https://porfolio.dev/">
-<img src="./public/porfolio.webp">
+<img src="./public/images/PortfolioImages.png">
 </a>
 <p></p>
 </div>
@@ -69,6 +69,6 @@ Las contribuciones son bienvenidas. Por favor, abre un issue primero para discut
 ## 📬 Contacto
 
 Si tienes alguna pregunta o sugerencia, no dudes en contactarme a través de:
-- Email: [tu@email.com](mailto:tu@email.com)
-- GitHub: [@tu-usuario](https://github.com/tu-usuario)
+- Email: [blasvernazza123@gmail.com](mailto:blasvernazza123@gmail.com)
+- GitHub: [@BlasVernazza06](https://github.com/BlasVernazza06)
 
