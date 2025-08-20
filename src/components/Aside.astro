@@ -1,14 +1,14 @@
 ---
 import Github3 from "./icons/github3.astro";
 import AsidePill from "./AsidePill.astro";
-import ThemeToggle from "./ThemeToggle.astro";
+import ThemeToggle from "./ThemeToggle.jsx";
 import Linkedin from "./icons/linkedin.astro";
 import Fiverr from './icons/fiverr.astro';
 ---
 
 <div class="inline-block fixed top-1/2 left-5 z-10">
     <div class="flex flex-col justify-center items-center p-3 shadow-[0_7px_13px_-1px_rgba(0,0,0,0.2),_0_2px_4px_-2px_rgba(0,0,0,0.2)] border-[2px] border-gray-400 backdrop-blur-[4px] bg-white/30 dark:bg-gray-800 dark:border-gray-400 rounded-full mb-2">
-        <ThemeToggle />
+        <ThemeToggle client:load/>
     </div>
     <div class="flex flex-col justify-center items-center gap-3 p-2 shadow-[0_7px_13px_-1px_rgba(0,0,0,0.2),_0_2px_4px_-2px_rgba(0,0,0,0.2)] border-[2px] border-gray-400 backdrop-blur-[4px] bg-white/30 dark:bg-gray-800 dark:border-gray-400 rounded-full">
         <AsidePill href="https://github.com/">

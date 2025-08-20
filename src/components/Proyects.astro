@@ -34,7 +34,7 @@ const proyects = proyectsRaw.map((item) => item.data)
                 <div class="flex flex-row flex-wrap gap-2 pr-2 min-h-[38px]">
                     {proyecto.technologies.map((tech) => (
                         <div 
-                        class={`tech-logos-cards flex items-center gap-2 px-1 py-1 rounded-3xl ${tech.class} text-white text-xs
+                        class={`tech-logos-cards flex items-center gap-2 px-2 py-1 rounded-3xl ${tech.class} text-white text-xs
                         transition duration-500 rounded-xl hover:scale-105`}>
                             <img src={tech.imagen} alt={tech.nombre} class="w-5 h-5"/>
                             <p>{tech.nombre}</p>

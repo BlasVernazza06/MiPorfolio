@@ -6,6 +6,9 @@ technologies:
 
     - nombre: "GitHub" 
       imagen: "/TechIcons/icons-github.svg"
+    
+    - nombre: "Stripe" 
+      imagen: "/TechIcons/icon-stripe.svg"
 
     - nombre: "Terminal" 
       imagen: "/TechIcons/icons-terminal.svg"

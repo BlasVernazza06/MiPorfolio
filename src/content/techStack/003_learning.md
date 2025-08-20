@@ -9,4 +9,7 @@ technologies:
     
     - nombre: "TypeScript" 
       imagen: "/TechIcons/typescript.svg"
+    
+    - nombre: "Docker" 
+      imagen: "/TechIcons/icons-docker.svg"
 ---
