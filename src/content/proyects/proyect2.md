@@ -1,9 +1,10 @@
 ---
-imgInicio: "/images/AeroViajes Pic.png"
-title: AeroApp
-description: Aplicacion mobile, que permite la compra de articulos turisticos, vuelos,etc. Ademas presenta presistencia de datos y logueo.
-link: "#"
-github: "https://github.com/BlasVernazza06/PreEntrega-Final-Vernazza.git"
+order: 2
+imgInicio: "/images/proyect1AeroViajes.webp"
+title: AeroViajes
+description: Pagina de e-commerce dedicada al sector turistico. Cada persona puede seleccionar sus viajes y distinguirlos por precio, cantidad, etc.
+link: "https://aeroviajeapp.netlify.app/"
+github: "https://github.com/BlasVernazza06/PreEntrega-Final-React-Vernazza.git"
 technologies:
     - nombre: HTML
       imagen: "/TechIcons/icons-html.svg"
@@ -17,7 +18,7 @@ technologies:
       imagen: "/TechIcons/icons-javascript.svg"
       class: "bg-[#e2e61d]"
 
-    - nombre: React Native
+    - nombre: React JS
       imagen: "/TechIcons/icons-react.svg"
       class: "bg-[#003159]"
 

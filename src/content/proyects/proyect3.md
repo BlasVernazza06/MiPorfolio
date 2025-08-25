@@ -1,9 +1,10 @@
 ---
-imgInicio: "/images/ClonDeSpotify.png"
-title: Clon de Spotify
-description: Pagina diseñada y desarrollada al detalle, con reproductor de audio, persistencia de audio entre navegaciones y paginas de playlist.
+order: 3
+imgInicio: "/images/AeroViajes Pic.png"
+title: AeroApp
+description: Aplicacion mobile, que permite la compra de articulos turisticos, vuelos,etc. Ademas presenta presistencia de datos y logueo.
 link: "#"
-github: "https://github.com/BlasVernazza06/Clon-de-Spotify.git"
+github: "https://github.com/BlasVernazza06/PreEntrega-Final-Vernazza.git"
 technologies:
     - nombre: HTML
       imagen: "/TechIcons/icons-html.svg"
@@ -17,8 +18,8 @@ technologies:
       imagen: "/TechIcons/icons-javascript.svg"
       class: "bg-[#e2e61d]"
 
-    - nombre: Astro
-      imagen: "/TechIcons/icons-astro.svg"
-      class: "bg-[#b282c5]"
+    - nombre: React Native
+      imagen: "/TechIcons/icons-react.svg"
+      class: "bg-[#003159]"
 
 ---
