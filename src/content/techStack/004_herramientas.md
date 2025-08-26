@@ -9,6 +9,9 @@ technologies:
     
     - nombre: "Stripe" 
       imagen: "/TechIcons/icon-stripe.svg"
+    
+    - nombre: "Gsap" 
+      imagen: "/TechIcons/gsap-black.svg"
 
     - nombre: "Terminal" 
       imagen: "/TechIcons/icons-terminal.svg"
