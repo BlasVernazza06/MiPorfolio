@@ -1,9 +1,9 @@
 ---
 order: 1
-imgInicio: "/public/images/Learnix Photo.png"
-title: AeroViajes
+imgInicio: "/public/images/LearnixPhoto.png"
+title: Learnix
 description: Pagina de Cursos para el desarrollo de conocimientos en el sector IT. Con sistema de pagos y base de datos.
-link: "https://aeroviajeapp.netlify.app/"
+link: "#"
 github: "https://github.com/BlasVernazza06/learnix-app.git"
 technologies:
   - nombre: NextJs
