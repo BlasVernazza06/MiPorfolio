@@ -1,6 +1,6 @@
 ---
 order: 1
-imgInicio: "/public/images/LearnixPhoto.png"
+imgInicio: "/images/LearnixPhoto.png"
 title: Learnix
 description: Pagina de Cursos para el desarrollo de conocimientos en el sector IT. Con sistema de pagos y base de datos.
 link: "#"
