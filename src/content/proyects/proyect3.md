@@ -1,25 +1,20 @@
 ---
-order: 3
-imgInicio: "/images/AeroViajes Pic.png"
-title: AeroApp
-description: Aplicacion mobile, que permite la compra de articulos turisticos, vuelos,etc. Ademas presenta presistencia de datos y logueo.
-link: "#"
-github: "https://github.com/BlasVernazza06/PreEntrega-Final-Vernazza.git"
+order: 2
+imgInicio: "/images/MelonsApp.png"
+title: MelonApp
+description: Melon es una app de gestión de tareas estilo Trello, desarrollada con Supabase.
+link: "https://melonsapp.netlify.app/"
+github: "https://github.com/BlasVernazza06/Melon.git"
 technologies:
-    - nombre: HTML
-      imagen: "/TechIcons/icons-html.svg"
-      class: "bg-[#c26d27]"
-
-    - nombre: CSS
-      imagen: "/TechIcons/icons-css3.svg"
-      class: "bg-[#125c8d]"
-
-    - nombre: JavaScript
-      imagen: "/TechIcons/icons-javascript.svg"
-      class: "bg-[#e2e61d]"
-
-    - nombre: React Native
+    - nombre: React JS
       imagen: "/TechIcons/icons-react.svg"
       class: "bg-[#003159]"
 
+    - nombre: Tailwind
+      imagen: "/TechIcons/icons-tailwind.svg"
+      class: "bg-[#0F172A]"
+
+    - nombre: Supabase
+      imagen: "/TechIcons/supabase.svg"
+      class: "bg-[#18181B]"
 ---
