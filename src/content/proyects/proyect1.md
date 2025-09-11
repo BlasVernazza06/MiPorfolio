@@ -3,7 +3,7 @@ order: 1
 imgInicio: "/images/LearnixPhoto.png"
 title: Learnix
 description: Pagina de Cursos para el desarrollo de conocimientos en el sector IT. Con sistema de pagos y base de datos.
-link: "#"
+link: "https://learnix-app.vercel.app/"
 github: "https://github.com/BlasVernazza06/learnix-app.git"
 technologies:
   - nombre: NextJs
