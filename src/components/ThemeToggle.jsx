@@ -67,7 +67,7 @@ export default function ThemeToggle() {
       </button>
       {menuOpen && (
         <div
-          className="absolute z-50 top-[-60px] left-8 min-w-[8rem] rounded-md border border-gray-100 bg-white dark:bg-gray-900 dark:border-gray-500/20 shadow-lg backdrop-blur-md animate-scale-up"
+          className="absolute z-50 md:top-[-60px] top-[-130px] md:left-8 -left-13 min-w-[8rem] rounded-md border border-gray-100 bg-white dark:bg-gray-900 dark:border-gray-500/20 shadow-lg backdrop-blur-md animate-scale-up"
         >
           <ul>
             {THEMES.map(({ name, icon: Icon }) => (

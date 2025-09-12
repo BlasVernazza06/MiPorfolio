@@ -1,5 +1,5 @@
 ---
 title: Diplomatura Full Stack
 description: Formación en desarrollo Full Stack, Capacitado para crear aplicaciones web, desde el frontend hasta el backend, aplicando buenas prácticas y metodologías ágiles.
-pdf: "/public/files/Certificaciones/Certificado Desarrollo Web.png"
+pdf: "/files/Certificaciones/Certificado Desarrollo Web.png"
 ---
