@@ -7,56 +7,192 @@ const proyectsRaw = await getCollection('proyects')
 proyectsRaw.sort((a, b) => a.data.order - b.data.order)
 const proyects = proyectsRaw.map((item) => item.data)
 ---
-<div class="flex flex-col gap-20 mt-2 md:flex-row md:justify-center md:flex-wrap md:items-center md:gap-20">
-    {proyects.map((proyecto) => (
-        <div class="w-full max-w-[400px] h-max md:w-[420px] md:h-[500px] 
-            flex flex-col justify-between
-            bg-[rgba(171,207,177,0.15)] 
-            dark:bg-[rgba(176,253,189,0.08)] 
-            border border-transparent 
-            dark:border-[1px] 
-            dark:border-[rgba(171,207,177,0.2)] 
-            shadow-lg 
-            dark:shadow-[0_0_8px_rgba(171,207,177,0.1)] 
-            rounded-2xl 
-            transition-all 
-            duration-300 
-            backdrop-blur-sm
-            overflow-hidden"
+
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-10 p-4">
+    {proyects.map((proyecto, index) => (
+        <div 
+            class={`project-card relative h-[600px] rounded-3xl bg-white/70 dark:bg-black/80 border border-gray-200 dark:border-white/10 backdrop-blur-xl overflow-hidden transition-all duration-500 ease-out transform-gpu opacity-0 translate-y-12 hover:translate-y-[30px] hover:shadow-2xl hover:shadow-black/15 dark:hover:shadow-green-500/20 hover:scale-[1.02] group animate-[slideInUp_0.8s_ease_forwards]`}
+            data-index={index}
+            style={`animation-delay: ${index * 0.2}s`}
         >
-            <img src={proyecto.imgInicio} alt="" class="w-full h-[200px] object-cover rounded-2xl pl-2 pr-2 pt-2"/>
-        
-            <div class="flex flex-col gap-8 px-4">
-                <header class="flex flex-col flex-wrap mt-4">
-                    <p class='text-xl font-semibold text-green-700 dark:text-green-400'>{proyecto.title}</p>
-                    <span class="text-[15px] text-black text-pretty pt-2 dark:text-gray-300">{proyecto.description}</span>
-                </header>
-        
-                <div class="flex flex-row flex-wrap gap-2 pr-2 min-h-[38px]">
-                    {proyecto.technologies.map((tech) => (
-                        <div 
-                        class={`tech-logos-cards flex items-center gap-2 px-2 py-1 rounded-3xl ${tech.class} text-white text-xs
-                        transition duration-500 rounded-xl hover:scale-105`}>
-                            <img src={tech.imagen} alt={tech.nombre} class="w-5 h-5"/>
-                            <p>{tech.nombre}</p>
+            <!-- Efecto de brillo de fondo -->
+            <div class="card-glow absolute -top-1/2 -left-1/2 w-[200%] h-[200%] bg-gradient-radial from-green-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0"></div>
+            
+            <!-- Imagen con overlay -->
+            <div class="relative h-52 overflow-hidden m-4 rounded-2xl group/image">
+                <img 
+                    src={proyecto.imgInicio} 
+                    alt={proyecto.title} 
+                    class="w-full h-full object-cover transition-transform duration-500 group-hover/image:scale-110"
+                />
+                
+            </div>
+
+            <!-- Contenido de la card -->
+            <div class="relative px-6 pb-6 z-10 h-[calc(100%-232px)] flex flex-col gap-4">
+                <!-- Header con título y estado -->
+                <div class="flex justify-between items-start">
+                    <div class="flex-1">
+                        <h3 class="text-2xl font-bold text-green-500 dark:text-emerald-300 mb-2 leading-tight">
+                            {proyecto.title}
+                        </h3>
+                        <div class="flex items-center gap-2">
+                            <div class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
+                            <span class="text-xs text-gray-500 dark:text-gray-400 font-medium uppercase tracking-wide">
+                                Finalizado
+                            </span>
                         </div>
-                    ))}
+                    </div>
                 </div>
-        
-                <div class="flex flex-row gap-3 mt-auto pb-2">
-                    <a href={proyecto.link} class='flex flex-row items-center gap-2 text-black dark:text-white bg-gray-100 dark:bg-gray-800 border-[0.1px] border-gray-300 dark:border-gray-600 rounded-xl p-2 transition
-                    hover:bg-gray-900 hover:text-white dark:hover:bg-white dark:hover:text-black' target='_blank'>
-                        <Demo />
-                        Ver Demo
+
+                <!-- Descripción -->
+                <p class="text-gray-600 dark:text-gray-300 leading-relaxed text-[0.95rem]">
+                    {proyecto.description}
+                </p>
+
+                <!-- Tecnologías con animación -->
+                <div class="flex-1 flex flex-col">
+                    <div class="text-sm font-semibold text-gray-700 dark:text-gray-200 uppercase tracking-wide">
+                        Tecnologías:
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        {proyecto.technologies.map((tech, techIndex) => (
+                            <div 
+                                class={`tech-item relative flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium text-white opacity-0 translate-y-5 hover:scale-105 transition-all duration-300 shadow-lg group/tech animate-[techSlideIn_0.6s_ease_forwards] ${tech.class}`}
+                                style={`animation-delay: ${techIndex * 0.1}s`}
+                            >
+                                <img src={tech.imagen} alt={tech.nombre} class="w-5 h-5 object-contain"/>
+                                <span class="text-xs font-semibold">{tech.nombre}</span>
+                                
+                                <!-- Tooltip -->
+                                <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1 bg-black/80 dark:bg-white dark:text-black text-white text-xs rounded whitespace-nowrap opacity-0 invisible group-hover/tech:opacity-100 group-hover/tech:visible transition-all duration-300 z-10">
+                                    {tech.nombre}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                <!-- Botones de acción -->
+                <div class="flex gap-3 mt-auto">
+                    <a 
+                        href={proyecto.link} 
+                        target="_blank" 
+                        class="relative flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-xl font-semibold text-sm border border-white/20 hover:translate-y-[-2px] hover:shadow-lg hover:shadow-green-500/30 transition-all duration-300 overflow-hidden group/btn"
+                    >
+                        <Demo class="w-4 h-4"/>
+                        <span>Ver Demo</span>
+                        
+                        <!-- Efecto shine -->
+                        <div class="absolute inset-0 -left-full w-full h-full bg-gradient-to-r from-transparent via-white/30 to-transparent group-hover/btn:left-full transition-all duration-600"></div>
                     </a>
-                    <a href={proyecto.github} class='flex flex-row items-center gap-2 text-black dark:text-white bg-gray-100 dark:bg-gray-800 border-[0.1px] border-gray-300 dark:border-gray-600 rounded-xl p-2 transition
-                    hover:bg-gray-900 hover:text-white dark:hover:bg-white dark:hover:text-black' target='_blank'>
-                        <Github3 class="size-6"/>
-                        Code
+                    
+                    <a 
+                        href={proyecto.github} 
+                        target="_blank" 
+                        class="relative flex-1 flex items-center justify-center gap-2 px-6 py-3 bg-gray-500/10 dark:bg-white/10 text-gray-700 dark:text-gray-200 rounded-xl font-semibold text-sm border border-gray-500/20 dark:border-white/20 hover:translate-y-[-2px] hover:shadow-lg hover:bg-gray-500/20 dark:hover:bg-white/20 transition-all duration-300 overflow-hidden group/btn"
+                    >
+                        <Github3 class="w-4 h-4"/>
+                        <span>Código</span>
+                        
+                        <!-- Efecto shine -->
+                        <div class="absolute inset-0 -left-full w-full h-full bg-gradient-to-r from-transparent via-white/30 to-transparent group-hover/btn:left-full transition-all duration-600"></div>
                     </a>
                 </div>
+            </div>
+
+            <!-- Partículas decorativas -->
+            <div class="absolute inset-0 pointer-events-none z-0">
+                <div class="particle absolute top-[20%] left-[10%] w-1 h-1 bg-green-500 rounded-full opacity-0 animate-[float1_6s_ease-in-out_infinite]"></div>
+                <div class="particle absolute top-[60%] right-[15%] w-1 h-1 bg-green-500 rounded-full opacity-0 animate-[float2_8s_ease-in-out_infinite]"></div>
+                <div class="particle absolute bottom-[30%] left-[80%] w-1 h-1 bg-green-500 rounded-full opacity-0 animate-[float3_7s_ease-in-out_infinite]"></div>
             </div>
         </div>
     ))}
 </div>
 
+<style>
+    /* Animaciones personalizadas que no están en Tailwind base */
+    @keyframes slideInUp {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes techSlideIn {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes float1 {
+        0%, 100% {
+            transform: translateY(0) rotate(0deg);
+            opacity: 0;
+        }
+        50% {
+            transform: translateY(-20px) rotate(180deg);
+            opacity: 0.6;
+        }
+    }
+
+    @keyframes float2 {
+        0%, 100% {
+            transform: translateX(0) rotate(0deg);
+            opacity: 0;
+        }
+        50% {
+            transform: translateX(-30px) rotate(180deg);
+            opacity: 0.4;
+        }
+    }
+
+    @keyframes float3 {
+        0%, 100% {
+            transform: translate(0, 0) rotate(0deg);
+            opacity: 0;
+        }
+        50% {
+            transform: translate(-20px, -20px) rotate(180deg);
+            opacity: 0.5;
+        }
+    }
+
+    /* Efecto 3D personalizado */
+    .project-card:hover {
+        transform: perspective(1000px) translateY(-10px) rotateX(5deg) rotateY(5deg);
+    }
+
+    /* Activar animaciones de partículas en hover */
+    .project-card:hover .particle {
+        animation-play-state: running;
+    }
+
+    /* Responsive: simplificar efectos 3D en móvil */
+    @media (max-width: 768px) {
+        .project-card:hover {
+            transform: translateY(-5px) !important;
+        }
+        
+        .project-card {
+            height: auto !important;
+            min-height: 500px;
+        }
+    }
+
+    /* Reducir animaciones en dispositivos con movimiento limitado */
+    @media (prefers-reduced-motion: reduce) {
+        .project-card,
+        .tech-item,
+        .particle {
+            animation: none !important;
+            transition: none !important;
+        }
+
+        .project-card:hover {
+            transform: translateY(-2px) !important;
+        }
+    }
+</style>
