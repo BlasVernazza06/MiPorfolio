@@ -4,8 +4,10 @@ import Github3 from './icons/github3.astro'
 import Demo from './icons/Demo.astro'
 
 const proyectsRaw = await getCollection('proyects')
-proyectsRaw.sort((a, b) => a.data.order - b.data.order)
-const proyects = proyectsRaw.map((item) => item.data)
+// Filtrar solo los proyectos visibles
+const proyectsVisible = proyectsRaw.filter(item => item.data.visible !== false)
+proyectsVisible.sort((a, b) => a.data.order - b.data.order)
+const proyects = proyectsVisible.map((item) => item.data)
 ---
 
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 p-4">
@@ -25,7 +27,6 @@ const proyects = proyectsRaw.map((item) => item.data)
                     alt={proyecto.title} 
                     class="w-full h-full object-cover transition-transform duration-500 group-hover/image:scale-110"
                 />
-                
             </div>
 
             <!-- Contenido de la card -->
@@ -52,7 +53,7 @@ const proyects = proyectsRaw.map((item) => item.data)
 
                 <!-- Tecnologías con animación -->
                 <div class="flex-1 flex flex-col">
-                    <div class="text-sm font-semibold text-gray-700 dark:text-gray-200 uppercase tracking-wide">
+                    <div class="text-sm font-semibold text-gray-700 dark:text-gray-200 uppercase tracking-wide mb-2">
                         Tecnologías:
                     </div>
                     <div class="flex flex-wrap gap-2">
@@ -170,29 +171,4 @@ const proyects = proyectsRaw.map((item) => item.data)
         animation-play-state: running;
     }
 
-    /* Responsive: simplificar efectos 3D en móvil */
-    @media (max-width: 768px) {
-        .project-card:hover {
-            transform: translateY(-5px) !important;
-        }
-        
-        .project-card {
-            height: auto !important;
-            min-height: 500px;
-        }
-    }
-
-    /* Reducir animaciones en dispositivos con movimiento limitado */
-    @media (prefers-reduced-motion: reduce) {
-        .project-card,
-        .tech-item,
-        .particle {
-            animation: none !important;
-            transition: none !important;
-        }
-
-        .project-card:hover {
-            transform: translateY(-2px) !important;
-        }
-    }
-</style>
+    /*

@@ -1,4 +1,5 @@
 ---
+hidden: false
 order: 3
 imgInicio: "/images/proyect1AeroViajes.webp"
 title: AeroViajes

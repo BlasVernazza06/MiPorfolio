@@ -1,5 +1,6 @@
 ---
 order: 4
+visible: false
 imgInicio: "/images/ClonDeSpotify.png"
 title: Clon de Spotify
 description: Pagina diseñada y desarrollada al detalle, con reproductor de audio, persistencia de audio entre navegaciones y paginas de playlist.
@@ -21,5 +22,4 @@ technologies:
     - nombre: Astro
       imagen: "/TechIcons/icons-astro.svg"
       class: "bg-[#b282c5]"
-
 ---

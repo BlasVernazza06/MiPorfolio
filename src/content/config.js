@@ -1,6 +1,5 @@
 import { defineCollection, z } from 'astro:content';
 
-
 const proyects = defineCollection({
   schema: z.object({
     order: z.number(),
@@ -9,10 +8,11 @@ const proyects = defineCollection({
     description: z.string(),
     link: z.string(),
     github: z.string(),
+    visible: z.boolean().optional().default(true), // Campo para controlar visibilidad
     technologies: z.array(
       z.object({
         nombre: z.string(),
-        imagen:z.string(),
+        imagen: z.string(),
         class: z.string()
       })
     )
@@ -25,8 +25,7 @@ const techStack = defineCollection({
     technologies: z.array(
       z.object({
         nombre: z.string(),
-        imagen:z.string()
-        
+        imagen: z.string()
       })
     )
   })

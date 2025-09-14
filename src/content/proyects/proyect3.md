@@ -1,4 +1,5 @@
 ---
+hidden: false
 order: 2
 imgInicio: "/images/MelonsApp.png"
 title: MelonApp
