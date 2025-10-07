@@ -32,10 +32,18 @@ export default function ThemeToggle() {
   function applyTheme(selected) {
     let t = selected;
     if (t === "system") {
-      t = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        t = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
     }
+    
+    // DEBUG: Verifica qué está pasando
+    console.log("Theme selected:", selected);
+    console.log("Final theme:", t);
+    console.log("HTML classes before:", document.documentElement.className);
+    
     document.documentElement.classList.toggle("dark", t === "dark");
-  }
+    
+    console.log("HTML classes after:", document.documentElement.className);
+  } 
 
   function handleThemeChange(newTheme) {
     setTheme(newTheme);

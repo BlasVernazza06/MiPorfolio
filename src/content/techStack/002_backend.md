@@ -12,4 +12,7 @@ technologies:
     
     - nombre: "PostgreSQL" 
       imagen: "/TechIcons/postgresql.svg"
+    
+    - nombre: "Neon" 
+      imagen: "/TechIcons/neon.svg"
 ---

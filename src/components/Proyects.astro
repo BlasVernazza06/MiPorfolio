@@ -13,7 +13,7 @@ const proyects = proyectsVisible.map((item) => item.data)
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 p-4">
     {proyects.map((proyecto, index) => (
         <div 
-            class={`project-card relative h-[600px] rounded-3xl bg-white/70 dark:bg-black/80 border border-gray-200 dark:border-white/10 backdrop-blur-xl overflow-hidden transition-all duration-500 ease-out transform-gpu opacity-0 translate-y-12 hover:translate-y-[30px] hover:shadow-2xl hover:shadow-black/15 dark:hover:shadow-green-500/20 hover:scale-[1.02] group animate-[slideInUp_0.8s_ease_forwards]`}
+            class={`project-card relative h-auto min-h-[550px] sm:min-h-[600px] rounded-3xl bg-white/70 dark:bg-black/80 border border-gray-200 dark:border-white/10 backdrop-blur-xl overflow-hidden transition-all duration-500 ease-out transform-gpu opacity-0 translate-y-12 hover:translate-y-[30px] hover:shadow-2xl hover:shadow-black/15 dark:hover:shadow-green-500/20 hover:scale-[1.02] group animate-[slideInUp_0.8s_ease_forwards]`}
             data-index={index}
             style={`animation-delay: ${index * 0.2}s`}
         >
@@ -52,8 +52,8 @@ const proyects = proyectsVisible.map((item) => item.data)
                 </p>
 
                 <!-- Tecnologías con animación -->
-                <div class="flex-1 flex flex-col">
-                    <div class="text-sm font-semibold text-gray-700 dark:text-gray-200 uppercase tracking-wide mb-2">
+                <div class="flex flex-col">
+                    <div class="text-sm font-semibold text-gray-700 dark:text-gray-200 uppercase tracking-wide">
                         Tecnologías:
                     </div>
                     <div class="flex flex-wrap gap-2">
