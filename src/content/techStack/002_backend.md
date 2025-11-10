@@ -15,4 +15,7 @@ technologies:
     
     - nombre: "Neon" 
       imagen: "/TechIcons/neon.svg"
+    
+    - nombre: "Prisma" 
+      imagen: "/TechIcons/icons-prisma.svg"
 ---

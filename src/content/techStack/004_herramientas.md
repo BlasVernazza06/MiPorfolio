@@ -1,11 +1,11 @@
 ---
 title: "Herramientas"
 technologies:
-    - nombre: "Git" 
-      imagen: "/TechIcons/icons-git.svg"
-
-    - nombre: "GitHub" 
-      imagen: "/TechIcons/icons-github.svg"
+    - nombre: "Zod" 
+      imagen: "/TechIcons/icons-zod.svg"
+    
+    - nombre: "Shadcn" 
+      imagen: "/TechIcons/icon-shadcn-ui.svg"
     
     - nombre: "Stripe" 
       imagen: "/TechIcons/icon-stripe.svg"
@@ -18,6 +18,12 @@ technologies:
     
     - nombre: "Clerk" 
       imagen: "/TechIcons/clerk-light.svg"
+    
+    - nombre: "Git" 
+      imagen: "/TechIcons/icons-git.svg"
+
+    - nombre: "GitHub" 
+      imagen: "/TechIcons/icons-github.svg"
     
     - nombre: "Npm" 
       imagen: "/TechIcons/icons-ngp.svg"

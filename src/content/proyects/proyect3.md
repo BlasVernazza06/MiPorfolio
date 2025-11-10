@@ -1,6 +1,6 @@
 ---
 hidden: false
-order: 2
+order: 3
 imgInicio: "/images/MelonsApp.png"
 title: MelonApp
 description: Melon es una app de gestión de tareas estilo Trello, desarrollada con Supabase.

@@ -35,7 +35,7 @@ export default function TechStackCards({ skills }) {
           return (
             <div
               key={index}
-              className="tech-cards px-6 pt-6 pb-8 rounded-xl bg-white dark:bg-gray-900 dark:border-gray-800 dark:border-[0.5px] shadow-2xl shadow-gray-400 dark:shadow-none transform transition duration-500 hover:scale-105 will-change-transform"
+              className="tech-cards px-6 pt-6 pb-8 rounded-xl bg-[#f5f5f5] dark:bg-gray-900 dark:border-gray-800 dark:border-[0.5px] shadow-2xl shadow-gray-400 dark:shadow-none transform transition duration-500 hover:scale-105 will-change-transform"
             >
               <div className="card-container flex flex-col gap-5">
                 <div className="header-container flex justify-center mb-2">
