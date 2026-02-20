@@ -5,83 +5,53 @@ const certifiesRaw = await getCollection('certifies')
 const certifies = certifiesRaw.map((item) => item.data)
 ---
 
-<div class="">
-    <span class='text-black dark:text-white [&>strong]:text-blue-500 [&>span]:text-orange-500 
-    dark:[&>strong]:text-[#2cc9ff] dark:[&>span]:text-[#f5a563]
-    [&>span]:font-bold'>
-        A lo largo de mi formación profesional, he completado cursos que fortalecieron mis <strong>habilidades técnicas</strong> y <strong>prácticas</strong>. Estas certificaciones respaldan mi conocimiento en tecnologías como JavaScript, React, Node.js, <span>bases de datos</span> y <span>metodologías ágiles</span>, permitiéndome abordar proyectos de forma integral y con una visión moderna del desarrollo web.
-    </span>
-    <div class="grid grid-cols-1 md:grid-cols-2 grid-rows-2 gap-7 pt-6">
+<div class="space-y-12">
+    <header class="max-w-4xl">
+        <p class="text-base md:text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed">
+            Mi compromiso con la <span class="text-emerald-600 dark:text-emerald-400 font-medium text-outfit">excelencia técnica</span> se ve reflejado en las certificaciones que he obtenido de instituciones líderes. Estas credenciales validan mi dominio en áreas críticas del desarrollo moderno, asegurando que mis habilidades estén siempre alineadas con los <span class="text-zinc-900 dark:text-zinc-100 font-semibold">estándares más altos de la industria</span> y las mejores prácticas actuales.
+        </p>
+    </header>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 pt-4">
         {certifies.map((certifie) => (
-            <div class="flip-card 
-                bg-[rgba(132,211,145,0.27)]
-                dark:bg-[rgba(176,253,189,0.08)] 
-                border border-transparent 
-                dark:border-[1px] 
-                dark:border-[rgba(171,207,177,0.2)] 
-                shadow-lg 
-                dark:shadow-[0_0_8px_rgba(171,207,177,0.1)] 
-                rounded-2xl 
-                transition-all 
-                duration-300 
-                backdrop-blur-sm
-                p-4 
-                hover:scale-105 
-                hover:shadow-[0_6px_30px_rgba(171,207,177,0.6)] 
-                dark:hover:shadow-[0_0_25px_rgba(0,255,128,0.5)]">
-                <div class="flip-card-inner">
-                    <div class="flip-card-front">
-                        <div class="">
-                            <p class="text-xl font-bold pb-2 text-green-400">{certifie.title}</p>
-                            <span class="text-xs text-black dark:text-white">{certifie.description}</span>
+            <a 
+                href={certifie.pdf} 
+                target="_blank" 
+                class="group relative flex flex-col p-8 rounded-[2rem] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl hover:shadow-emerald-500/10 active:scale-[0.98]"
+            >
+                <!-- SpotLight Effect Layer -->
+                <div class="absolute inset-0 bg-emerald-500/0 group-hover:bg-emerald-500/[0.03] transition-colors duration-500 rounded-[2rem]"></div>
+                
+                <div class="relative z-10 flex flex-col h-full">
+                    <div class="flex items-start justify-between mb-6">
+                        <div class="p-3 rounded-2xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-300 group-hover:scale-110 transition-transform duration-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-award"><path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"/><circle cx="12" cy="8" r="6"/></svg>
                         </div>
+                        <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-400 dark:text-zinc-500 group-hover:text-emerald-500 transition-colors">Verificado</span>
                     </div>
-                    <div class="flip-card-back">
-                        <a href={certifie.pdf} target="_blank" class="flex items-center justify-center h-full">
-                            <div class="text-center">
-                                <p class="text-lg font-semibold">Haz click para descargar certificado</p>
-                            </div>
-                        </a>
+
+                    <div class="space-y-3 flex-grow">
+                        <h3 class="text-2xl font-bold text-zinc-900 dark:text-zinc-50 font-outfit leading-tight group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
+                            {certifie.title}
+                        </h3>
+                        <p class="text-zinc-500 dark:text-zinc-400 text-sm leading-relaxed">
+                            {certifie.description}
+                        </p>
+                    </div>
+
+                    <div class="mt-8 flex items-center gap-2 text-sm font-bold text-zinc-900 dark:text-zinc-100">
+                        <span>Ver Certificado</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right group-hover:translate-x-1 transition-transform"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                     </div>
                 </div>
-            </div>
+            </a>
         ))}
     </div>
 </div>
 
 <style>
-    .flip-card {
-        perspective: 1000px;
-        height: 200px;
-    }
-
-    .flip-card-inner {
-        position: relative;
-        width: 100%;
-        height: 100%;
-        text-align: center;
-        transition: transform 0.6s;
-        transform-style: preserve-3d;
-    }
-
-    .flip-card:hover .flip-card-inner {
-        transform: rotateY(180deg);
-    }
-
-    .flip-card-front, .flip-card-back {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        -webkit-backface-visibility: hidden;
-        backface-visibility: hidden;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .flip-card-back {
-        transform: rotateY(180deg);
-        background-color: rgba(90, 129, 97, 0.5);
-        border-radius: 2rem;
+    /* Efecto de brillo de borde muy sutil en hover */
+    a:hover {
+        border-color: rgba(16, 185, 129, 0.3);
     }
 </style>

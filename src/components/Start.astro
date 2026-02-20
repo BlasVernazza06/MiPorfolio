@@ -1,33 +1,120 @@
 ---
 import Github3 from "./icons/github3.astro";
 import SocialPill from "./SocialPill.astro";
-
 ---
 
-<div class="max-w flex flex-col justify-center items-center text-center">
+<div
+  class="flex flex-col items-center text-center space-y-8 py-6 md:py-10 relative overflow-hidden group/hero"
+>
+  <!-- Hero content starts here -->
+
+  <!-- Status Badge -->
+  <div
+    class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-xs font-medium animate-fade-in"
+  >
+    <span class="relative flex h-2 w-2">
+      <span
+        class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"
+      ></span>
+      <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"
+      ></span>
+    </span>
+    Disponible para trabajar
+  </div>
+
+  <div class="space-y-6 max-w-4xl mx-auto">
     <h1
-        class="text-4xl font-bold tracking-tight sm:text-5xl lg:text-7xl
-        bg-gradient-to-b from-[#1ad101] to-[#abce9c] bg-clip-text text-transparent
-        dark:bg-gradient-to-b dark:from-[#1ad101] dark:to-[#abce9c]"
+      class="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight text-zinc-900 dark:text-white"
     >
-        Software Developer
+      Hola, soy <span
+        class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-500 to-emerald-700 dark:from-emerald-400 dark:to-emerald-600"
+        >Blas</span
+      >
     </h1>
     <p
-        class="mt-2 text-xl font-semibold text-gray-800 dark:text-white"
+      class="text-lg md:text-xl font-medium text-zinc-600 dark:text-zinc-400 max-w-3xl mx-auto leading-relaxed"
     >
-        Blas Vernazza
+      Desarrollador <span class="text-zinc-900 dark:text-zinc-100 font-semibold"
+        >Full Stack & Mobile</span
+      > con pasión por los detalles. Me especializo en construir interfaces modernas,
+      rápidas y escalables, priorizando siempre la experiencia del usuario y la robustez
+      del código en cada línea de trabajo.
     </p>
-    <span class="bg-[linear-gradient(110deg,#64748b,45%,#0f172a,55%,#64748b)]
-    dark:bg-[linear-gradient(110deg,#c6f9c6_45%,#0d4d0d_55%,#c6f9c6)] bg-clip-text animate-background-shine bg-[length:250%_100%] text-gray-500 font-semibold">
-        Full Stack React & Mobile Developer
-    </span>
-    <nav class="flex flex-wrap justify-center mt-4 gap-3">
-        <SocialPill href="/files/Curriculum Vitae.pdf">
-            Descargar CV
-        </SocialPill>
-        <SocialPill href="https://github.com/BlasVernazza06">
-            <Github3 class="size-5"/>
-            Github
-        </SocialPill>
-    </nav>
+  </div>
+
+  <!-- Stats or Tags -->
+  <div class="flex flex-wrap justify-center gap-3 pt-4">
+    {
+      ["React", "React Native", "Node.js", "TypeScript"].map((tech) => (
+        <span class="px-4 py-2 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 text-sm font-medium shadow-sm">
+          {tech}
+        </span>
+      ))
+    }
+  </div>
+
+  <nav class="flex flex-wrap justify-center items-center gap-4 pt-8">
+    <SocialPill
+      href="/files/Curriculum Vitae.pdf"
+      class="group relative px-8 py-4 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 rounded-2xl font-bold tracking-wide transition-all duration-300 hover:scale-[1.02] active:scale-95 shadow-xl shadow-zinc-200 dark:shadow-none overflow-hidden"
+    >
+      <span class="relative z-10 flex items-center gap-2">
+        Descargar CV
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="transition-transform group-hover:translate-y-0.5"
+          ><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline
+            points="7 10 12 15 17 10"></polyline><line
+            x1="12"
+            x2="12"
+            y1="15"
+            y2="3"></line></svg
+        >
+      </span>
+    </SocialPill>
+
+    <SocialPill
+      href="https://github.com/BlasVernazza06"
+      class="flex items-center gap-3 px-8 py-4 bg-white dark:bg-zinc-900 text-zinc-900 dark:text-white border border-zinc-200 dark:border-zinc-800 rounded-2xl font-bold transition-all duration-300 hover:bg-zinc-50 dark:hover:bg-zinc-800 hover:scale-[1.02] active:scale-95 shadow-sm"
+    >
+      <Github3 class="size-6 transition-transform group-hover:scale-110" />
+      Github
+    </SocialPill>
+  </nav>
 </div>
+
+<style>
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes float-slow {
+    0%,
+    100% {
+      transform: translateY(0) scale(1);
+    }
+    50% {
+      transform: translateY(-20px) scale(1.05);
+    }
+  }
+  .animate-fade-in {
+    animation: fade-in 0.8s ease-out forwards;
+  }
+  .animate-float-slow {
+    animation: float-slow 10s ease-in-out infinite;
+  }
+</style>

@@ -1,5 +1,4 @@
 ---
-
 const navItems = [
   {
     title: "Inicio",
@@ -9,66 +8,95 @@ const navItems = [
   {
     title: "Proyectos",
     label: "proyectos",
-    url: "#Proyectos",
+    url: "#Proyects",
+  },
+  {
+    title: "Experiencia",
+    label: "experiencia",
+    url: "#Experiencia",
   },
   {
     title: "Skills",
     label: "skills",
-    url: "#Skills"
+    url: "#Skills",
   },
   {
     title: "Sobre mí",
     label: "sobre-mi",
-    url: "#Sobre mi",
+    url: "#Sobre-mi",
   },
   {
     title: "Certificados",
     label: "certificados",
-    url: "#Certificados"
+    url: "#Certificados",
   },
-]
+];
 ---
 
-<header class="header fixed top-0 z-10 flex items-center justify-center w-full mx-auto mt-2">
-    <nav class="flex flex-row px-1 sm:px-3 text-sm font-medium rounded-full text-gray-600 dark:bg-gray-800 justify-center items-center">
-        {
-            navItems.map((link)=>(
-                <a
-                class="relative block transition hover:text-blue-500
-    cursor-pointer text-gray-500 dark:hover:text-blue-500 dark:text-white font-medium text-l px-1 sm:px-2 py-2"
-                aria-label={link.label}
-                href={link.url}
-                    
-                >
-                    {link.title}
-                </a>
-        ))}
-    </nav>
+<header
+  class="header fixed top-4 z-50 flex items-center justify-center w-full px-4"
+>
+  <nav
+    class="flex items-center gap-1 p-1 rounded-2xl transition-all duration-300"
+  >
+    {
+      navItems.map((link) => (
+        <a
+          class="px-4 py-2 text-sm font-semibold text-zinc-600 dark:text-zinc-400 hover:text-emerald-600 dark:hover:text-emerald-400 transition-all duration-300 rounded-xl hover:bg-emerald-500/5 dark:hover:bg-emerald-500/10 active:scale-95"
+          aria-label={link.label}
+          href={link.url}
+        >
+          {link.title}
+        </a>
+      ))
+    }
+  </nav>
 </header>
 
 <style>
   nav {
-    animation: nav-shadow 1s linear both;
+    animation: nav-reveal 1s linear both;
     animation-timeline: scroll();
     animation-range: 0 100px;
   }
 
-  /* Animación con valores CSS explícitos */
-  @keyframes nav-shadow {
+  @keyframes nav-reveal {
     0% {
       background-color: rgba(255, 255, 255, 0);
-      --tw-bg-opacity: 0;
-      box-shadow: none;
-      backdrop-filter: none;
-      -webkit-backdrop-filter: none;
+      border-color: rgba(0, 0, 0, 0);
+      backdrop-filter: blur(0px);
+      box-shadow: 0 0 #0000;
     }
     to {
-      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2),
-                  0 4px 6px -4px rgba(0, 0, 0, 0.2);
-      backdrop-filter: blur(70px);
-      -webkit-backdrop-filter: blur(8px);
-      
+      background-color: rgba(255, 255, 255, 0.7);
+      border: 1px solid rgba(228, 228, 231, 0.8); /* zinc-200 approximation */
+      backdrop-filter: blur(20px);
+      box-shadow:
+        0 10px 15px -3px rgba(0, 0, 0, 0.1),
+        0 4px 6px -4px rgba(0, 0, 0, 0.1);
     }
   }
 
+  :global(.dark) nav {
+    animation: nav-reveal-dark 1s linear both;
+    animation-timeline: scroll();
+    animation-range: 0 100px;
+  }
+
+  @keyframes nav-reveal-dark {
+    0% {
+      background-color: rgba(9, 9, 11, 0);
+      border-color: rgba(255, 255, 255, 0);
+      backdrop-filter: blur(0px);
+      box-shadow: 0 0 #0000;
+    }
+    to {
+      background-color: rgba(24, 24, 27, 0.7); /* zinc-900 approximation */
+      border: 1px solid rgba(63, 63, 70, 0.5); /* zinc-800 approximation */
+      backdrop-filter: blur(20px);
+      box-shadow:
+        0 20px 25px -5px rgba(0, 0, 0, 0.3),
+        0 10px 10px -5px rgba(0, 0, 0, 0.3);
+    }
+  }
 </style>

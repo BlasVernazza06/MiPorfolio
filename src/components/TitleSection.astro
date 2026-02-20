@@ -1,5 +1,6 @@
 <h2
-	class={`flex items-center mb-6 text-3xl font-semibold gap-x-3 text-black/80 dark:text-white ${Astro.props.className}`}
+	class={`group flex items-center mb-10 text-2xl md:text-4xl font-extrabold gap-x-4 text-zinc-900 dark:text-zinc-50 ${Astro.props.className}`}
 >
+    <span class="w-12 h-1 bg-gradient-to-r from-emerald-500 to-emerald-700 dark:from-emerald-400 dark:to-emerald-600 rounded-full group-hover:w-20 transition-all duration-500"></span>
     <slot />
 </h2>

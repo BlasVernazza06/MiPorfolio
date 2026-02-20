@@ -1,108 +1,267 @@
 ---
-import '@/styles/global.css'
+import "@/styles/global.css";
+import { ClientRouter } from "astro:transitions";
 import Header from "@/components/Navbar.astro";
-import Footer from "@/components/Footer.astro"
-import Aside from '@/components/Aside.astro';
-const { title } = Astro.props
+import Footer from "@/components/Footer.astro";
+import Aside from "@/components/Aside.astro";
+import CommandPalette from "@/components/CommandPalette.jsx";
+const { title } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="es">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/TechIcons/icons-Web.png" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
-	</head>
-	<body class="bg-white dark:text-white dark:bg-black">
-		<div class="absolute top-0 bottom-0 z-[-2] min-h-screen w-full 
-			bg-[radial-gradient(ellipse_95%_95%_at_50%_20%,rgba(100,243,75,0.2),rgba(255,255,255,0.9))]
-			dark:bg-gray-950
-			dark:bg-[radial-gradient(ellipse_90%_90%_at_50%_-5%,rgba(100,243,70,0.3),rgba(0,0,0,0.9))]"
-		>
-	
-		</div>
-		<Aside />
-		<Header />
-		<slot />
-	
-		<style is:global>
-			@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Pixelify+Sans:wght@400..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
 
-			:root {
-				color-scheme: light dark;
-			}
+    <!-- Theme Initialization Script -->
+    <script is:inline>
+      const getTheme = () => {
+        if (
+          typeof localStorage !== "undefined" &&
+          localStorage.getItem("theme")
+        ) {
+          return localStorage.getItem("theme");
+        }
+        if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+          return "dark";
+        }
+        return "light";
+      };
 
-			body {
-				font-family: 'Poppins', sans-serif;
-				display: flex;
-				flex-direction: column;
-				min-height: 100dvh;
-				overscroll-behavior: none;
-			}
+      const theme = getTheme();
+      const isDark =
+        theme === "dark" ||
+        (theme === "system" &&
+          window.matchMedia("(prefers-color-scheme: dark)").matches);
+      document.documentElement.classList.toggle("dark", isDark);
 
-			html {
-				scroll-behavior: smooth;
-			}
-			
-			main {
-				margin: 0 auto;
-			}
+      // Persist across View Transitions
+      document.addEventListener("astro:after-swap", () => {
+        const theme = getTheme();
+        const isDark =
+          theme === "dark" ||
+          (theme === "system" &&
+            window.matchMedia("(prefers-color-scheme: dark)").matches);
+        document.documentElement.classList.toggle("dark", isDark);
+      });
+    </script>
 
-			@media (prefers-reduced-motion: reduce) {
-				html {
-					scroll-behavior: auto;
-				}
-			}
+    <!-- Background Safeguard -->
+    <style is:inline>
+      html.dark {
+        background-color: #030303;
+      }
+      html {
+        background-color: #fafafa;
+      }
+    </style>
 
+    <link rel="icon" type="image/svg+xml" href="/TechIcons/icons-Web.png" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <ClientRouter />
 
-			#header-nav {
-				animation: blur linear both 0.5s;
-				animation-timeline: scroll();
-				animation-range: 0 500px;
-			}
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body
+    class="bg-[#fafafa] dark:bg-[#030303] text-zinc-900 dark:text-zinc-100 selection:bg-emerald-500/30"
+  >
+    <!-- Scroll Progress Bar -->
+    <div
+      id="progress-bar"
+      class="fixed top-0 left-0 h-[3px] bg-gradient-to-r from-emerald-400 to-emerald-600 z-[9999] transition-all duration-300 pointer-events-none"
+      style="width: 0%;"
+      transition:persist
+    >
+    </div>
 
-			@keyframes blur {
-				to {
-					backdrop-filter: blur(20px);
-					border-width: 1px;
-					border-color: rgba(0, 0, 0);
-					padding: 0.25rem 0.75rem;
-					display: flex;
-					flex-direction: row;
-					align-items: center;
-					background-color: rgb(229, 229, 229);
-					border-radius: 9999px;
-				}
-			}
+    <!-- Global Background with Dot Pattern -->
+    <div
+      class="fixed inset-0 z-[-10] overflow-hidden pointer-events-none"
+      transition:persist
+    >
+      <!-- Subtle Mesh Gradient -->
+      <div
+        class="absolute inset-0 bg-[radial-gradient(circle_at_50%_-20%,rgba(16,185,129,0.1),transparent_50%)] dark:bg-[radial-gradient(circle_at_50%_-20%,rgba(16,185,129,0.15),transparent_50%)]"
+      >
+      </div>
 
-			@media (prefers-color-scheme: dark) {
-				@keyframes blur {
-					from {
-						border: 0px;
-					}
-					to {
-						box-shadow:
-						0px 5px 50px -5px rgba(0, 0, 0, 0.1),
-						0px 0px 0 1px rgba(0, 0, 0, 0.3);
-						background: rgba(0, 0, 0, 0.3);
-						backdrop-filter: blur(20px);
-						border-width: 1px;
-						border-color: rgba(0, 0, 0);
-						padding-left: 0.75rem;
-						padding-right: 0.75rem;
-						padding-top: 0.25rem;
-						padding-bottom: 0.25rem;
-						display: flex;
-						flex-direction: row;
-						align-items: center;
-						background-color: rgba(0, 0, 0, 0.3);
-						border-radius: 9999px;
-					}
-				}
-			}
+      <!-- Global Dot Grid with Parallax -->
+      <div
+        id="global-dots"
+        class="absolute inset-[-10%] bg-[radial-gradient(#d1d5db_1.5px,transparent_1.5px)] dark:bg-[radial-gradient(#374151_2px,transparent_2px)] [background-size:24px_24px] transition-transform duration-500 ease-out opacity-40 dark:opacity-60"
+      >
+      </div>
 
-		</style>
-	</body>
+      <!-- Noise layer for extra texture -->
+      <div
+        class="absolute inset-0 bg-[canvas] opacity-[0.03] dark:opacity-[0.05]"
+        style="background-image: url('data:image/svg+xml,%3Csvg viewBox=\'0 0 200 200\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noiseFilter\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.65\' numOctaves=\'3\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noiseFilter)\'/%3E%3C/svg%3E')"
+      >
+      </div>
+    </div>
+
+    <Aside />
+    <Header />
+    <CommandPalette client:load />
+    <main class="relative">
+      <slot />
+    </main>
+    <Footer />
+
+    <style is:global>
+      :root {
+        color-scheme: light dark;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        min-height: 100dvh;
+        overscroll-behavior: none;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-family: "Outfit", sans-serif;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+      }
+
+      #header-nav {
+        animation: blur linear both 0.5s;
+        animation-timeline: scroll();
+        animation-range: 0 500px;
+      }
+
+      @keyframes blur {
+        to {
+          backdrop-filter: blur(16px);
+          background-color: rgba(255, 255, 255, 0.7);
+          border: 1px solid rgba(0, 0, 0, 0.05);
+          box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+      }
+
+      .dark #header-nav {
+        animation: blur-dark linear both 0.5s;
+        animation-timeline: scroll();
+        animation-range: 0 500px;
+      }
+
+      @keyframes blur-dark {
+        to {
+          backdrop-filter: blur(16px);
+          background-color: rgba(0, 0, 0, 0.6);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+        }
+      }
+
+      /* Reveal Animation */
+      .reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+
+      .reveal.active {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: rgba(16, 185, 129, 0.2);
+        border-radius: 20px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: rgba(16, 185, 129, 0.4);
+      }
+    </style>
+
+    <script>
+      let isMouseListenerActive = false;
+
+      function init() {
+        // Intersection Observer for Reveal
+        const observerOptions = { threshold: 0.1 };
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("active");
+            }
+          });
+        }, observerOptions);
+
+        const revealElements = document.querySelectorAll(".reveal");
+
+        // On transition, if we're going to a hash or back, show immediately to avoid "reload" flicker
+        const isBackNav =
+          (window as any).navigation?.activation?.navigationType ===
+          "back-forward";
+        const hasHash = window.location.hash;
+
+        revealElements.forEach((el) => {
+          if (isBackNav || hasHash) {
+            el.classList.add("active");
+          }
+          observer.observe(el);
+        });
+
+        // Scroll Progress Bar
+        const progressBar = document.getElementById("progress-bar");
+        const updateProgress = () => {
+          if (!progressBar) return;
+          const winScroll = document.documentElement.scrollTop;
+          const height =
+            document.documentElement.scrollHeight -
+            document.documentElement.clientHeight;
+          const scrolled = (winScroll / height) * 100;
+          progressBar.style.width = scrolled + "%";
+        };
+
+        window.addEventListener("scroll", updateProgress);
+
+        // Global Dots Parallax - Only add once
+        if (!isMouseListenerActive) {
+          document.addEventListener("mousemove", (e) => {
+            const globalDots = document.getElementById("global-dots");
+            if (!globalDots) return;
+            const x = (e.clientX / window.innerWidth - 0.5) * 15;
+            const y = (e.clientY / window.innerHeight - 0.5) * 15;
+            globalDots.style.transform = `translate(${x}px, ${y}px)`;
+          });
+          isMouseListenerActive = true;
+        }
+      }
+
+      // Initialize on first load and after every View Transition
+      document.addEventListener("astro:page-load", init);
+    </script>
+  </body>
 </html>

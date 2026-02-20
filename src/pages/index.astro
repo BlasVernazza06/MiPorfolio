@@ -7,34 +7,46 @@ import SectionContainer from '@/components/SectionContainer.astro';
 import TitleSection from '@/components/TitleSection.astro'
 import Start from '@/components/Start.astro'
 import Proyects from '@/components/Proyects.astro'
+import Experience from '@/components/Experience.astro'
 ---
 
 
-<Layout title="Mi Portfolio">
-	<main class="flex flex-col px-4">
-		<SectionContainer id="Inicio" class="py-16 md:py-36">
+<Layout title="Blas Vernazza | Portfolio">
+	<main class="flex flex-col px-6">
+		<SectionContainer id="Inicio" class="pt-16 pb-20 md:pt-24 md:pb-32 lg:pt-32">
 			<Start/>
 		</SectionContainer>
-		<div class="space-y-52">
-			<SectionContainer id="Proyects">
+		
+		<div class="space-y-32 md:space-y-48 lg:space-y-64 pb-20 md:pb-32">
+			<SectionContainer id="Proyects" class="reveal">
 				<TitleSection>
-					Proyects
+					Proyectos
 				</TitleSection>
-				<Proyects client/>
+				<Proyects client:load />
 			</SectionContainer>
-			<SectionContainer id="Skills">
+
+			<SectionContainer id="Experiencia" class="reveal">
 				<TitleSection>
-					Skills
+					Experiencia
+				</TitleSection>
+				<Experience/>
+			</SectionContainer>
+
+			<SectionContainer id="Skills" class="reveal">
+				<TitleSection>
+					Habilidades
 				</TitleSection>
 				<Skills/>
 			</SectionContainer>
-			<SectionContainer id="Sobre mi">
+
+			<SectionContainer id="Sobre-mi" class="reveal">
 				<TitleSection>
 					Sobre Mí
 				</TitleSection>
 				<About/>
 			</SectionContainer>
-			<SectionContainer id="Certificados" class="pb-20">
+
+			<SectionContainer id="Certificados" class="reveal">
 				<TitleSection>
 					Certificados
 				</TitleSection>

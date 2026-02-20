@@ -7,111 +7,83 @@ const proyectsRaw = await getCollection('proyects')
 // Filtrar solo los proyectos visibles
 const proyectsVisible = proyectsRaw.filter(item => item.data.visible !== false)
 proyectsVisible.sort((a, b) => a.data.order - b.data.order)
-const proyects = proyectsVisible.map((item) => item.data)
+const proyects = proyectsVisible.map((item) => ({
+    ...item.data,
+    id: item.id
+}))
 ---
 
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-10 p-3 sm:p-4">
-    {proyects.map((proyecto, index) => (
-        <div 
-            class={`project-card relative h-full rounded-2xl sm:rounded-3xl bg-white/70 dark:bg-black/80 border border-gray-200 dark:border-white/10 backdrop-blur-xl overflow-hidden transition-all duration-500 ease-out transform-gpu opacity-0 translate-y-4 hover:translate-y-[-8px] sm:hover:translate-y-[-10px] hover:shadow-2xl hover:shadow-black/15 dark:hover:shadow-green-500/20 hover:scale-[1.01] sm:hover:scale-[1.02] group animate-[slideInUp_0.8s_ease_forwards]`}
-            data-index={index}
-            style={`animation-delay: ${index * 0.2}s`}
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+    {proyects.map((proyecto) => (
+        <article 
+            class="group relative flex flex-col h-full rounded-[2.5rem] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-emerald-500/10"
         >
-            <!-- Efecto de brillo de fondo -->
-            <div class="card-glow absolute -top-1/2 -left-1/2 w-[200%] h-[200%] bg-gradient-radial from-green-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-0"></div>
-            
-            <!-- Contenedor flex para layout vertical -->
-            <div class="relative z-10 h-full flex flex-col">
-                <!-- Imagen con overlay -->
-                <div class="relative h-40 sm:h-48 md:h-52 overflow-hidden m-3 sm:m-4 rounded-xl sm:rounded-2xl group/image flex-shrink-0">
-                    <img 
-                        src={proyecto.imgInicio} 
-                        alt={proyecto.title} 
-                        class="w-full h-full object-cover transition-transform duration-500 group-hover/image:scale-110"
-                    />
+            <!-- Project Image Container -->
+            <a href={`/proyects/${proyecto.id}`} class="block relative overflow-hidden aspect-video mx-4 mt-4 rounded-[1.8rem]">
+                <img 
+                    src={proyecto.imgInicio} 
+                    alt={proyecto.title} 
+                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    transition:name={`img-${proyecto.id}`}
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                
+                <!-- Status Badge (Floating) -->
+                <div class="absolute top-4 right-4 flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/20 backdrop-blur-md border border-white/20 text-white text-[10px] font-bold uppercase tracking-widest">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                    Live Now
                 </div>
+            </a>
 
-                <!-- Contenido de la card -->
-                <div class="px-4 sm:px-5 md:px-6 pb-4 sm:pb-5 md:pb-6 flex flex-col flex-grow">
-                    <!-- Header con título y estado -->
-                    <div class="flex justify-between items-start mb-3 sm:mb-4">
-                        <div class="flex-1">
-                            <h3 class="text-xl sm:text-2xl font-bold text-green-500 dark:text-emerald-300 mb-1.5 sm:mb-2 leading-tight">
-                                {proyecto.title}
-                            </h3>
-                            <div class="flex items-center gap-2">
-                                <div class="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-green-500 animate-pulse"></div>
-                                <span class="text-[10px] sm:text-xs text-gray-500 dark:text-gray-400 font-medium uppercase tracking-wide">
-                                    Finalizado
-                                </span>
-                            </div>
-                        </div>
+            <!-- Content Area -->
+            <div class="flex flex-col flex-grow p-8">
+                <header class="mb-4">
+                    <a href={`/proyects/${proyecto.id}`}>
+                        <h3 
+                            class="text-2xl font-bold text-zinc-900 dark:text-zinc-50 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors duration-300 font-outfit"
+                            transition:name={`title-${proyecto.id}`}
+                        >
+                            {proyecto.title}
+                        </h3>
+                    </a>
+                </header>
+
+                <p class="text-zinc-600 dark:text-zinc-400 leading-relaxed mb-8 flex-grow">
+                    {proyecto.description}
+                </p>
+
+                <!-- Footer: Tech & Links -->
+                <div class="space-y-6">
+                    <div class="flex flex-wrap gap-2">
+                        {proyecto.technologies.slice(0, 4).map((tech) => (
+                            <span class="px-3 py-1.5 rounded-xl bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 text-xs font-semibold border border-transparent dark:border-zinc-700/50">
+                                {tech.nombre}
+                            </span>
+                        ))}
                     </div>
 
-                    <!-- Descripción -->
-                    <p class="text-sm sm:text-[0.95rem] text-gray-600 dark:text-gray-300 leading-relaxed mb-3 sm:mb-4">
-                        {proyecto.description}
-                    </p>
-
-                    <!-- Tecnologías con animación -->
-                    <div class="flex flex-col gap-2 mb-6 sm:mb-8">
-                        <div class="text-xs sm:text-sm font-semibold text-gray-700 dark:text-gray-200 uppercase tracking-wide">
-                            Tecnologías:
-                        </div>
-                        <div class="flex flex-wrap gap-1.5 sm:gap-2">
-                            {proyecto.technologies.map((tech, techIndex) => (
-                                <div 
-                                    class={`tech-item relative flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 md:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium text-white opacity-0 translate-y-5 hover:scale-105 transition-all duration-300 shadow-lg group/tech animate-[techSlideIn_0.6s_ease_forwards] ${tech.class}`}
-                                    style={`animation-delay: ${techIndex * 0.1}s`}
-                                >
-                                    <img src={tech.imagen} alt={tech.nombre} class="w-4 h-4 sm:w-5 sm:h-5 object-contain"/>
-                                    <span class="text-[10px] sm:text-xs font-semibold">{tech.nombre}</span>
-                                    
-                                    <!-- Tooltip - solo en desktop -->
-                                    <div class="hidden sm:block absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1 bg-black/80 dark:bg-white dark:text-black text-white text-xs rounded whitespace-nowrap opacity-0 invisible group-hover/tech:opacity-100 group-hover/tech:visible transition-all duration-300 z-10">
-                                        {tech.nombre}
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-
-                    <!-- Botones de acción - siempre al final -->
-                    <div class="flex flex-col sm:flex-row gap-2 sm:gap-3 mt-auto">
+                    <div class="flex items-center gap-3 pt-4 border-t border-zinc-100 dark:border-zinc-800">
                         <a 
                             href={proyecto.link} 
                             target="_blank" 
-                            class="relative flex-1 flex items-center justify-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-lg sm:rounded-xl font-semibold text-xs sm:text-sm border border-white/20 hover:translate-y-[-2px] hover:shadow-lg hover:shadow-green-500/30 transition-all duration-300 overflow-hidden group/btn active:scale-95"
+                            class="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3 bg-zinc-900 dark:bg-zinc-50 text-white dark:text-zinc-900 rounded-2xl font-bold text-sm transition-all duration-300 hover:scale-[1.02] active:scale-95"
                         >
-                            <Demo class="w-3.5 h-3.5 sm:w-4 sm:h-4"/>
+                            <Demo class="size-4"/>
                             <span>Ver Demo</span>
-                            
-                            <!-- Efecto shine -->
-                            <div class="absolute inset-0 -left-full w-full h-full bg-gradient-to-r from-transparent via-white/30 to-transparent group-hover/btn:left-full transition-all duration-600"></div>
                         </a>
                         
                         <a 
                             href={proyecto.github} 
                             target="_blank" 
-                            class="relative flex-1 flex items-center justify-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 bg-gray-500/10 dark:bg-white/10 text-gray-700 dark:text-gray-200 rounded-lg sm:rounded-xl font-semibold text-xs sm:text-sm border border-gray-500/20 dark:border-white/20 hover:translate-y-[-2px] hover:shadow-lg hover:bg-gray-500/20 dark:hover:bg-white/20 transition-all duration-300 overflow-hidden group/btn active:scale-95"
+                            class="inline-flex items-center justify-center p-3 text-zinc-600 dark:text-zinc-400 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl transition-all duration-300 hover:bg-zinc-50 dark:hover:bg-zinc-800 hover:scale-105"
+                            aria-label="GitHub Repository"
                         >
-                            <Github3 class="w-3.5 h-3.5 sm:w-4 sm:h-4"/>
-                            <span>Código</span>
-                            
-                            <!-- Efecto shine -->
-                            <div class="absolute inset-0 -left-full w-full h-full bg-gradient-to-r from-transparent via-white/30 to-transparent group-hover/btn:left-full transition-all duration-600"></div>
+                            <Github3 class="size-6"/>
                         </a>
                     </div>
                 </div>
             </div>
-
-            <!-- Partículas decorativas - solo en desktop -->
-            <div class="hidden sm:block absolute inset-0 pointer-events-none z-0">
-                <div class="particle absolute top-[20%] left-[10%] w-1 h-1 bg-green-500 rounded-full opacity-0 animate-[float1_6s_ease-in-out_infinite]"></div>
-                <div class="particle absolute top-[60%] right-[15%] w-1 h-1 bg-green-500 rounded-full opacity-0 animate-[float2_8s_ease-in-out_infinite]"></div>
-                <div class="particle absolute bottom-[30%] left-[80%] w-1 h-1 bg-green-500 rounded-full opacity-0 animate-[float3_7s_ease-in-out_infinite]"></div>
-            </div>
-        </div>
+        </article>
     ))}
 </div>
 

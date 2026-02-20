@@ -1,28 +1,74 @@
 ---
 import Github3 from "./icons/github3.astro";
-import AsidePill from "./AsidePill.astro";
 import ThemeToggle from "./ThemeToggle.jsx";
-import Linkedin from "./icons/linkedin.astro";
 import Fiverr from './icons/fiverr.astro';
 ---
 
-<div class="fixed bottom-0 left-1/2 -translate-x-1/2 -translate-y-5 flex flex-row items-center justify-center gap-2 z-50
-            md:fixed md:top-1/4 md:left-5 md:translate-x-0 md:flex-col">
-  <!-- Botón de tema -->
-  <div class="flex justify-center items-center p-3 shadow-[0_7px_13px_-1px_rgba(0,0,0,0.2),_0_2px_4px_-2px_rgba(0,0,0,0.2)] border-[2px] border-gray-400 backdrop-blur-[4px] bg-white/30 dark:bg-gray-800 dark:border-gray-400 rounded-full md:mb-2">
-    <ThemeToggle client:load />
+<div class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[100] md:bottom-auto md:top-1/2 md:left-6 md:-translate-y-1/2 md:translate-x-0 group">
+  <div class="flex flex-row md:flex-col items-center gap-2 p-2 rounded-3xl bg-white/70 dark:bg-zinc-900/70 backdrop-blur-2xl border border-zinc-200 dark:border-zinc-800 shadow-2xl shadow-emerald-500/10 transition-all duration-500 hover:scale-[1.02]">
+    
+    <!-- Theme Toggle -->
+    <div class="p-1 rounded-2xl transition-colors hover:bg-zinc-100 dark:hover:bg-white/5">
+      <ThemeToggle client:load />
+    </div>
+
+    <!-- Divider -->
+    <div class="w-px h-6 bg-zinc-200 dark:bg-zinc-800 mx-1 md:w-6 md:h-px md:my-1"></div>
+
+    <!-- Main Action: Copy Email -->
+    <button 
+      id="copy-email"
+      data-email="blasvernazza@example.com"
+      class="flex items-center justify-center gap-2 px-4 py-2 md:px-2 md:py-4 rounded-2xl bg-zinc-900 dark:bg-zinc-50 text-white dark:text-zinc-900 font-bold text-sm transition-all duration-300 hover:bg-emerald-600 dark:hover:bg-emerald-400 dark:hover:text-black group/btn overflow-hidden relative"
+      title="Copiar Email"
+    >
+      <span class="relative z-10 md:hidden font-outfit">Copiar Email</span>
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="relative z-10 transition-transform group-hover/btn:scale-110 md:group-hover/btn:translate-y-[-2px]"><rect width="14" height="14" x="8" y="8" rx="2" ry="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></svg>
+      
+      <!-- Shine effect -->
+      <div class="absolute inset-0 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
+    </button>
+
+    <!-- Secondary Action: Fiverr -->
+    <a 
+      href="https://www.fiverr.com/blas_vernazza?public_mode=true" 
+      target="_blank"
+      class="p-2 rounded-2xl text-zinc-500 dark:text-zinc-400 hover:text-emerald-500 dark:hover:text-emerald-400 transition-colors"
+      title="Fiverr Profile"
+    >
+      <Fiverr class="size-6" />
+    </a>
   </div>
 
-  <!-- Botones sociales -->
-  <div class="flex flex-row md:flex-col justify-center items-center gap-3 p-2 shadow-[0_7px_13px_-1px_rgba(0,0,0,0.2),_0_2px_4px_-2px_rgba(0,0,0,0.2)] border-[2px] border-gray-400 backdrop-blur-[4px] bg-white/30 dark:bg-gray-800 dark:border-gray-400 rounded-full">
-    <AsidePill href="https://github.com/BlasVernazza06">
-      <Github3 class="size-6" />
-    </AsidePill>
-    <AsidePill href="https://www.linkedin.com/in/blas-vernazza-888588355/">
-      <Linkedin class="size-6" />
-    </AsidePill>
-    <AsidePill href="https://www.fiverr.com/blas_vernazza?public_mode=true">
-      <Fiverr class="size-6" />
-    </AsidePill>
+  <!-- Toast Notification -->
+  <div id="copy-toast" class="absolute bottom-full mb-4 left-1/2 -translate-x-1/2 px-4 py-2 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 text-xs font-bold rounded-xl opacity-0 pointer-events-none transition-all duration-300 translate-y-2">
+    ¡Email copiado! 🚀
   </div>
 </div>
+
+<script>
+  function initCopy() {
+    const btn = document.getElementById('copy-email');
+    const toast = document.getElementById('copy-toast');
+    
+    btn?.addEventListener('click', () => {
+      const email = btn.getAttribute('data-email');
+      if (email) {
+        navigator.clipboard.writeText(email);
+        
+        // Show Toast
+        toast?.classList.remove('opacity-0', 'translate-y-2', 'pointer-events-none');
+        toast?.classList.add('opacity-100', 'translate-y-0');
+        
+        // Hide Toast after 2s
+        setTimeout(() => {
+          toast?.classList.add('opacity-0', 'translate-y-2', 'pointer-events-none');
+          toast?.classList.remove('opacity-100', 'translate-y-0');
+        }, 2000);
+      }
+    });
+  }
+
+  // Support View Transitions
+  document.addEventListener('astro:page-load', initCopy);
+</script>

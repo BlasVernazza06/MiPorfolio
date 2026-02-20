@@ -2,14 +2,67 @@
 
 ---
 
-<div class="flex flex-col md:flex-row justify-center items-center gap-6">
-    <div class="pr-4">
-        <p class="text-black dark:text-white [&>span]:text-blue-500 [&>span]:font-light [&>span]:font-mono">
-        Soy <span>Blas Vernazza</span>, Full Stack Developer con <span>2 años de experiencia</span> en desarrollo web. Me especializo en <span>JavaScript, React y Node.js</span>, creando aplicaciones eficientes, escalables y centradas en el usuario.
-
-        Trabajo con foco en <span>buenas prácticas, código limpio y colaboración en equipo</span>. Me motiva seguir creciendo en proyectos que mezclen <span>tecnología, innovación y aprendizaje continuo.</span>
-                
-        </p>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-stretch">
+  <!-- Bio Card -->
+  <div
+    class="md:col-span-12 lg:col-span-8 p-8 md:p-10 rounded-3xl bg-white/50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 backdrop-blur-sm relative overflow-hidden group"
+  >
+    <div
+      class="absolute -right-20 -top-20 w-64 h-64 bg-emerald-500/5 rounded-full blur-3xl group-hover:bg-emerald-500/10 transition-colors duration-500"
+    >
     </div>
-    <img src="/images/BlasPhoto.jpg" alt="" class="mt-8 order-1 object-cover w-64 h-full p-1 md:order-2 rotate-3 lg:p-2 lg:w-64 aspect-square rounded-2xl bg-black/30 dark:bg-yellow-500/5 ring-1 ring-black/80 dark:ring-white/20 " style="object-position: 50% 50%">  
+
+    <div
+      class="relative space-y-6 text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed"
+    >
+      <p>
+        Soy <span
+          class="text-zinc-900 dark:text-zinc-100 font-semibold font-outfit"
+          >Blas Vernazza</span
+        >, desarrollador Full Stack con <span
+          class="text-emerald-600 dark:text-emerald-400 font-medium"
+          >2 años de experiencia</span
+        > transformando ideas en aplicaciones web y móviles escalables.
+      </p>
+      <p>
+        Mi enfoque principal es <span
+          class="px-2 py-0.5 rounded-md bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 font-medium"
+          >JavaScript</span
+        >, <span
+          class="px-2 py-0.5 rounded-md bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 font-medium"
+          >React</span
+        > y <span
+          class="px-2 py-0.5 rounded-md bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 font-medium"
+          >Node.js</span
+        >. Me apasiona el código limpio y la arquitectura sólida.
+      </p>
+      <p>
+        Más allá del código, me motiva la resolución de problemas complejos y la
+        colaboración constante para crear productos que realmente aporten valor
+        al usuario final.
+      </p>
+    </div>
+  </div>
+
+  <!-- Image Card -->
+  <div
+    class="md:col-span-12 lg:col-span-4 rounded-3xl overflow-hidden relative group aspect-[4/5] lg:aspect-auto"
+  >
+    <img
+      src="/images/BlasPhoto.jpg"
+      alt="Blas Vernazza"
+      class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+    />
+    <div
+      class="absolute inset-0 bg-gradient-to-t from-emerald-900/40 to-transparent opacity-60"
+    >
+    </div>
+    <div class="absolute bottom-6 left-6 right-6">
+      <div
+        class="p-4 rounded-2xl bg-white/10 dark:bg-black/20 backdrop-blur-md border border-white/20"
+      >
+        <p class="text-white text-sm font-medium">📍 Buenos Aires, Argentina</p>
+      </div>
+    </div>
+  </div>
 </div>

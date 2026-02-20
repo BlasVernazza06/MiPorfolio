@@ -1,9 +1,14 @@
 ---
-import { getCollection } from 'astro:content'
-import TechStackCards from './TechStackCarousel'
+import { getCollection } from "astro:content";
+import TechStackCards from "./TechStackCarousel";
 
-const skillsRaw = await getCollection('techStack')
-const skills = skillsRaw.map((item) => item.data)
+const skillsRaw = await getCollection("techStack");
+
+const ORDER = ["Frontend", "Backend", "Herramientas", "Aprendiendo"];
+
+const skills = skillsRaw
+  .sort((a, b) => ORDER.indexOf(a.data.title) - ORDER.indexOf(b.data.title))
+  .map((item) => item.data);
 ---
 
 <TechStackCards skills={skills} client:load />

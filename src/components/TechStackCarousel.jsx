@@ -8,7 +8,6 @@ import {
 } from "@/components/ui/carousel";
 
 export default function TechStackCards({ skills }) {
-  // Función para dividir un array en chunks de tamaño específico
   const chunkArray = (array, size) => {
     const chunks = [];
     for (let i = 0; i < array.length; i += size) {
@@ -18,50 +17,35 @@ export default function TechStackCards({ skills }) {
   };
 
   return (
-    <div className="w-full">
-      <header className="tech-header-container flex flex-col flex-warp justify-center pb-6 px-4">
-        <span className="text-l text-black dark:text-white text-pretty font-normal dark:[&>strong]:text-[#2cc9ff] [&>strong]:text-blue-500 [&>span]:text-orange-500 [&>span]:font-bold dark:[&>strong]:text-p dark:[&>span]:text-[#f5a563]">
-          Trabajo con herramientas como <strong>React</strong>, <strong>Firebase</strong>, <strong>Tailwind </strong> y <strong>JavaScript</strong> para crear experiencias web dinámicas y eficientes.
-          También tengo habilidades en <span>diseño responsivo</span>, manejo de <span>versionado con Git</span> y enfoque en buenas prácticas de desarrollo.
-        </span>
+    <div className="w-full space-y-12">
+      <header className="max-w-4xl mx-auto text-center px-4">
+        <p className="text-base md:text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed">
+          Mi stack tecnológico está diseñado para la <span className="text-emerald-600 dark:text-emerald-400 font-medium">eficiencia y la escalabilidad</span>. 
+          Combino la potencia de <span className="text-zinc-900 dark:text-zinc-100 font-semibold">React y TypeScript</span> con arquitecturas de backend sólidas en <span className="text-zinc-900 dark:text-zinc-100 font-semibold">Node.js</span>, 
+          asegurando productos que no solo se ven bien, sino que rinden al máximo nivel bajo cualquier demanda.
+        </p>
       </header>
 
-      {/* Grid de cards: 2x2 en desktop, 1 columna en mobile */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 px-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 px-4">
         {skills.map((tech, index) => {
-          // Dividir las tecnologías en grupos de 9
           const techChunks = chunkArray(tech.technologies, 9);
           
           return (
             <div
               key={index}
-              className="tech-cards px-6 pt-6 pb-8 rounded-xl bg-[#f5f5f5] dark:bg-gray-900 dark:border-gray-800 dark:border-[0.5px] shadow-2xl shadow-gray-400 dark:shadow-none transform transition duration-500 hover:scale-105 will-change-transform"
+              className="p-8 rounded-[2rem] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 transition-all duration-500 hover:shadow-xl hover:shadow-emerald-500/5 group"
             >
-              <div className="card-container flex flex-col gap-5">
-                <div className="header-container flex justify-center mb-2">
-                  <p 
-                    className="text-center font-bold text-[32px]"
-                    style={{
-                      letterSpacing: '-1px',
-                      background: tech.title === 'Frontend' 
-                        ? 'linear-gradient(0deg, #00d9ff 1%, #2cb2f5 58%)'
-                        : tech.title === 'Backend'
-                        ? 'linear-gradient(0deg, #b1afaf 1%, #2c2c2c 78%)'
-                        : tech.title === 'Aprendiendo'
-                        ? 'linear-gradient(0deg, #ffc79f 1.44%, #ff6a00 78.37%)'
-                        : tech.title === 'Herramientas'
-                        ? 'linear-gradient(0deg, #98d5fd 2%, #206a8f 88%)'
-                        : 'linear-gradient(0deg, #00d9ff 1%, #2cb2f5 58%)',
-                      backgroundClip: 'text',
-                      WebkitBackgroundClip: 'text',
-                      WebkitTextFillColor: 'transparent'
-                    }}
-                  >
+              <div className="flex flex-col gap-8">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-2xl font-bold font-outfit text-zinc-900 dark:text-zinc-100 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
                     {tech.title}
-                  </p>
+                  </h3>
+                  <div className="h-px flex-grow mx-4 bg-zinc-100 dark:bg-zinc-800"></div>
+                  <span className="text-xs font-bold text-zinc-400 dark:text-zinc-600 uppercase tracking-widest">
+                    Stack
+                  </span>
                 </div>
 
-                {/* Carousel con 9 ítems por slide */}
                 <Carousel 
                   className="w-full"
                   opts={{
@@ -69,21 +53,23 @@ export default function TechStackCards({ skills }) {
                     loop: true,
                   }}
                 >
-                  <CarouselContent className="-ml-2 md:-ml-4">
+                  <CarouselContent>
                     {techChunks.map((chunk, chunkIdx) => (
-                      <CarouselItem key={chunkIdx} className="pl-2 md:pl-4 basis-full">
-                        <div className="grid grid-cols-3 gap-6 py-4">
+                      <CarouselItem key={chunkIdx} className="basis-full">
+                        <div className="grid grid-cols-3 gap-y-12 gap-x-4 py-8">
                           {chunk.map((t, idx) => (
                             <div
                               key={idx}
-                              className="flex flex-col items-center text-center gap-2"
+                              className="flex flex-col items-center gap-3 group/item"
                             >
-                              <img 
-                                src={t.imagen} 
-                                alt={t.nombre} 
-                                className="h-16 w-16 object-contain"
-                              />
-                              <span className="text-black dark:text-gray-300 text-xs font-medium">
+                              <div className="p-3 rounded-2xl bg-zinc-50 dark:bg-zinc-800/50 group-hover/item:bg-white dark:group-hover/item:bg-zinc-700 transition-all duration-300 group-hover/item:scale-110 group-hover/item:shadow-lg group-hover/item:shadow-emerald-500/20">
+                                <img 
+                                  src={t.imagen} 
+                                  alt={t.nombre} 
+                                  className="h-10 w-10 md:h-12 md:w-12 object-contain transition-transform duration-300 group-hover/item:rotate-3"
+                                />
+                              </div>
+                              <span className="text-zinc-500 dark:text-zinc-400 text-[10px] md:text-xs font-bold uppercase tracking-tighter group-hover/item:text-zinc-900 dark:group-hover/item:text-zinc-100 transition-colors">
                                 {t.nombre}
                               </span>
                             </div>
@@ -93,11 +79,10 @@ export default function TechStackCards({ skills }) {
                     ))}
                   </CarouselContent>
 
-                  {/* Controles con espacio reservado, solo si hay más de un slide */}
                   {techChunks.length > 1 && (
-                    <div className="flex justify-center items-center gap-4 mt-6">
-                      <CarouselPrevious className="relative left-0 top-0 translate-y-0" />
-                      <CarouselNext className="relative right-0 top-0 translate-y-0" />
+                    <div className="flex justify-end gap-2 mt-8">
+                      <CarouselPrevious className="static translate-y-0 h-10 w-10 rounded-xl bg-zinc-100 dark:bg-zinc-800 border-none hover:bg-emerald-500/10 text-zinc-600 dark:text-zinc-400 hover:text-emerald-600 dark:hover:text-emerald-400" />
+                      <CarouselNext className="static translate-y-0 h-10 w-10 rounded-xl bg-zinc-100 dark:bg-zinc-800 border-none hover:bg-emerald-500/10 text-zinc-600 dark:text-zinc-400 hover:text-emerald-600 dark:hover:text-emerald-400" />
                     </div>
                   )}
                 </Carousel>
