@@ -9,6 +9,7 @@ const proyects = defineCollection({
     link: z.string(),
     github: z.string(),
     visible: z.boolean().optional().default(true), // Campo para controlar visibilidad
+    liveNow: z.boolean().optional().default(true), // Campo para controlar el badge de "Live Now"
     technologies: z.array(
       z.object({
         nombre: z.string(),

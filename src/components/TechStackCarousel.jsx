@@ -26,18 +26,20 @@ export default function TechStackCards({ skills }) {
         </p>
       </header>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 px-4">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
         {skills.map((tech, index) => {
           const techChunks = chunkArray(tech.technologies, 9);
           
           return (
             <div
               key={index}
-              className="p-8 rounded-[2rem] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 transition-all duration-500 hover:shadow-xl hover:shadow-emerald-500/5 group"
+              className="p-10 rounded-[2.5rem] bg-white/40 dark:bg-zinc-900/40 backdrop-blur-md border border-zinc-200/50 dark:border-zinc-800/50 transition-all duration-700 hover:-translate-y-2 hover:shadow-2xl hover:shadow-emerald-500/5 group relative overflow-hidden"
             >
-              <div className="flex flex-col gap-8">
-                <div className="flex items-center justify-between">
-                  <h3 className="text-2xl font-bold font-outfit text-zinc-900 dark:text-zinc-100 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
+              <div className="absolute top-0 right-0 size-24 bg-gradient-to-bl from-emerald-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+              
+              <div className="flex flex-col gap-10">
+                <div className="flex items-center gap-6">
+                  <h3 className="text-3xl font-black tracking-tighter text-zinc-900 dark:text-zinc-50 group-hover:text-emerald-500 transition-colors">
                     {tech.title}
                   </h3>
                   <div className="h-px flex-grow mx-4 bg-zinc-100 dark:bg-zinc-800"></div>
@@ -56,20 +58,20 @@ export default function TechStackCards({ skills }) {
                   <CarouselContent>
                     {techChunks.map((chunk, chunkIdx) => (
                       <CarouselItem key={chunkIdx} className="basis-full">
-                        <div className="grid grid-cols-3 gap-y-12 gap-x-4 py-8">
+                        <div className="grid grid-cols-3 gap-6 py-6">
                           {chunk.map((t, idx) => (
                             <div
                               key={idx}
-                              className="flex flex-col items-center gap-3 group/item"
+                              className="flex flex-col items-center gap-4 group/item"
                             >
                               <div className="p-3 rounded-2xl bg-zinc-50 dark:bg-zinc-800/50 group-hover/item:bg-white dark:group-hover/item:bg-zinc-700 transition-all duration-300 group-hover/item:scale-110 group-hover/item:shadow-lg group-hover/item:shadow-emerald-500/20">
                                 <img 
                                   src={t.imagen} 
                                   alt={t.nombre} 
-                                  className="h-10 w-10 md:h-12 md:w-12 object-contain transition-transform duration-300 group-hover/item:rotate-3"
+                                  className="h-10 w-10 md:h-12 md:w-12 object-contain transition-all duration-500"
                                 />
                               </div>
-                              <span className="text-zinc-500 dark:text-zinc-400 text-[10px] md:text-xs font-bold uppercase tracking-tighter group-hover/item:text-zinc-900 dark:group-hover/item:text-zinc-100 transition-colors">
+                              <span className="text-zinc-400 dark:text-zinc-500 text-[10px] font-black uppercase tracking-widest group-hover/item:text-zinc-900 dark:group-hover/item:text-zinc-100 transition-colors">
                                 {t.nombre}
                               </span>
                             </div>
@@ -80,9 +82,9 @@ export default function TechStackCards({ skills }) {
                   </CarouselContent>
 
                   {techChunks.length > 1 && (
-                    <div className="flex justify-end gap-2 mt-8">
-                      <CarouselPrevious className="static translate-y-0 h-10 w-10 rounded-xl bg-zinc-100 dark:bg-zinc-800 border-none hover:bg-emerald-500/10 text-zinc-600 dark:text-zinc-400 hover:text-emerald-600 dark:hover:text-emerald-400" />
-                      <CarouselNext className="static translate-y-0 h-10 w-10 rounded-xl bg-zinc-100 dark:bg-zinc-800 border-none hover:bg-emerald-500/10 text-zinc-600 dark:text-zinc-400 hover:text-emerald-600 dark:hover:text-emerald-400" />
+                    <div className="flex justify-end gap-3 mt-10">
+                      <CarouselPrevious className="static translate-y-0 h-12 w-12 rounded-2xl bg-zinc-100 dark:bg-zinc-800/50 border border-zinc-200/50 dark:border-zinc-700/50 hover:bg-emerald-500/10 text-zinc-500 hover:text-emerald-500 transition-all" />
+                      <CarouselNext className="static translate-y-0 h-12 w-12 rounded-2xl bg-zinc-100 dark:bg-zinc-800/50 border border-zinc-200/50 dark:border-zinc-700/50 hover:bg-emerald-500/10 text-zinc-500 hover:text-emerald-500 transition-all" />
                     </div>
                   )}
                 </Carousel>
@@ -94,3 +96,4 @@ export default function TechStackCards({ skills }) {
     </div>
   );
 }
+
