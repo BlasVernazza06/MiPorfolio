@@ -4,7 +4,6 @@ import Github3 from './icons/github3.astro'
 import Demo from './icons/Demo.astro'
 
 const proyectsRaw = await getCollection('proyects')
-// Filtrar solo los proyectos visibles
 const proyectsVisible = proyectsRaw.filter(item => item.data.visible !== false)
 proyectsVisible.sort((a, b) => a.data.order - b.data.order)
 const proyects = proyectsVisible.map((item) => ({
@@ -13,34 +12,35 @@ const proyects = proyectsVisible.map((item) => ({
 }))
 ---
 
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-12">
     {proyects.map((proyecto) => (
         <article 
-            class="group relative flex flex-col h-full rounded-[2.5rem] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 overflow-hidden transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl hover:shadow-emerald-500/10"
+            class="group relative flex flex-col h-full rounded-[2.5rem] bg-white/50 dark:bg-zinc-900/50 backdrop-blur-sm border border-zinc-200/50 dark:border-zinc-800/50 overflow-hidden transition-all duration-700 hover:-translate-y-3 hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.5)]"
         >
-            <!-- Project Image Container -->
-            <a href={`/proyects/${proyecto.id}`} class="block relative overflow-hidden aspect-video mx-4 mt-4 rounded-[1.8rem]">
+            <div class="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+
+            <a href={`/proyects/${proyecto.id}`} class="block relative overflow-hidden aspect-video mx-4 mt-4 rounded-[1.8rem] shadow-inner">
                 <img 
                     src={proyecto.imgInicio} 
                     alt={proyecto.title} 
-                    class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    class="w-full h-full object-cover transition-transform duration-1000 cubic-bezier(0.16, 1, 0.3, 1) group-hover:scale-110"
                     transition:name={`img-${proyecto.id}`}
                 />
-                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors duration-700"></div>
                 
-                <!-- Status Badge (Floating) -->
-                <div class="absolute top-4 right-4 flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/20 backdrop-blur-md border border-white/20 text-white text-[10px] font-bold uppercase tracking-widest">
-                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                    Live Now
-                </div>
+                {proyecto.liveNow && (
+                    <div class="absolute top-4 right-4 flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 text-white text-[9px] font-black uppercase tracking-[0.2em]">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                        Live
+                    </div>
+                )}
             </a>
 
-            <!-- Content Area -->
-            <div class="flex flex-col flex-grow p-8">
-                <header class="mb-4">
+            <div class="flex flex-col flex-grow p-10 pt-8">
+                <header class="mb-5">
                     <a href={`/proyects/${proyecto.id}`}>
                         <h3 
-                            class="text-2xl font-bold text-zinc-900 dark:text-zinc-50 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors duration-300 font-outfit"
+                            class="text-3xl font-black text-zinc-900 dark:text-zinc-50 tracking-tighter group-hover:text-emerald-500 transition-colors duration-300 font-outfit"
                             transition:name={`title-${proyecto.id}`}
                         >
                             {proyecto.title}
@@ -48,110 +48,40 @@ const proyects = proyectsVisible.map((item) => ({
                     </a>
                 </header>
 
-                <p class="text-zinc-600 dark:text-zinc-400 leading-relaxed mb-8 flex-grow">
+                <p class="text-[15px] text-zinc-500 dark:text-zinc-400 leading-relaxed mb-10 flex-grow font-medium">
                     {proyecto.description}
                 </p>
 
-                <!-- Footer: Tech & Links -->
-                <div class="space-y-6">
+                <div class="space-y-8">
                     <div class="flex flex-wrap gap-2">
                         {proyecto.technologies.slice(0, 4).map((tech) => (
-                            <span class="px-3 py-1.5 rounded-xl bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 text-xs font-semibold border border-transparent dark:border-zinc-700/50">
+                            <span class="px-3 py-1.5 rounded-lg bg-emerald-500/5 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-[10px] font-black uppercase tracking-widest border border-emerald-500/10">
                                 {tech.nombre}
                             </span>
                         ))}
                     </div>
 
-                    <div class="flex items-center gap-3 pt-4 border-t border-zinc-100 dark:border-zinc-800">
+                    <div class="flex items-center gap-4 pt-6 border-t border-zinc-100/50 dark:border-zinc-800/50">
                         <a 
                             href={proyecto.link} 
                             target="_blank" 
-                            class="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3 bg-zinc-900 dark:bg-zinc-50 text-white dark:text-zinc-900 rounded-2xl font-bold text-sm transition-all duration-300 hover:scale-[1.02] active:scale-95"
+                            class="flex-1 inline-flex items-center justify-center gap-2 px-6 py-4 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 rounded-2xl font-black text-[11px] uppercase tracking-widest transition-all duration-300 hover:bg-emerald-600 dark:hover:bg-emerald-400 hover:scale-[1.02] shadow-lg shadow-zinc-900/10 dark:shadow-white/5"
                         >
                             <Demo class="size-4"/>
-                            <span>Ver Demo</span>
+                            <span>Demo</span>
                         </a>
                         
                         <a 
                             href={proyecto.github} 
                             target="_blank" 
-                            class="inline-flex items-center justify-center p-3 text-zinc-600 dark:text-zinc-400 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl transition-all duration-300 hover:bg-zinc-50 dark:hover:bg-zinc-800 hover:scale-105"
+                            class="inline-flex items-center justify-center p-4 text-zinc-400 hover:text-emerald-500 bg-zinc-100/50 dark:bg-zinc-800/50 rounded-2xl transition-all duration-300 hover:bg-emerald-500/10"
                             aria-label="GitHub Repository"
                         >
-                            <Github3 class="size-6"/>
+                            <Github3 class="size-5"/>
                         </a>
                     </div>
                 </div>
             </div>
         </article>
     ))}
-</div>
-
-<style>
-    /* Animaciones personalizadas que no están en Tailwind base */
-    @keyframes slideInUp {
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    @keyframes techSlideIn {
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    @keyframes float1 {
-        0%, 100% {
-            transform: translateY(0) rotate(0deg);
-            opacity: 0;
-        }
-        50% {
-            transform: translateY(-10px) rotate(180deg);
-            opacity: 0.6;
-        }
-    }
-
-    @keyframes float2 {
-        0%, 100% {
-            transform: translateX(0) rotate(0deg);
-            opacity: 0;
-        }
-        50% {
-            transform: translateX(-20px) rotate(180deg);
-            opacity: 0.4;
-        }
-    }
-
-    @keyframes float3 {
-        0%, 100% {
-            transform: translate(0, 0) rotate(0deg);
-            opacity: 0;
-        }
-        50% {
-            transform: translate(-10px, -10px) rotate(180deg);
-            opacity: 0.5;
-        }
-    }
-
-    /* Efecto 3D personalizado - solo en dispositivos medianos+ */
-    @media (min-width: 768px) {
-        .project-card:hover {
-            transform: perspective(1000px) translateY(-10px) rotateX(5deg) rotateY(5deg);
-        }
-        
-        /* Activar animaciones de partículas en hover */
-        .project-card:hover .particle {
-            animation-play-state: running;
-        }
-    }
-
-    /* En móviles, efecto hover más simple */
-    @media (max-width: 767px) {
-        .project-card:active {
-            transform: scale(0.98);
-        }
-    }
-</style>
+</div>

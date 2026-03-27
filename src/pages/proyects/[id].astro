@@ -14,7 +14,7 @@ export async function getStaticPaths() {
 }
 
 const { proyect } = Astro.props;
-const { title, description, imgInicio, link, github, technologies } =
+const { title, description, imgInicio, link, github, technologies, liveNow } =
   proyect.data;
 const { Content } = await render(proyect);
 ---
@@ -99,14 +99,23 @@ const { Content } = await render(proyect);
 
           <!-- Links -->
           <div class="flex items-center gap-4 pt-4">
-            <a
-              href={link}
-              target="_blank"
-              class="flex-1 inline-flex items-center justify-center gap-2 px-6 py-4 bg-emerald-500 text-white rounded-2xl font-bold transition-all hover:bg-emerald-600 hover:scale-[1.02] shadow-xl shadow-emerald-500/20"
-            >
-              <Demo class="size-5" />
-              Ver Demo En Vivo
-            </a>
+            {
+              liveNow ? (
+                <a
+                  href={link}
+                  target="_blank"
+                  class="flex-1 inline-flex items-center justify-center gap-2 px-6 py-4 bg-emerald-500 text-white rounded-2xl font-bold transition-all hover:bg-emerald-600 hover:scale-[1.02] shadow-xl shadow-emerald-500/20"
+                >
+                  <Demo class="size-5" />
+                  Ver Demo En Vivo
+                </a>
+              ) : (
+                <div class="flex-1 inline-flex items-center justify-center gap-2 px-6 py-4 bg-zinc-200 dark:bg-zinc-800 text-zinc-500 dark:text-zinc-500 rounded-2xl font-bold cursor-not-allowed">
+                  <Demo class="size-5 opacity-50" />
+                  Demo no disponible
+                </div>
+              )
+            }
             <a
               href={github}
               target="_blank"

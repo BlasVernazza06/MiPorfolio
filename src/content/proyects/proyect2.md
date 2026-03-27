@@ -1,5 +1,6 @@
 ---
 hidden: false
+liveNow: true
 order: 5
 imgInicio: "/images/proyect1AeroViajes.webp"
 title: AeroViajes

@@ -1,6 +1,7 @@
 ---
 order: 3
 visible: true
+liveNow: true
 imgInicio: "/images/JavaProyect.png"
 title: Java Project
 description: Proyecto final realizado para el curso de Programacion con Java 3.0

@@ -1,6 +1,7 @@
 ---
 order: 5
 visible: false
+liveNow: true
 imgInicio: "/images/ClonDeSpotify.png"
 title: Clon de Spotify
 description: Pagina diseñada y desarrollada al detalle, con reproductor de audio, persistencia de audio entre navegaciones y paginas de playlist.

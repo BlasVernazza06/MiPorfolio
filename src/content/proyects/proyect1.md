@@ -1,5 +1,6 @@
 ---
 hidden: false
+liveNow: false
 order: 1
 imgInicio: "/images/LearnixPhoto.png"
 title: Learnix

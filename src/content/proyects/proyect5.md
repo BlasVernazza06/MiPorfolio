@@ -1,6 +1,7 @@
 ---
 order: 2
 visible: true
+liveNow: false
 imgInicio: "/images/StudyHubPic.png"
 title: StudyHub
 description: Centro de Trabajo para estudiantes, con Editor de Texto, Chat en Tiempo Real, Carga de archivos y espacios de trabajo compartidos
