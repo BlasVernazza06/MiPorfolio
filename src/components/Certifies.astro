@@ -5,53 +5,46 @@ const certifiesRaw = await getCollection('certifies')
 const certifies = certifiesRaw.map((item) => item.data)
 ---
 
-<div class="space-y-12">
+<div class="space-y-16">
     <header class="max-w-4xl">
-        <p class="text-base md:text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed">
-            Mi compromiso con la <span class="text-emerald-600 dark:text-emerald-400 font-medium text-outfit">excelencia técnica</span> se ve reflejado en las certificaciones que he obtenido de instituciones líderes. Estas credenciales validan mi dominio en áreas críticas del desarrollo moderno, asegurando que mis habilidades estén siempre alineadas con los <span class="text-zinc-900 dark:text-zinc-100 font-semibold">estándares más altos de la industria</span> y las mejores prácticas actuales.
+        <p class="text-base md:text-lg text-zinc-500 dark:text-zinc-400 leading-relaxed font-medium">
+            Validando la <span class="text-emerald-500 font-black tracking-tighter uppercase italic">Excelencia</span> técnica a través de certificaciones de instituciones líderes en la industria.
         </p>
     </header>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 pt-4">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4 leading-none">
         {certifies.map((certifie) => (
             <a 
                 href={certifie.pdf} 
                 target="_blank" 
-                class="group relative flex flex-col p-8 rounded-[2rem] bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl hover:shadow-emerald-500/10 active:scale-[0.98]"
+                class="group relative flex flex-col p-10 rounded-[2.5rem] bg-white/40 dark:bg-zinc-900/40 backdrop-blur-md border border-zinc-200/50 dark:border-zinc-800/50 transition-all duration-700 hover:-translate-y-2 hover:shadow-2xl hover:shadow-emerald-500/5 active:scale-[0.98] overflow-hidden"
             >
                 <!-- SpotLight Effect Layer -->
-                <div class="absolute inset-0 bg-emerald-500/0 group-hover:bg-emerald-500/[0.03] transition-colors duration-500 rounded-[2rem]"></div>
+                <div class="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
                 
                 <div class="relative z-10 flex flex-col h-full">
-                    <div class="flex items-start justify-between mb-6">
-                        <div class="p-3 rounded-2xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-300 group-hover:scale-110 transition-transform duration-500">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-award"><path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"/><circle cx="12" cy="8" r="6"/></svg>
+                    <div class="flex items-start justify-between mb-10">
+                        <div class="p-4 rounded-2xl bg-emerald-500/5 text-emerald-600 dark:text-emerald-400 group-hover:bg-emerald-500/10 transition-all duration-500 group-hover:scale-110">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-award"><path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"/><circle cx="12" cy="8" r="6"/></svg>
                         </div>
-                        <span class="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-400 dark:text-zinc-500 group-hover:text-emerald-500 transition-colors">Verificado</span>
+                        <span class="text-[9px] font-black uppercase tracking-[0.3em] text-zinc-400 group-hover:text-emerald-500 transition-colors">Verified_ID</span>
                     </div>
 
-                    <div class="space-y-3 flex-grow">
-                        <h3 class="text-2xl font-bold text-zinc-900 dark:text-zinc-50 font-outfit leading-tight group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
+                    <div class="space-y-4 flex-grow">
+                        <h3 class="text-2xl font-black text-zinc-900 dark:text-zinc-50 tracking-tighter leading-tight group-hover:text-emerald-500 transition-colors">
                             {certifie.title}
                         </h3>
-                        <p class="text-zinc-500 dark:text-zinc-400 text-sm leading-relaxed">
+                        <p class="text-[15px] text-zinc-500 dark:text-zinc-400 leading-relaxed font-medium">
                             {certifie.description}
                         </p>
                     </div>
 
-                    <div class="mt-8 flex items-center gap-2 text-sm font-bold text-zinc-900 dark:text-zinc-100">
+                    <div class="mt-10 flex items-center gap-2 text-[11px] font-black uppercase tracking-widest text-zinc-900 dark:text-zinc-100">
                         <span>Ver Certificado</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right group-hover:translate-x-1 transition-transform"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right group-hover:translate-x-1.5 transition-transform"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                     </div>
                 </div>
             </a>
         ))}
     </div>
 </div>
-
-<style>
-    /* Efecto de brillo de borde muy sutil en hover */
-    a:hover {
-        border-color: rgba(16, 185, 129, 0.3);
-    }
-</style>
