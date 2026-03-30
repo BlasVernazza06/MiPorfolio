@@ -77,7 +77,7 @@ export default function ThemeToggle() {
         <div
           className="absolute z-[1001]
             md:top-0 md:left-full md:ml-4 
-            bottom-full mb-4 md:bottom-auto left-1/2 -translate-x-1/2 md:translate-x-0
+            bottom-10 mb-4 md:bottom-auto left-1/2 -translate-x-1/10 md:translate-x-2 md:-translate-y-14
             min-w-[8rem] rounded-2xl border border-zinc-200 bg-white dark:bg-zinc-900 dark:border-zinc-800 shadow-2xl backdrop-blur-md animate-scale-up p-2"
         >
           <ul>
