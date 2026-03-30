@@ -23,37 +23,49 @@ import Fiverr from "./icons/fiverr.astro";
     >
     </div>
 
-    <!-- Main Action: Copy Email -->
-    <button
-      id="copy-email"
-      data-email="blasvernazza123@gmail.com"
-      class="flex items-center justify-center gap-2 px-4 py-2 md:px-2 md:py-4 rounded-2xl bg-zinc-900 dark:bg-zinc-50 text-white dark:text-zinc-900 font-bold text-sm transition-all duration-300 hover:bg-emerald-600 dark:hover:bg-emerald-400 dark:hover:text-black group/btn overflow-hidden relative"
-      title="Copiar Email"
-    >
-      <span class="relative z-10 md:hidden font-outfit">Copiar Email</span>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="20"
-        height="20"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="3"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        class="relative z-10 transition-transform group-hover/btn:scale-110 md:group-hover/btn:translate-y-[-2px]"
+    <!-- Main Action: Email with Tooltip -->
+    <div class="relative group">
+      <a
+        id="copy-email"
+        data-email="blasvernazza123@gmail.com"
+        href="mailto:blasvernazza123@gmail.com"
+        class="flex items-center justify-center gap-2 px-4 py-2 md:px-2 md:py-4 rounded-2xl bg-zinc-900 dark:bg-zinc-50 text-white dark:text-zinc-900 font-bold text-sm transition-all duration-300 hover:bg-emerald-600 dark:hover:bg-emerald-400 dark:hover:text-black group/btn overflow-hidden relative"
       >
-        <rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect>
-        <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"
-        ></path>
-      </svg>
+        <span class="relative z-10 md:hidden font-outfit">Contactame</span>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="3"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="relative z-10 transition-transform group-hover/btn:scale-110 md:group-hover/btn:translate-y-[-2px]"
+        >
+          <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+          <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+        </svg>
 
-      <!-- Shine effect -->
+        <!-- Shine effect -->
+        <div
+          class="absolute inset-0 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+        >
+        </div>
+      </a>
+
+      <!-- Premium Tooltip (Centrado Infalible) -->
       <div
-        class="absolute inset-0 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+        class="absolute bottom-full mb-4 left-1/2 -translate-x-1/2 md:inset-y-1.5 md:left-full md:ml-3 md:bottom-auto md:mb-0 md:translate-x-1 flex items-center justify-center opacity-0 pointer-events-none group-hover:opacity-100 transition-all duration-300 scale-95 group-hover:scale-100 z-50"
       >
+        <div
+          class="px-4 py-2 rounded-2xl bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 text-[10px] font-black uppercase tracking-widest shadow-xl whitespace-nowrap"
+        >
+          Envíame un email 🚀
+        </div>
       </div>
-    </button>
+    </div>
 
     <!-- Secondary Action: Fiverr -->
     <a
@@ -65,47 +77,9 @@ import Fiverr from "./icons/fiverr.astro";
       <Fiverr class="size-6" />
     </a>
   </div>
-
-  <!-- Toast Notification -->
-  <div
-    id="copy-toast"
-    class="absolute bottom-full mb-4 left-1/2 -translate-x-1/2 md:left-full md:bottom-auto md:top-1/2 md:-translate-y-1/2 md:ml-4 md:mb-0 px-4 py-2 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 text-xs font-bold rounded-xl opacity-0 pointer-events-none transition-all duration-300 translate-y-2"
-  >
-    ¡Email copiado! 🚀
-  </div>
 </div>
 
 <script>
-  function initCopy() {
-    const btn = document.getElementById("copy-email");
-    const toast = document.getElementById("copy-toast");
-
-    btn?.addEventListener("click", () => {
-      const email = btn.getAttribute("data-email");
-      if (email) {
-        navigator.clipboard.writeText(email);
-
-        // Show Toast
-        toast?.classList.remove(
-          "opacity-0",
-          "translate-y-2",
-          "pointer-events-none",
-        );
-        toast?.classList.add("opacity-100", "translate-y-0");
-
-        // Hide Toast after 2s
-        setTimeout(() => {
-          toast?.classList.add(
-            "opacity-0",
-            "translate-y-2",
-            "pointer-events-none",
-          );
-          toast?.classList.remove("opacity-100", "translate-y-0");
-        }, 2000);
-      }
-    });
-  }
-
   // Support View Transitions
   document.addEventListener("astro:page-load", initCopy);
 </script>
