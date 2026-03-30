@@ -18,13 +18,6 @@ export default function TechStackCards({ skills }) {
 
   return (
     <div className="w-full space-y-12">
-      <header className="max-w-4xl mx-auto text-center px-4">
-        <p className="text-base md:text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed">
-          Mi stack tecnológico está diseñado para la <span className="text-emerald-600 dark:text-emerald-400 font-medium">eficiencia y la escalabilidad</span>. 
-          Combino la potencia de <span className="text-zinc-900 dark:text-zinc-100 font-semibold">React y TypeScript</span> con arquitecturas de backend sólidas en <span className="text-zinc-900 dark:text-zinc-100 font-semibold">Node.js</span>, 
-          asegurando productos que no solo se ven bien, sino que rinden al máximo nivel bajo cualquier demanda.
-        </p>
-      </header>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
         {skills.map((tech, index) => {
