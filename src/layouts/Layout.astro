@@ -17,33 +17,25 @@ const { title } = Astro.props;
     <!-- Theme Initialization Script -->
     <script is:inline>
       const getTheme = () => {
-        if (
-          typeof localStorage !== "undefined" &&
-          localStorage.getItem("theme")
-        ) {
+        if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
           return localStorage.getItem("theme");
         }
-        if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-          return "dark";
-        }
-        return "light";
+        return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
       };
 
-      const theme = getTheme();
-      const isDark =
-        theme === "dark" ||
-        (theme === "system" &&
-          window.matchMedia("(prefers-color-scheme: dark)").matches);
-      document.documentElement.classList.toggle("dark", isDark);
-
-      // Persist across View Transitions
-      document.addEventListener("astro:after-swap", () => {
+      const applyTheme = (doc) => {
         const theme = getTheme();
-        const isDark =
-          theme === "dark" ||
-          (theme === "system" &&
-            window.matchMedia("(prefers-color-scheme: dark)").matches);
-        document.documentElement.classList.toggle("dark", isDark);
+        const isDark = theme === "dark";
+        doc.documentElement.classList.toggle("dark", isDark);
+      };
+
+      // Inicialización inmediata
+      applyTheme(document);
+
+      // Persistencia durante la transición
+      document.addEventListener("astro:before-swap", (event) => {
+        // Aplicamos el tema al NUEVO documento antes de que se muestre
+        applyTheme(event.newDocument);
       });
     </script>
 
@@ -64,6 +56,11 @@ const { title } = Astro.props;
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap"
+    />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
@@ -111,6 +108,18 @@ const { title } = Astro.props;
     <style is:global>
       :root {
         color-scheme: light dark;
+      }
+
+      /* View Transitions: Quitamos la animación de salida */
+      ::view-transition-old(root) {
+        animation: none;
+        display: none;
+      }
+
+      /* Opcional: Ajustamos la velocidad de entrada para que se sienta más "pro" */
+      ::view-transition-new(root) {
+        animation-duration: 0.4s;
+        animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
       }
 
       html {
@@ -169,16 +178,14 @@ const { title } = Astro.props;
         }
       }
 
-      /* Reveal Animation */
+      /* Reveal Animation: Solo opacidad para evitar saltos de layout */
       .reveal {
         opacity: 0;
-        transform: translateY(30px);
-        transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);
+        transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1);
       }
 
       .reveal.active {
         opacity: 1;
-        transform: translateY(0);
       }
 
       /* Custom Scrollbar */
@@ -238,15 +245,16 @@ const { title } = Astro.props;
         }, observerOptions);
 
         const revealElements = document.querySelectorAll(".reveal");
+        
+        // Detectamos si es una navegación interna (Astro) para evitar el salto de 30px
+        const isAstroNav = !!document.documentElement.getAttribute('data-astro-transition');
 
-        // On transition, if we're going to a hash or back, show immediately to avoid "reload" flicker
-        const isBackNav =
-          (window as any).navigation?.activation?.navigationType ===
-          "back-forward";
+        // On transition, if we're going to a hash, back or it's an Astro transition, show immediately
+        const isBackNav = (window as any).navigation?.activation?.navigationType === "back-forward";
         const hasHash = window.location.hash;
 
         revealElements.forEach((el) => {
-          if (isBackNav || hasHash) {
+          if (isBackNav || hasHash || isAstroNav) {
             el.classList.add("active");
           }
           observer.observe(el);

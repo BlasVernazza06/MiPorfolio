@@ -48,13 +48,12 @@ const { Content } = await render(proyect);
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
         <!-- Project Image -->
         <div
-          class="relative group rounded-[2.5rem] overflow-hidden border border-zinc-200 dark:border-zinc-800 shadow-2xl"
+          class="relative group rounded-[2.5rem] overflow-hidden border border-zinc-200 dark:border-zinc-800 shadow-2xl aspect-video"
         >
           <img
             src={imgInicio}
             alt={title}
-            class="w-full h-auto object-cover"
-            transition:name={`img-${proyect.id}`}
+            class="w-full h-full object-cover"
           />
         </div>
 
@@ -63,7 +62,6 @@ const { Content } = await render(proyect);
           <div>
             <h1
               class="text-4xl md:text-5xl font-extrabold text-zinc-900 dark:text-white font-outfit mb-4"
-              transition:name={`title-${proyect.id}`}
             >
               {title}
             </h1>

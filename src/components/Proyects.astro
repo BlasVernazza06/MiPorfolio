@@ -1,87 +1,99 @@
 ---
-import { getCollection } from 'astro:content'
-import Github3 from './icons/github3.astro'
-import Demo from './icons/Demo.astro'
+import { getCollection } from "astro:content";
+import Github3 from "./icons/github3.astro";
+import Demo from "./icons/Demo.astro";
 
-const proyectsRaw = await getCollection('proyects')
-const proyectsVisible = proyectsRaw.filter(item => item.data.visible !== false)
-proyectsVisible.sort((a, b) => a.data.order - b.data.order)
+const proyectsRaw = await getCollection("proyects");
+const proyectsVisible = proyectsRaw.filter(
+  (item) => item.data.visible !== false,
+);
+proyectsVisible.sort((a, b) => a.data.order - b.data.order);
 const proyects = proyectsVisible.map((item) => ({
-    ...item.data,
-    id: item.id
-}))
+  ...item.data,
+  id: item.id,
+}));
 ---
 
 <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-    {proyects.map((proyecto) => (
-        <article 
-            class="group relative flex flex-col h-full rounded-[2.5rem] bg-white/50 dark:bg-zinc-900/50 backdrop-blur-sm border border-zinc-200/50 dark:border-zinc-800/50 overflow-hidden transition-all duration-700 hover:-translate-y-3 hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.5)]"
+  {
+    proyects.map((proyecto) => (
+      <article class="group relative flex flex-col h-full rounded-[2.5rem] bg-white/50 dark:bg-zinc-900/50 backdrop-blur-sm border border-zinc-200/50 dark:border-zinc-800/50 overflow-hidden transition-all duration-700 hover:-translate-y-3 hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.5)]">
+        <!-- Decorative Overlay (pointer-events-none es CLAVE aquí) -->
+        <div class="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+
+        <a
+          href={`/proyects/${proyecto.id}`}
+          class="block relative overflow-hidden aspect-video mx-4 mt-4 rounded-[1.8rem] shadow-inner bg-zinc-200/20 dark:bg-zinc-800/20 z-10"
         >
-            <div class="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+          <img
+            src={proyecto.imgInicio}
+            alt={proyecto.title}
+            class="w-full h-full object-cover transition-transform duration-1000 cubic-bezier(0.16, 1, 0.3, 1) group-hover:scale-110"
+            loading="eager"
+            decoding="async"
+            fetchpriority="high"
+          />
+          <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors duration-700" />
 
-            <a href={`/proyects/${proyecto.id}`} class="block relative overflow-hidden aspect-video mx-4 mt-4 rounded-[1.8rem] shadow-inner">
-                <img 
-                    src={proyecto.imgInicio} 
-                    alt={proyecto.title} 
-                    class="w-full h-full object-cover transition-transform duration-1000 cubic-bezier(0.16, 1, 0.3, 1) group-hover:scale-110"
-                    transition:name={`img-${proyecto.id}`}
-                />
-                <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors duration-700"></div>
-                
-                {proyecto.liveNow && (
-                    <div class="absolute top-4 right-4 flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 text-white text-[9px] font-black uppercase tracking-[0.2em]">
-                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                        Live
-                    </div>
-                )}
-            </a>
-
-            <div class="flex flex-col flex-grow p-10 pt-8">
-                <header class="mb-5">
-                    <a href={`/proyects/${proyecto.id}`}>
-                        <h3 
-                            class="text-3xl font-black text-zinc-900 dark:text-zinc-50 tracking-tighter group-hover:text-emerald-500 transition-colors duration-300 font-outfit"
-                            transition:name={`title-${proyecto.id}`}
-                        >
-                            {proyecto.title}
-                        </h3>
-                    </a>
-                </header>
-
-                <p class="text-[15px] text-zinc-500 dark:text-zinc-400 leading-relaxed mb-10 flex-grow font-medium">
-                    {proyecto.description}
-                </p>
-
-                <div class="space-y-8">
-                    <div class="flex flex-wrap gap-2">
-                        {proyecto.technologies.slice(0, 4).map((tech) => (
-                            <span class="px-3 py-1.5 rounded-lg bg-emerald-500/5 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-[10px] font-black uppercase tracking-widest border border-emerald-500/10">
-                                {tech.nombre}
-                            </span>
-                        ))}
-                    </div>
-
-                    <div class="flex items-center gap-4 pt-6 border-t border-zinc-100/50 dark:border-zinc-800/50">
-                        <a 
-                            href={proyecto.link} 
-                            target="_blank" 
-                            class="flex-1 inline-flex items-center justify-center gap-2 px-6 py-4 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 rounded-2xl font-black text-[11px] uppercase tracking-widest transition-all duration-300 hover:bg-emerald-600 dark:hover:bg-emerald-400 hover:scale-[1.02] shadow-lg shadow-zinc-900/10 dark:shadow-white/5"
-                        >
-                            <Demo class="size-4"/>
-                            <span>Demo</span>
-                        </a>
-                        
-                        <a 
-                            href={proyecto.github} 
-                            target="_blank" 
-                            class="inline-flex items-center justify-center p-4 text-zinc-400 hover:text-emerald-500 bg-zinc-100/50 dark:bg-zinc-800/50 rounded-2xl transition-all duration-300 hover:bg-emerald-500/10"
-                            aria-label="GitHub Repository"
-                        >
-                            <Github3 class="size-5"/>
-                        </a>
-                    </div>
-                </div>
+          {proyecto.liveNow && (
+            <div class="absolute top-4 right-4 flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 text-white text-[9px] font-black uppercase tracking-[0.2em]">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              Live
             </div>
-        </article>
-    ))}
-</div>
+          )}
+        </a>
+
+        <div class="flex flex-col flex-grow p-10 pt-8 relative z-10">
+          <header class="mb-5">
+            <a href={`/proyects/${proyecto.id}`}>
+              <h3 class="text-3xl font-black text-zinc-900 dark:text-zinc-50 tracking-tighter group-hover:text-emerald-500 transition-colors duration-300 font-outfit">
+                {proyecto.title}
+              </h3>
+            </a>
+          </header>
+
+          <p class="text-[15px] text-zinc-500 dark:text-zinc-400 leading-relaxed mb-10 flex-grow font-medium">
+            {proyecto.description}
+          </p>
+
+          <div class="space-y-8">
+            <div class="flex flex-wrap gap-2">
+              {proyecto.technologies.slice(0, 4).map((tech) => (
+                <span class="px-3 py-1.5 rounded-lg bg-emerald-500/5 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-[10px] font-black uppercase tracking-widest border border-emerald-500/10">
+                  {tech.nombre}
+                </span>
+              ))}
+            </div>
+
+            <div class="flex items-center gap-4 pt-6 border-t border-zinc-100/50 dark:border-zinc-800/50">
+              {proyecto.liveNow ? (
+                <a
+                  href={proyecto.link}
+                  target="_blank"
+                  class="flex-1 inline-flex items-center justify-center gap-2 px-6 py-4 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 rounded-2xl font-black text-[11px] uppercase tracking-widest transition-all duration-300 hover:bg-emerald-600 dark:hover:bg-emerald-400 hover:scale-[1.02] shadow-lg shadow-zinc-900/10 dark:shadow-white/5"
+                >
+                  <Demo class="size-4" />
+                  <span>Demo</span>
+                </a>
+              ) : (
+                <div class="flex-1 inline-flex items-center justify-center gap-2 px-6 py-4 bg-zinc-100 dark:bg-zinc-800 text-zinc-400 dark:text-zinc-500 rounded-2xl font-black text-[11px] uppercase tracking-widest cursor-not-allowed">
+                  <Demo class="size-4 opacity-50" />
+                  <span>Próximamente</span>
+                </div>
+              )}
+
+              <a
+                href={proyecto.github}
+                target="_blank"
+                class="inline-flex items-center justify-center p-4 text-zinc-400 hover:text-emerald-500 bg-zinc-100/50 dark:bg-zinc-800/50 rounded-2xl transition-all duration-300 hover:bg-emerald-500/10"
+                aria-label="GitHub Repository"
+              >
+                <Github3 class="size-5" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </article>
+    ))
+  }
+</div>
