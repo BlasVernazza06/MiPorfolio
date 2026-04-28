@@ -16,6 +16,7 @@ technologies:
     imagen: "/TechIcons/icons-mysql.svg"
     class: "bg-[#125c8d]"
 
+otherTechnologies:
   - nombre: Postman
     imagen: "/TechIcons/icons-postman.svg"
     class: "bg-[#FF6C37]"

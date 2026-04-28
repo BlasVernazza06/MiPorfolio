@@ -48,4 +48,19 @@ technologies:
 
   - nombre: "Terminal"
     imagen: "/TechIcons/icons-terminal.svg"
+
+  - nombre: "Turborepo"
+    imagen: "/TechIcons/turborepo-icon-dark.svg"
+
+  - nombre: "Postman"
+    imagen: "/TechIcons/icons-postman.svg"
+
+  - nombre: "Pusher"
+    imagen: "/TechIcons/pusher.svg"
+
+  - nombre: "UploadThing"
+    imagen: "/TechIcons/uploadthing.png"
+
+  - nombre: "Resend"
+    imagen: "/TechIcons/resend.svg"
 ---

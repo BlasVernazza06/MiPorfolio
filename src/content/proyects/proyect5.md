@@ -12,14 +12,6 @@ technologies:
     imagen: "/TechIcons/nextjs_icon_dark.svg"
     class: "bg-[#c26d27]"
 
-  - nombre: Shadcn
-    imagen: "/TechIcons/icon-shadcn-ui.svg"
-    class: "bg-[#0F172A]"
-
-  - nombre: Tailwind
-    imagen: "/TechIcons/icons-tailwind.svg"
-    class: "bg-[#125c8d]"
-
   - nombre: TypeScript
     imagen: "/TechIcons/typescript.svg"
     class: "bg-[#3178C6]"
@@ -28,13 +20,42 @@ technologies:
     imagen: "/TechIcons/icons-prisma.svg"
     class: "bg-[#2D3748]"
 
+  - nombre: Neon
+    imagen: "/TechIcons/neon.svg"
+    class: "bg-[#12B397]"
+
+  - nombre: Pusher
+    imagen: "/TechIcons/pusher.svg"
+    class: "bg-[#300D4F]"
+
+  - nombre: Tiptap
+    imagen: "/TechIcons/tiptap.jpeg"
+    class: "bg-[#000000]"
+
+otherTechnologies:
+  - nombre: Tailwind
+    imagen: "/TechIcons/icons-tailwind.svg"
+    class: "bg-[#125c8d]"
+
+  - nombre: Shadcn
+    imagen: "/TechIcons/icon-shadcn-ui.svg"
+    class: "bg-[#0F172A]"
+
   - nombre: Zod
     imagen: "/TechIcons/icons-zod.svg"
     class: "bg-[#7C3AED]"
 
-  - nombre: Neon
-    imagen: "/TechIcons/neon.svg"
-    class: "bg-[#12B397]"
+  - nombre: Better Auth
+    imagen: "/TechIcons/better-auth_light.svg"
+    class: "bg-[#FFFFFF]"
+
+  - nombre: UploadThing
+    imagen: "/TechIcons/uploadthing.png"
+    class: "bg-[#f2132d]"
+
+  - nombre: Resend
+    imagen: "/TechIcons/resend.svg"
+    class: "bg-[#000000]"
 ---
 
 ## Sobre el Proyecto

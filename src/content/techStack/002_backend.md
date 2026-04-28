@@ -27,4 +27,16 @@ technologies:
 
   - nombre: "Prisma"
     imagen: "/TechIcons/icons-prisma.svg"
+
+  - nombre: "AWS S3"
+    imagen: "/TechIcons/aws.svg"
+
+  - nombre: "Redis"
+    imagen: "/TechIcons/redis.svg"
+
+  - nombre: "Drizzle"
+    imagen: "/TechIcons/drizzle-orm_dark.svg"
+
+  - nombre: "MySQL"
+    imagen: "/TechIcons/icons-mysql.svg"
 ---

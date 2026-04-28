@@ -16,7 +16,14 @@ const proyects = defineCollection({
         imagen: z.string(),
         class: z.string()
       })
-    )
+    ),
+    otherTechnologies: z.array(
+      z.object({
+        nombre: z.string(),
+        imagen: z.string(),
+        class: z.string()
+      })
+    ).optional()
   })
 })
 

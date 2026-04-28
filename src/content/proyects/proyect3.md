@@ -12,13 +12,18 @@ technologies:
     imagen: "/TechIcons/icons-react.svg"
     class: "bg-[#003159]"
 
-  - nombre: Tailwind
-    imagen: "/TechIcons/icons-tailwind.svg"
-    class: "bg-[#0F172A]"
-
   - nombre: Supabase
     imagen: "/TechIcons/supabase.svg"
     class: "bg-[#18181B]"
+
+  - nombre: DndKit
+    imagen: "/TechIcons/dndkit.png"
+    class: "bg-[#000000]"
+
+otherTechnologies:
+  - nombre: Tailwind
+    imagen: "/TechIcons/icons-tailwind.svg"
+    class: "bg-[#0F172A]"
 ---
 
 ## Sobre el Proyecto

@@ -31,5 +31,12 @@ technologies:
     - nombre: "SASS" 
       imagen: "/TechIcons/icons-sass.svg"
 
-    
+    - nombre: "Motion"
+      imagen: "/TechIcons/icons-react.svg"
+
+    - nombre: "DndKit"
+      imagen: "/TechIcons/dndkit.png"
+
+    - nombre: "Tiptap"
+      imagen: "/TechIcons/tiptap.jpeg"
 ---

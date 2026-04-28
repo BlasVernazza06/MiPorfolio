@@ -8,14 +8,6 @@ description: Pagina diseñada y desarrollada al detalle, con reproductor de audi
 link: "#"
 github: "https://github.com/BlasVernazza06/Clon-de-Spotify.git"
 technologies:
-  - nombre: HTML
-    imagen: "/TechIcons/icons-html.svg"
-    class: "bg-[#c26d27]"
-
-  - nombre: CSS
-    imagen: "/TechIcons/icons-css3.svg"
-    class: "bg-[#125c8d]"
-
   - nombre: JavaScript
     imagen: "/TechIcons/icons-javascript.svg"
     class: "bg-[#e2e61d]"
@@ -23,6 +15,15 @@ technologies:
   - nombre: Astro
     imagen: "/TechIcons/icons-astro.svg"
     class: "bg-[#b282c5]"
+
+otherTechnologies:
+  - nombre: HTML
+    imagen: "/TechIcons/icons-html.svg"
+    class: "bg-[#c26d27]"
+
+  - nombre: CSS
+    imagen: "/TechIcons/icons-css3.svg"
+    class: "bg-[#125c8d]"
 ---
 
 ## Sobre el Proyecto
