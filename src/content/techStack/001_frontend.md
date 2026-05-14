@@ -24,6 +24,9 @@ technologies:
 
     - nombre: "React" 
       imagen: "/TechIcons/icons-react.svg"
+
+    - nombre: "Angular" 
+      imagen: "/TechIcons/angular.svg"
     
     - nombre: "Bootstrap" 
       imagen: "/TechIcons/icons-bootstrap.svg"
