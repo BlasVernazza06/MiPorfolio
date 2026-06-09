@@ -1,6 +1,6 @@
 ---
 hidden: false
-liveNow: false
+liveNow: true
 order: 1
 imgInicio: "/images/memo.ai"
 title: Memo.ai
