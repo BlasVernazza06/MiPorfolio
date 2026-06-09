@@ -5,7 +5,7 @@ order: 1
 imgInicio: "/images/memo.ai"
 title: Memo.ai
 description: Plataforma de productividad para estudiantes que transforma documentos en material de estudio mediante Inteligencia Artificial.
-link: "https://memo-ai-app.vercel.app/"
+link: "https://memo-ai-web.vercel.app/"
 github: "https://github.com/BlasVernazza06/memo-ai"
 technologies:
   - nombre: NextJs
