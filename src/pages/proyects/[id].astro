@@ -17,15 +17,111 @@ const { proyect } = Astro.props;
 const { title, description, imgInicio, link, github, technologies, otherTechnologies, liveNow } =
   proyect.data;
 const { Content } = await render(proyect);
+
+// Extrae el color hexadecimal de la clase de color (ej. bg-[#2114F2] -> #2114F2)
+const getHexColor = (classStr) => {
+  if (!classStr) return '#10b981';
+  const match = classStr.match(/#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})/);
+  return match ? `#${match[1]}` : '#10b981';
+};
+
+const themeColor = technologies.length > 0 ? getHexColor(technologies[0].class) : '#10b981';
+
+// Función para determinar si el color es claro (contraste y accesibilidad)
+const isLightColor = (hex) => {
+  const c = hex.substring(1);      // quitar #
+  const rgb = parseInt(c, 16);   // convertir a decimal
+  const r = (rgb >> 16) & 0xff;  // componente rojo
+  const g = (rgb >> 8) & 0xff;   // componente verde
+  const b = (rgb >> 0) & 0xff;   // componente azul
+  const luma = 0.2126 * r + 0.7152 * g + 0.0722 * b; // estándar ITU-R BT.709
+  return luma > 185; // retorna true si es color claro
+};
+
+const isThemeLight = isLightColor(themeColor);
+
+// Clasificación de tecnologías por palabras clave
+const getCategoryKey = (techName) => {
+  const name = techName.toLowerCase();
+  
+  const frontendKeywords = [
+    'nextjs', 'react', 'astro', 'tailwind', 'gsap', 'html', 'css', 
+    'javascript', 'typescript', 'dndkit', 'tiptap', 'motion', 'shadcn',
+    'lucide', 'svgl'
+  ];
+  const backendKeywords = [
+    'nestjs', 'java', 'python', 'stripe', 'pusher', 'resend', 
+    'better auth', 'uploadthing', 'api', 'fastapi', 'uvicorn', 'langchain', 'brevo'
+  ];
+  const databaseKeywords = [
+    'supabase', 'prisma', 'neon', 'mysql', 'postgresql', 'drizzle', 
+    'redis', 'aws s3', 'database', 'sql', 'cache-manager'
+  ];
+
+  if (frontendKeywords.some(keyword => name.includes(keyword))) {
+    return 'frontend';
+  }
+  if (backendKeywords.some(keyword => name.includes(keyword))) {
+    return 'backend';
+  }
+  if (databaseKeywords.some(keyword => name.includes(keyword))) {
+    return 'database';
+  }
+  return 'tools'; // fallback para herramientas secundarias
+};
+
+// Mapa estructurado de categorías de tecnologías
+const categoriesMap = {
+  frontend: {
+    label: "Frontend & UI",
+    class: "border-blue-500/20 dark:border-blue-500/10 text-blue-600 dark:text-blue-400 bg-blue-50/30 dark:bg-blue-950/10",
+    technologies: []
+  },
+  backend: {
+    label: "Backend & APIs",
+    class: "border-rose-500/20 dark:border-rose-500/10 text-rose-600 dark:text-rose-400 bg-rose-50/30 dark:bg-rose-950/10",
+    technologies: []
+  },
+  database: {
+    label: "Base de Datos & Infraestructura",
+    class: "border-emerald-500/20 dark:border-emerald-500/10 text-emerald-600 dark:text-emerald-400 bg-emerald-50/30 dark:bg-emerald-950/10",
+    technologies: []
+  },
+  tools: {
+    label: "Herramientas & DevOps",
+    class: "border-amber-500/20 dark:border-amber-500/10 text-amber-600 dark:text-amber-400 bg-amber-50/30 dark:bg-amber-950/10",
+    technologies: []
+  }
+};
+
+// Unificar y etiquetar tecnologías principales y secundarias
+const allTech = [
+  ...technologies.map(t => ({ ...t, isCore: true })),
+  ...(otherTechnologies || []).map(t => ({ ...t, isCore: false }))
+];
+
+allTech.forEach(tech => {
+  const catKey = getCategoryKey(tech.nombre);
+  categoriesMap[catKey].technologies.push(tech);
+});
+
+// Filtrar las categorías vacías
+const activeCategories = Object.entries(categoriesMap)
+  .filter(([_, cat]) => cat.technologies.length > 0)
+  .map(([key, cat]) => ({ key, ...cat }));
 ---
 
 <Layout title={`${title} | Proyecto`}>
-  <main class="px-6 pt-32 pb-20">
+  <main class="relative px-6 pt-32 pb-20 overflow-hidden" style={`--theme-color: ${themeColor};`}>
+    <!-- Halos de luz de fondo con el color temático del proyecto -->
+    <div class="absolute top-0 right-0 -z-20 w-[40rem] h-[40rem] rounded-full bg-[var(--theme-color)] opacity-[0.03] dark:opacity-[0.05] blur-[120px] pointer-events-none"></div>
+    <div class="absolute bottom-0 left-0 -z-20 w-[30rem] h-[30rem] rounded-full bg-[var(--theme-color)] opacity-[0.02] dark:opacity-[0.04] blur-[100px] pointer-events-none"></div>
+
     <SectionContainer class="max-w-5xl">
       <!-- Back Button -->
       <a
         href="/#Proyects"
-        class="inline-flex items-center gap-2 text-zinc-500 dark:text-zinc-400 hover:text-emerald-500 transition-colors mb-8 group"
+        class="inline-flex items-center gap-2 text-zinc-500 dark:text-zinc-400 hover:text-[var(--theme-color)] transition-colors mb-8 group"
         data-astro-history="back"
         data-astro-prefetch
       >
@@ -46,83 +142,67 @@ const { Content } = await render(proyect);
       </a>
 
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-        <!-- Project Image -->
-        <div
-          class="relative group rounded-[2.5rem] overflow-hidden border border-zinc-200 dark:border-zinc-800 shadow-2xl aspect-video"
-        >
-          <img
-            src={imgInicio}
-            alt={title}
-            class="w-full h-full object-cover"
-          />
+        <!-- Columna 1: Presentación de la Imagen del Proyecto -->
+        <div class="relative group">
+          <!-- Halo trasero de color temático en hover -->
+          <div class="absolute -inset-4 rounded-[2.5rem] bg-[var(--theme-color)] opacity-15 dark:opacity-25 blur-2xl group-hover:opacity-25 dark:group-hover:opacity-35 transition-opacity duration-500 -z-10"></div>
+          
+          <!-- Textura de fondo (cuadrícula sutil) -->
+          <div class="absolute inset-0 -z-10 rounded-[2.5rem] bg-[linear-gradient(to_right,#8080800d_1px,transparent_1px),linear-gradient(to_bottom,#8080800d_1px,transparent_1px)] bg-[size:14px_24px]"></div>
+
+          <!-- Marco de la imagen con diseño premium -->
+          <div
+            class="relative overflow-hidden rounded-[2.5rem] border border-zinc-200/80 dark:border-zinc-800/80 shadow-2xl aspect-video bg-zinc-100 dark:bg-zinc-900"
+          >
+            <img
+              src={imgInicio}
+              alt={title}
+              class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+            />
+            
+            <!-- Efecto Sweep/Brillo sobre la imagen en hover -->
+            <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:animate-shimmer pointer-events-none"></div>
+            
+            <!-- Insignia "En Vivo" flotante -->
+            <div class="absolute top-4 left-4 flex gap-2">
+              {liveNow && (
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-emerald-500/90 text-white backdrop-blur-md shadow-lg shadow-emerald-500/20">
+                  <span class="size-1.5 rounded-full bg-white animate-pulse"></span>
+                  En Vivo
+                </span>
+              )}
+            </div>
+          </div>
         </div>
 
-        <!-- Project Info -->
-        <div class="space-y-8">
+        <!-- Columna 2: Título del Proyecto, Descripción y Botones originales -->
+        <div class="space-y-8 lg:pl-4">
           <div>
             <h1
-              class="text-4xl md:text-5xl font-extrabold text-zinc-900 dark:text-white font-outfit mb-4"
+              class="text-4xl md:text-5xl font-extrabold text-zinc-900 dark:text-white font-outfit mb-4 tracking-tight leading-none"
             >
               {title}
             </h1>
-            <p class="text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed">
+            <p class="text-base md:text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed font-normal">
               {description}
             </p>
           </div>
 
-          <!-- Technologies -->
-          <div class="space-y-4">
-            <h3
-              class="text-sm font-bold uppercase tracking-widest text-zinc-400"
-            >
-              Stack Tecnológico
-            </h3>
-            <div class="flex flex-wrap gap-3">
-              {
-                technologies.map((tech) => (
-                  <div class="flex items-center gap-2 px-3 py-2 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 shadow-sm">
-                    <img
-                      src={tech.imagen}
-                      alt={tech.nombre}
-                      class="size-5 object-contain"
-                    />
-                    <span class="text-xs font-semibold text-zinc-700 dark:text-zinc-300">
-                      {tech.nombre}
-                    </span>
-                  </div>
-                ))
-              }
-              {
-                otherTechnologies && otherTechnologies.map((tech) => (
-                  <div class="flex items-center gap-2 px-3 py-2 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 shadow-sm">
-                    <img
-                      src={tech.imagen}
-                      alt={tech.nombre}
-                      class="size-5 object-contain"
-                    />
-                    <span class="text-xs font-semibold text-zinc-700 dark:text-zinc-300">
-                      {tech.nombre}
-                    </span>
-                  </div>
-                ))
-              }
-            </div>
-          </div>
-
-          <!-- Links -->
+          <!-- Botones de Acción (Demo y Código) originales -->
           <div class="flex items-center gap-4 pt-4">
             {
               liveNow ? (
                 <a
                   href={link}
                   target="_blank"
-                  class="flex-1 inline-flex items-center justify-center gap-2 px-6 py-4 bg-emerald-500 text-white rounded-2xl font-bold transition-all hover:bg-emerald-600 hover:scale-[1.02] shadow-xl shadow-emerald-500/20"
+                  class={`flex-1 inline-flex items-center justify-center gap-2 px-6 py-4 rounded-2xl font-bold transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] shadow-xl ${isThemeLight ? 'text-zinc-900' : 'text-white'}`}
+                  style={`background: linear-gradient(135deg, var(--theme-color), ${themeColor}dd); box-shadow: 0 10px 25px -5px ${themeColor}40;`}
                 >
                   <Demo class="size-5" />
                   Ver Demo En Vivo
                 </a>
               ) : (
-                <div class="flex-1 inline-flex items-center justify-center gap-2 px-6 py-4 bg-zinc-200 dark:bg-zinc-800 text-zinc-500 dark:text-zinc-500 rounded-2xl font-bold cursor-not-allowed">
+                <div class="flex-1 inline-flex items-center justify-center gap-2 px-6 py-4 bg-zinc-100 dark:bg-zinc-900 text-zinc-400 dark:text-zinc-600 border border-zinc-200/50 dark:border-zinc-800/80 rounded-2xl font-bold cursor-not-allowed">
                   <Demo class="size-5 opacity-50" />
                   Demo no disponible
                 </div>
@@ -131,7 +211,7 @@ const { Content } = await render(proyect);
             <a
               href={github}
               target="_blank"
-              class="p-4 bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-white rounded-2xl transition-all hover:scale-110"
+              class="p-4 bg-zinc-100 dark:bg-zinc-900 text-zinc-900 dark:text-white border border-zinc-200/65 dark:border-zinc-800/80 rounded-2xl transition-all duration-300 hover:scale-105 hover:bg-zinc-200 dark:hover:bg-zinc-800"
               title="Ver Código en GitHub"
             >
               <Github3 class="size-6" />
@@ -140,12 +220,90 @@ const { Content } = await render(proyect);
         </div>
       </div>
 
-      <!-- Article Content -->
-      <article
-        class="mt-20 prose dark:prose-invert max-w-none prose-emerald prose-headings:font-outfit prose-headings:font-bold prose-p:text-zinc-600 dark:prose-p:text-zinc-400 prose-p:text-lg prose-p:leading-relaxed"
-      >
-        <Content />
-      </article>
+      <!-- Stack Tecnológico Categorizado por Tipo (Ancho Completo y Horizontal) -->
+      <div class="mt-16 space-y-6">
+        <h3 class="text-xs font-bold uppercase tracking-widest text-zinc-400 dark:text-zinc-500">
+          Stack Tecnológico
+        </h3>
+        
+        <div class="space-y-5">
+          {
+            activeCategories.map((cat, catIdx) => (
+              <div 
+                class="space-y-3 animate-fade-in-up" 
+                style={`animation-delay: ${catIdx * 100}ms;`}
+              >
+                <!-- Título de Categoría con Separador Técnico -->
+                <div class="flex items-center gap-3">
+                  <span class={`inline-flex items-center px-2.5 py-0.5 rounded-md text-[9px] font-extrabold uppercase tracking-wider border ${cat.class}`}>
+                    {cat.label}
+                  </span>
+                  <div class="h-[1px] flex-1 bg-zinc-100 dark:bg-zinc-800/85"></div>
+                </div>
+                
+                <!-- Lista de Tarjetas de Tecnologías (en horizontal) -->
+                <div class="flex flex-wrap gap-2.5">
+                  {
+                    cat.technologies.map((tech) => {
+                      const color = getHexColor(tech.class);
+                      return (
+                        <div
+                          class="group relative flex items-center gap-2 px-3.5 py-2.5 rounded-xl bg-white dark:bg-zinc-950 border border-zinc-200/70 dark:border-zinc-900 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md hover:shadow-[var(--shadow-color)] hover:border-[var(--border-color)]"
+                          style={`--shadow-color: ${color}15; --border-color: ${color}; --accent-color: ${color};`}
+                        >
+                          <!-- Glow Radial al hacer hover sobre la tarjeta -->
+                          <div 
+                            class="absolute inset-0 -z-10 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[radial-gradient(circle_at_center,var(--glow-color)_0%,transparent_70%)]" 
+                            style={`--glow-color: ${color}0d;`}
+                          />
+                          
+                          <img
+                            src={tech.imagen}
+                            alt={tech.nombre}
+                            class="size-5 object-contain transition-transform duration-300 group-hover:scale-110"
+                          />
+                          <span class="text-xs font-semibold text-zinc-700 dark:text-zinc-300 group-hover:text-zinc-900 dark:group-hover:text-white transition-colors duration-300">
+                            {tech.nombre}
+                          </span>
+                          
+                          {tech.isCore && (
+                            <span 
+                              class="text-[8px] font-extrabold uppercase tracking-wider px-1.5 py-0.5 rounded bg-zinc-100 dark:bg-zinc-900 text-zinc-400 dark:text-zinc-500 border border-zinc-200/50 dark:border-zinc-800/80"
+                            >
+                              Core
+                            </span>
+                          )}
+                        </div>
+                      );
+                    })
+                  }
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      <!-- Divisor Decorativo Central -->
+      <div class="relative flex items-center justify-center my-20">
+        <div class="absolute inset-0 flex items-center" aria-hidden="true">
+          <div class="w-full border-t border-zinc-200 dark:border-zinc-850"></div>
+        </div>
+        <div class="relative bg-white dark:bg-zinc-950 px-4 text-zinc-350 dark:text-zinc-700">
+          <svg class="size-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+          </svg>
+        </div>
+      </div>
+
+      <!-- Contenedor del Artículo con Ancho Optimizado de Lectura -->
+      <div class="max-w-3xl mx-auto">
+        <article
+          class="prose dark:prose-invert max-w-none prose-emerald prose-headings:font-outfit prose-headings:font-bold prose-p:text-zinc-600 dark:prose-p:text-zinc-400 prose-p:text-lg prose-p:leading-relaxed"
+        >
+          <Content />
+        </article>
+      </div>
     </SectionContainer>
   </main>
 </Layout>
@@ -153,17 +311,66 @@ const { Content } = await render(proyect);
 <style is:global>
   @reference "../../styles/global.css";
 
-  /* Custom prose styles for a blog-like feel */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in-up {
+    opacity: 0;
+    animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  @keyframes shimmer {
+    100% {
+      transform: translateX(100%);
+    }
+  }
+  .group:hover .group-hover\:animate-shimmer {
+    animation: shimmer 1.2s ease-out;
+  }
+
+  /* Estilos prose personalizados para un estilo premium tipo blog */
   .prose h2 {
-    @apply text-3xl mt-12 mb-6 border-b border-zinc-100 dark:border-zinc-800 pb-2;
+    @apply text-2xl md:text-3xl mt-12 mb-6 font-outfit font-extrabold text-zinc-900 dark:text-white border-b border-zinc-100 dark:border-zinc-800/80 pb-2 tracking-tight;
+  }
+  .prose h3 {
+    @apply text-xl mt-8 mb-4 font-outfit font-bold text-zinc-800 dark:text-zinc-200 tracking-tight;
   }
   .prose p {
-    @apply mb-6;
+    @apply mb-6 text-zinc-600 dark:text-zinc-400 leading-relaxed text-base md:text-lg;
   }
   .prose ul {
-    @apply list-disc list-inside space-y-2 mb-6 text-zinc-600 dark:text-zinc-400;
+    @apply list-disc pl-6 space-y-3 mb-6 text-zinc-600 dark:text-zinc-400 text-base md:text-lg;
+  }
+  .prose ol {
+    @apply list-decimal pl-6 space-y-3 mb-6 text-zinc-600 dark:text-zinc-400 text-base md:text-lg;
+  }
+  .prose li::marker {
+    @apply text-emerald-500 dark:text-emerald-400;
   }
   .prose strong {
-    @apply text-emerald-600 dark:text-emerald-400 font-bold;
+    @apply text-emerald-600 dark:text-emerald-400 font-extrabold;
+  }
+  .prose blockquote {
+    @apply pl-6 border-l-4 border-emerald-500 dark:border-emerald-400 italic text-zinc-700 dark:text-zinc-300 bg-zinc-50 dark:bg-zinc-900/40 py-2 pr-4 rounded-r-xl my-6;
+  }
+  .prose code {
+    @apply bg-zinc-100 dark:bg-zinc-800/80 px-1.5 py-0.5 rounded text-sm font-mono text-zinc-900 dark:text-zinc-100 font-semibold;
+  }
+  .prose code::before, .prose code::after {
+    content: "" !important;
+  }
+  .prose pre {
+    @apply bg-zinc-900 dark:bg-zinc-950 p-4 rounded-2xl overflow-x-auto border border-zinc-800 shadow-xl my-6;
+  }
+  .prose pre code {
+    @apply bg-transparent p-0 rounded-none text-zinc-100 font-normal;
   }
 </style>

@@ -56,6 +56,70 @@ otherTechnologies:
   - nombre: Motion
     imagen: "/TechIcons/icons-react.svg"
     class: "bg-[#0055FF]"
+
+  - nombre: Prettier
+    imagen: "/TechIcons/icons-terminal.svg"
+    class: "bg-[#1A2B34]"
+
+  - nombre: Shadcn
+    imagen: "/TechIcons/icon-shadcn-ui_dark.svg"
+    class: "bg-[#000000]"
+
+  - nombre: Lucide
+    imagen: "/TechIcons/icons-Web.png"
+    class: "bg-[#0F172A]"
+
+  - nombre: Svgl
+    imagen: "/TechIcons/icons-Web.png"
+    class: "bg-[#1E293B]"
+
+  - nombre: Playwright
+    imagen: "/TechIcons/icon-playwright.svg"
+    class: "bg-[#2EAD33]"
+
+  - nombre: Cache-manager
+    imagen: "/TechIcons/icons-terminal.svg"
+    class: "bg-[#4A5568]"
+
+  - nombre: Jest
+    imagen: "/TechIcons/icon-jest.svg"
+    class: "bg-[#15C213]"
+
+  - nombre: FastApi
+    imagen: "/TechIcons/icons-terminal.svg"
+    class: "bg-[#009688]"
+
+  - nombre: Uvicorn
+    imagen: "/TechIcons/icons-terminal.svg"
+    class: "bg-[#2F3E46]"
+
+  - nombre: Langchain
+    imagen: "/TechIcons/icons-Web.png"
+    class: "bg-[#000000]"
+
+  - nombre: PyMuPDF
+    imagen: "/TechIcons/icons-terminal.svg"
+    class: "bg-[#FF5722]"
+
+  - nombre: Python-dotenv
+    imagen: "/TechIcons/icons-terminal.svg"
+    class: "bg-[#3F51B5]"
+
+  - nombre: Pydantic
+    imagen: "/TechIcons/icons-terminal.svg"
+    class: "bg-[#E91E63]"
+
+  - nombre: Brevo
+    imagen: "/TechIcons/icons-Web.png"
+    class: "bg-[#0052FF]"
+
+  - nombre: UploadThing
+    imagen: "/TechIcons/uploadthing.png"
+    class: "bg-[#6366F1]"
+
+  - nombre: Stripe
+    imagen: "/TechIcons/icon-stripe.svg"
+    class: "bg-[#635BFF]"
 ---
 
 ## Sobre el Proyecto
