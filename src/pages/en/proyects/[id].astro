@@ -1,16 +1,16 @@
 ---
 import { getCollection, render } from "astro:content";
-import Layout from "../../layouts/Layout.astro";
-import SectionContainer from "../../components/SectionContainer.astro";
-import Github3 from "../../components/icons/github3.astro";
-import Demo from "../../components/icons/Demo.astro";
-import { getTranslations } from "../../lib/i18n";
+import Layout from "../../../layouts/Layout.astro";
+import SectionContainer from "../../../components/SectionContainer.astro";
+import Github3 from "../../../components/icons/github3.astro";
+import Demo from "../../../components/icons/Demo.astro";
+import { getTranslations } from "../../../lib/i18n";
 
 export async function getStaticPaths() {
   const proyects = await getCollection("proyects");
-  const esProyects = proyects.filter((p) => p.id.startsWith("es/"));
-  return esProyects.map((proyect) => ({
-    params: { id: proyect.id.replace("es/", "") },
+  const enProyects = proyects.filter((p) => p.id.startsWith("en/"));
+  return enProyects.map((proyect) => ({
+    params: { id: proyect.id.replace("en/", "") },
     props: { proyect },
   }));
 }
@@ -20,9 +20,9 @@ const { title, description, imgInicio, link, github, technologies, otherTechnolo
   proyect.data;
 const { Content } = await render(proyect);
 
-const lang = "es";
+const lang = "en";
 const t = getTranslations(lang);
-const prefix = "";
+const prefix = "/en";
 
 // Extrae el color hexadecimal de la clase de color (ej. bg-[#2114F2] -> #2114F2)
 const getHexColor = (classStr) => {
@@ -117,7 +117,7 @@ const activeCategories = Object.entries(categoriesMap)
   .map(([key, cat]) => ({ key, ...cat }));
 ---
 
-<Layout title={`${title} | Proyecto`} lang={lang}>
+<Layout title={`${title} | Project`} lang={lang}>
   <main class="relative px-6 pt-32 pb-20 overflow-hidden" style={`--theme-color: ${themeColor};`}>
     <!-- Halos de luz de fondo con el color temático del proyecto -->
     <div class="absolute top-0 right-0 -z-20 w-[40rem] h-[40rem] rounded-full bg-[var(--theme-color)] opacity-[0.03] dark:opacity-[0.05] blur-[120px] pointer-events-none"></div>
@@ -315,7 +315,7 @@ const activeCategories = Object.entries(categoriesMap)
 </Layout>
 
 <style is:global>
-  @reference "../../styles/global.css";
+  @reference "../../../styles/global.css";
 
   @keyframes fadeInUp {
     from {
