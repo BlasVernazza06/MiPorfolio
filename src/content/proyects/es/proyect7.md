@@ -98,7 +98,7 @@ otherTechnologies:
     class: "bg-[#000000]"
 
   - nombre: PyMuPDF
-    imagen: "/TechIcons/icons-terminal.svg"
+    imagen: "/TechIcons/pymupdf.svg"
     class: "bg-[#FF5722]"
 
   - nombre: Python-dotenv
@@ -110,7 +110,7 @@ otherTechnologies:
     class: "bg-[#E91E63]"
 
   - nombre: Brevo
-    imagen: "/TechIcons/icons-Web.png"
+    imagen: "/TechIcons/brevo.jpeg"
     class: "bg-[#0052FF]"
 
   - nombre: UploadThing
