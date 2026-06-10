@@ -1,20 +1,54 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Search, Command, Home, Briefcase, Code, User, Award, ExternalLink } from 'lucide-react';
 
-const ACTIONS = [
-  { id: 'inicio', title: 'Ir a Inicio', icon: Home, url: '#Inicio' },
-  { id: 'proyectos', title: 'Ver Proyectos', icon: Code, url: '#Proyects' },
-  { id: 'skills', title: 'Habilidades Técnicas', icon: Briefcase, url: '#Skills' },
-  { id: 'sobre-mi', title: 'Sobre mí', icon: User, url: '#Sobre-mi' },
-  { id: 'certificados', title: 'Certificaciones', icon: Award, url: '#Certificados' },
-  { id: 'github', title: 'Visitar GitHub', icon: ExternalLink, url: 'https://github.com/BlasVernazza06', external: true },
-];
+const LABELS = {
+  es: {
+    placeholder: "¿A dónde quieres ir? (Presiona Esc para salir)",
+    noResults: 'No se encontraron resultados para "{query}"',
+    navigate: "Navegar",
+    select: "Seleccionar",
+    actions: {
+      inicio: "Ir a Inicio",
+      proyectos: "Ver Proyectos",
+      skills: "Habilidades Técnicas",
+      sobreMi: "Sobre mí",
+      certificados: "Certificaciones",
+      github: "Visitar GitHub",
+    }
+  },
+  en: {
+    placeholder: "Where do you want to go? (Press Esc to exit)",
+    noResults: 'No results found for "{query}"',
+    navigate: "Navigate",
+    select: "Select",
+    actions: {
+      inicio: "Go to Home",
+      proyectos: "View Projects",
+      skills: "Technical Skills",
+      sobreMi: "About me",
+      certificados: "Certifications",
+      github: "Visit GitHub",
+    }
+  }
+};
 
-export default function CommandPalette() {
+export default function CommandPalette({ lang = "es" }) {
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState('');
   const [selectedIndex, setSelectedIndex] = useState(0);
   const inputRef = useRef(null);
+
+  const t = LABELS[lang] || LABELS.es;
+  const prefix = lang === 'en' ? '/en' : '';
+
+  const ACTIONS = [
+    { id: 'inicio', title: t.actions.inicio, icon: Home, url: `${prefix}#Inicio` },
+    { id: 'proyectos', title: t.actions.proyectos, icon: Code, url: `${prefix}#Proyects` },
+    { id: 'skills', title: t.actions.skills, icon: Briefcase, url: `${prefix}#Skills` },
+    { id: 'sobre-mi', title: t.actions.sobreMi, icon: User, url: `${prefix}#Sobre-mi` },
+    { id: 'certificados', title: t.actions.certificados, icon: Award, url: `${prefix}#Certificados` },
+    { id: 'github', title: t.actions.github, icon: ExternalLink, url: 'https://github.com/BlasVernazza06', external: true },
+  ];
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -25,8 +59,16 @@ export default function CommandPalette() {
       if (e.key === 'Escape') setIsOpen(false);
     };
 
+    const handleToggleEvent = () => {
+      setIsOpen(prev => !prev);
+    };
+
     window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    window.addEventListener('toggle-command-palette', handleToggleEvent);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+      window.removeEventListener('toggle-command-palette', handleToggleEvent);
+    };
   }, []);
 
   useEffect(() => {
@@ -45,7 +87,7 @@ export default function CommandPalette() {
     if (action.external) {
       window.open(action.url, '_blank');
     } else {
-      window.location.hash = action.url;
+      window.location.href = action.url;
     }
     setIsOpen(false);
   };
@@ -65,7 +107,7 @@ export default function CommandPalette() {
           <input
             ref={inputRef}
             type="text"
-            placeholder="¿A dónde quieres ir? (Presiona Esc para salir)"
+            placeholder={t.placeholder}
             className="flex-1 bg-transparent border-none outline-none text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-400 text-sm"
             value={query}
             onChange={(e) => {
@@ -90,7 +132,7 @@ export default function CommandPalette() {
           </div>
         </div>
 
-        <div className="max-h-[300px] overflow-y-auto p-2">
+        <div class="max-h-[300px] overflow-y-auto p-2">
           {filteredActions.length > 0 ? (
             filteredActions.map((action, idx) => (
               <button
@@ -114,7 +156,7 @@ export default function CommandPalette() {
             ))
           ) : (
             <div className="py-12 text-center">
-              <p className="text-zinc-500 text-sm">No se encontraron resultados para "{query}"</p>
+              <p className="text-zinc-500 text-sm">{t.noResults.replace('{query}', query)}</p>
             </div>
           )}
         </div>
@@ -123,11 +165,11 @@ export default function CommandPalette() {
           <div className="flex gap-4">
             <div className="flex items-center gap-1.5 grayscale opacity-50">
               <span className="text-[10px] font-bold px-1.5 py-0.5 bg-zinc-200 dark:bg-zinc-800 rounded">↓↑</span>
-              <span className="text-[10px] text-zinc-500">Navegar</span>
+              <span class="text-[10px] text-zinc-500">{t.navigate}</span>
             </div>
             <div className="flex items-center gap-1.5 grayscale opacity-50">
               <span className="text-[10px] font-bold px-1.5 py-0.5 bg-zinc-200 dark:bg-zinc-800 rounded">↵</span>
-              <span className="text-[10px] text-zinc-500">Seleccionar</span>
+              <span class="text-[10px] text-zinc-500">{t.select}</span>
             </div>
           </div>
           <span className="text-[10px] text-zinc-400 font-medium">Blas Portfolio v2.0</span>

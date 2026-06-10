@@ -35,14 +35,7 @@ export default function ThemeToggle() {
         t = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
     }
     
-    // DEBUG: Verifica qué está pasando
-    console.log("Theme selected:", selected);
-    console.log("Final theme:", t);
-    console.log("HTML classes before:", document.documentElement.className);
-    
     document.documentElement.classList.toggle("dark", t === "dark");
-    
-    console.log("HTML classes after:", document.documentElement.className);
   } 
 
   function handleThemeChange(newTheme) {
@@ -64,10 +57,10 @@ export default function ThemeToggle() {
   const CurrentIcon = THEMES.find(t => t.name === theme)?.icon || Sun;
 
   return (
-    <div className="relative" ref={menuRef}>
+    <div className={`relative ${menuOpen ? 'menu-open' : ''}`} ref={menuRef}>
       <button
         aria-label="Elige el tema"
-        className="appearance-none border-none flex items-center text-black dark:text-white hover:scale-125 transition"
+        className="appearance-none border-none flex items-center justify-center p-2.5 rounded-full text-zinc-500 dark:text-zinc-400 hover:text-emerald-500 dark:hover:text-emerald-400 hover:bg-emerald-500/10 dark:hover:bg-emerald-400/10 transition-all duration-[400ms] cubic-bezier(0.175, 0.885, 0.32, 1.275) hover:scale-115 cursor-pointer bg-transparent"
         onClick={() => setMenuOpen(v => !v)}
         type="button"
       >
@@ -76,18 +69,18 @@ export default function ThemeToggle() {
       {menuOpen && (
         <div
           className="absolute z-[1001]
-            md:top-0 md:left-full md:ml-4 
-            bottom-10 mb-4 md:bottom-auto left-1/2 -translate-x-1/10 md:translate-x-2 md:-translate-y-14
-            min-w-[8rem] rounded-2xl border border-zinc-200 bg-white dark:bg-zinc-900 dark:border-zinc-800 shadow-2xl backdrop-blur-md animate-scale-up p-2"
+            md:top-0 md:left-full md:ml-3 
+            bottom-12 mb-4 md:bottom-auto left-1/2 -translate-x-1/2 md:translate-x-0 md:-translate-y-12
+            w-[7.5rem] rounded-xl border border-zinc-200/80 bg-white/95 dark:bg-zinc-950/95 dark:border-zinc-800/80 shadow-2xl backdrop-blur-md animate-scale-up p-1 text-xs"
         >
           <ul>
             {THEMES.map(({ name, icon: Icon }) => (
               <li
                 key={name}
-                className="flex items-center gap-2 px-2 py-1.5 cursor-pointer text-black dark:text-white hover:bg-neutral-400/40 dark:hover:bg-gray-500/50 rounded-sm transition"
+                className="flex items-center gap-2 px-2 py-1 cursor-pointer text-zinc-600 dark:text-zinc-400 hover:bg-emerald-500/10 dark:hover:bg-emerald-400/10 hover:text-emerald-600 dark:hover:text-emerald-400 rounded-lg transition-colors font-semibold"
                 onClick={() => handleThemeChange(name)}
               >
-                <Icon className="w-4 h-4" />
+                <Icon className="w-3.5 h-3.5" />
                 {name.charAt(0).toUpperCase() + name.slice(1)}
               </li>
             ))}

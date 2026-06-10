@@ -1,7 +1,11 @@
 ---
 import { Mail, Copy, CheckCircle2 } from "lucide-react";
+import { getTranslations } from "@/lib/i18n";
 
-const emailAddress = import.meta.env.EMAIL_ADDRESS || "tu-correo@ejemplo.com";
+const { lang = "es" } = Astro.props;
+const t = getTranslations(lang);
+
+const emailAddress = import.meta.env.EMAIL_ADDRESS || "blasvernazza123@gmail.com";
 ---
 
 <div
@@ -22,15 +26,13 @@ const emailAddress = import.meta.env.EMAIL_ADDRESS || "tu-correo@ejemplo.com";
   >
     <div class="space-y-6 max-w-2xl">
       <h2 class="text-5xl md:text-6xl font-black tracking-tighter text-white">
-        ¿Hablamos sobre tu <br class="hidden sm:block" />
+        {t.contact.titlePrefix} <br class="hidden sm:block" />
         <span class="text-emerald-500 italic font-medium serif"
-          >próximo proyecto?</span
+          >{t.contact.titleHighlight}</span
         >
       </h2>
       <p class="text-lg md:text-xl text-zinc-400 leading-relaxed font-medium">
-        Actualmente estoy abierto a nuevas oportunidades de trabajo. Ya sea que
-        tengas una pregunta o simplemente quieras saludar, ¡intentaré
-        responderte lo antes posible!
+        {t.contact.desc}
       </p>
     </div>
 
@@ -42,7 +44,7 @@ const emailAddress = import.meta.env.EMAIL_ADDRESS || "tu-correo@ejemplo.com";
         class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-emerald-500 text-zinc-950 font-black uppercase tracking-widest rounded-2xl hover:bg-emerald-400 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-emerald-500/20 active:translate-y-0 whitespace-nowrap w-full sm:w-auto"
       >
         <Mail className="size-5" />
-        Envíame un correo
+        {t.contact.send}
       </a>
 
       <button
@@ -61,7 +63,8 @@ const emailAddress = import.meta.env.EMAIL_ADDRESS || "tu-correo@ejemplo.com";
         <span
           id="copy-text"
           class="transition-colors duration-300 group-[.copied]:text-emerald-500"
-          >Copiar Email</span
+          data-copied-text={t.contact.copied}
+          >{t.contact.copy}</span
         >
       </button>
     </div>
@@ -69,26 +72,32 @@ const emailAddress = import.meta.env.EMAIL_ADDRESS || "tu-correo@ejemplo.com";
 </div>
 
 <script>
-  const copyBtn = document.getElementById("copy-email-btn");
-  const copyText = document.getElementById("copy-text");
+  function initContactCopy() {
+    const copyBtn = document.getElementById("copy-email-btn");
+    const copyText = document.getElementById("copy-text");
 
-  if (copyBtn && copyText) {
-    copyBtn.addEventListener("click", async () => {
-      try {
-        const emailToCopy = copyBtn.getAttribute("data-email");
-        await navigator.clipboard.writeText(emailToCopy);
-        const originalText = copyText.innerText;
+    if (copyBtn && copyText) {
+      copyBtn.addEventListener("click", async () => {
+        try {
+          const emailToCopy = copyBtn.getAttribute("data-email") || "";
+          await navigator.clipboard.writeText(emailToCopy);
+          const originalText = copyText.innerText;
+          const copiedText = copyText.getAttribute("data-copied-text") || "¡Copiado!";
 
-        copyText.innerText = "¡Copiado!";
-        copyBtn.classList.add("copied");
+          copyText.innerText = copiedText;
+          copyBtn.classList.add("copied");
 
-        setTimeout(() => {
-          copyText.innerText = originalText;
-          copyBtn.classList.remove("copied");
-        }, 2000);
-      } catch (err) {
-        console.error("Failed to copy email: ", err);
-      }
-    });
+          setTimeout(() => {
+            copyText.innerText = originalText;
+            copyBtn.classList.remove("copied");
+          }, 2000);
+        } catch (err) {
+          console.error("Failed to copy email: ", err);
+        }
+      });
+    }
   }
+
+  // Support View Transitions
+  document.addEventListener("astro:page-load", initContactCopy);
 </script>

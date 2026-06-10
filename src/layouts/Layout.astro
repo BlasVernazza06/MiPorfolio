@@ -5,14 +5,42 @@ import Header from "@/components/Navbar.astro";
 import Footer from "@/components/Footer.astro";
 import Aside from "@/components/Aside.astro";
 import CommandPalette from "@/components/CommandPalette.jsx";
-const { title } = Astro.props;
+const { title, lang = "es" } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="es">
+<html lang={lang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
+
+    <!-- Language Detection & Redirection -->
+    <script is:inline>
+      (function() {
+        const path = window.location.pathname;
+        const isRoot = path === "/" || path === "/index.html";
+        
+        // Sync direct navigations
+        if (path.startsWith("/en")) {
+          localStorage.setItem("preferred-language", "en");
+          return;
+        } else if (isRoot) {
+          const preferredLanguage = localStorage.getItem("preferred-language");
+          const systemLanguage = navigator.languages ? navigator.languages[0] : navigator.language;
+
+          if (!preferredLanguage) {
+            if (systemLanguage.toLowerCase().startsWith("en")) {
+              localStorage.setItem("preferred-language", "en");
+              window.location.href = "/en/";
+            } else {
+              localStorage.setItem("preferred-language", "es");
+            }
+          } else if (preferredLanguage === "en") {
+            window.location.href = "/en/";
+          }
+        }
+      })();
+    </script>
 
     <!-- Theme Initialization Script -->
     <script is:inline>
@@ -97,13 +125,13 @@ const { title } = Astro.props;
     
     </div>
 
-    <Aside />
-    <Header />
-    <CommandPalette client:load />
+    <Aside lang={lang} />
+    <Header lang={lang} />
+    <CommandPalette client:load lang={lang} />
     <main class="relative">
       <slot />
     </main>
-    <Footer />
+    <Footer lang={lang} />
 
     <style is:global>
       :root {

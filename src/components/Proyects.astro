@@ -2,15 +2,20 @@
 import { getCollection } from "astro:content";
 import Github3 from "./icons/github3.astro";
 import Demo from "./icons/Demo.astro";
+import { getTranslations } from "@/lib/i18n";
+
+const { lang = "es" } = Astro.props;
+const t = getTranslations(lang);
+const prefix = lang === "en" ? "/en" : "";
 
 const proyectsRaw = await getCollection("proyects");
 const proyectsVisible = proyectsRaw.filter(
-  (item) => item.data.visible !== false,
+  (item) => item.data.visible !== false && item.id.startsWith(`${lang}/`),
 );
 proyectsVisible.sort((a, b) => a.data.order - b.data.order);
 const proyects = proyectsVisible.map((item) => ({
   ...item.data,
-  id: item.id,
+  id: item.id.replace(`${lang}/`, ""),
 }));
 ---
 
@@ -22,7 +27,7 @@ const proyects = proyectsVisible.map((item) => ({
         <div class="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
 
         <a
-          href={`/proyects/${proyecto.id}`}
+          href={`${prefix}/proyects/${proyecto.id}`}
           class="block relative overflow-hidden aspect-video mx-4 mt-4 rounded-[1.8rem] shadow-inner bg-zinc-200/20 dark:bg-zinc-800/20 z-10"
         >
           <img
@@ -38,21 +43,21 @@ const proyects = proyectsVisible.map((item) => ({
           {proyecto.liveNow && (
             <div class="absolute top-4 right-4 flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 text-white text-[9px] font-black uppercase tracking-[0.2em]">
               <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              Live
+              {t.projectDetail.live}
             </div>
           )}
         </a>
 
         <div class="flex flex-col flex-grow p-10 pt-8 relative z-10">
           <header class="mb-5">
-            <a href={`/proyects/${proyecto.id}`}>
+            <a href={`${prefix}/proyects/${proyecto.id}`}>
               <h3 class="text-3xl font-black text-zinc-900 dark:text-zinc-50 tracking-tighter group-hover:text-emerald-500 transition-colors duration-300 font-outfit">
                 {proyecto.title}
               </h3>
             </a>
           </header>
 
-          <p class="text-[15px] text-zinc-500 dark:text-zinc-400 leading-relaxed mb-10 flex-grow font-medium">
+          <p class="text-[15px] text-zinc-600 dark:text-zinc-400 leading-relaxed mb-10 flex-grow font-medium">
             {proyecto.description}
           </p>
 
@@ -85,7 +90,7 @@ const proyects = proyectsVisible.map((item) => ({
               ) : (
                 <div class="flex-1 inline-flex items-center justify-center gap-2 px-6 py-4 bg-zinc-100 dark:bg-zinc-800 text-zinc-400 dark:text-zinc-500 rounded-2xl font-black text-[11px] uppercase tracking-widest cursor-not-allowed">
                   <Demo class="size-4 opacity-50" />
-                  <span>Próximamente</span>
+                  <span>{t.projectDetail.notAvailable}</span>
                 </div>
               )}
 

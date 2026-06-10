@@ -1,18 +1,23 @@
 ---
+import { getTranslations } from "@/lib/i18n";
+
+const { lang = "es" } = Astro.props;
+const t = getTranslations(lang);
+
 const experiences = [
   {
-    date: "Enero 2024 - Presente",
-    title: "Full Stack Developer Freelance",
-    company: "Proyectos Independientes",
-    description: "Desarrollo de aplicaciones web y móviles personalizadas para clientes internacionales, enfocándome en arquitecturas escalables y diseño centrado en el usuario.",
+    date: t.experience.freelanceDate,
+    title: t.experience.freelanceTitle,
+    company: t.experience.freelanceCompany,
+    description: t.experience.freelanceDesc,
     link: "https://www.fiverr.com/blas_vernazza",
     technologies: ["Next.js", "React Native", "Node.js", "PostgreSQL"]
   },
   {
-    date: "2024",
-    title: "Diseño de Interfaz para pasteurizadora",
-    company: "IAR",
-    description: "Creación de una interfaz HMI optimizada para el monitoreo en tiempo real de procesos industriales, mejorando la eficiencia operativa.",
+    date: t.experience.hmiDate,
+    title: t.experience.hmiTitle,
+    company: t.experience.hmiCompany,
+    description: t.experience.hmiDesc,
     technologies: ["Node-red", "Node.js", "JSON", "HTML", "CSS", "JavaScript"]
   }
 ];

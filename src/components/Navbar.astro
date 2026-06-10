@@ -1,11 +1,17 @@
 ---
+import { getTranslations } from "@/lib/i18n";
+
+const { lang = "es" } = Astro.props;
+const t = getTranslations(lang);
+const prefix = lang === "en" ? "/en" : "";
+
 const navItems = [
-  { title: "Inicio", label: "inicio", url: "/#Inicio" },
-  { title: "Proyectos", label: "proyectos", url: "/#Proyects" },
-  { title: "Experiencia", label: "experiencia", url: "/#Experiencia" },
-  { title: "Skills", label: "skills", url: "/#Skills" },
-  { title: "Sobre mí", label: "sobre-mi", url: "/#Sobre-mi" },
-  { title: "Certificados", label: "certificados", url: "/#Certificados" },
+  { title: t.nav.inicio, label: "inicio", url: `${prefix}/#Inicio` },
+  { title: t.nav.proyectos, label: "proyectos", url: `${prefix}/#Proyects` },
+  { title: t.nav.experiencia, label: "experiencia", url: `${prefix}/#Experiencia` },
+  { title: t.nav.skills, label: "skills", url: `${prefix}/#Skills` },
+  { title: t.nav.sobreMi, label: "sobre-mi", url: `${prefix}/#Sobre-mi` },
+  { title: t.nav.certificados, label: "certificados", url: `${prefix}/#Certificados` },
 ];
 ---
 
