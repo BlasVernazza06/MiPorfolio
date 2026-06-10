@@ -58,7 +58,7 @@ otherTechnologies:
     class: "bg-[#0055FF]"
 
   - nombre: Prettier
-    imagen: "/TechIcons/icons-terminal.svg"
+    imagen: "/TechIcons/prettier-icon-dark.svg"
     class: "bg-[#1A2B34]"
 
   - nombre: Shadcn
@@ -66,11 +66,11 @@ otherTechnologies:
     class: "bg-[#000000]"
 
   - nombre: Lucide
-    imagen: "/TechIcons/icons-Web.png"
+    imagen: "/TechIcons/lucide.webp"
     class: "bg-[#0F172A]"
 
   - nombre: Svgl
-    imagen: "/TechIcons/icons-Web.png"
+    imagen: "/TechIcons/svgl.svg"
     class: "bg-[#1E293B]"
 
   - nombre: Playwright
@@ -86,7 +86,7 @@ otherTechnologies:
     class: "bg-[#15C213]"
 
   - nombre: FastApi
-    imagen: "/TechIcons/icons-terminal.svg"
+    imagen: "/TechIcons/fastapi.svg"
     class: "bg-[#009688]"
 
   - nombre: Uvicorn
@@ -94,7 +94,7 @@ otherTechnologies:
     class: "bg-[#2F3E46]"
 
   - nombre: Langchain
-    imagen: "/TechIcons/icons-Web.png"
+    imagen: "/TechIcons/langchain-logo.svg"
     class: "bg-[#000000]"
 
   - nombre: PyMuPDF
@@ -102,7 +102,7 @@ otherTechnologies:
     class: "bg-[#FF5722]"
 
   - nombre: Python-dotenv
-    imagen: "/TechIcons/icons-terminal.svg"
+    imagen: "/TechIcons/dotenv.svg"
     class: "bg-[#3F51B5]"
 
   - nombre: Pydantic
