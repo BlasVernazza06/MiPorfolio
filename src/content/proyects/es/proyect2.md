@@ -1,6 +1,6 @@
 ---
-hidden: false
-liveNow: true
+visible: false
+liveNow: false
 order: 5
 imgInicio: "/images/proyect1AeroViajes.webp"
 title: AeroViajes

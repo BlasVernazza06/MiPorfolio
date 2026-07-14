@@ -6,4 +6,7 @@ technologies:
 
   - nombre: "Docker"
     imagen: "/TechIcons/icons-docker.svg"
+
+  - nombre: "Golang"
+    imagen: "/TechIcons/go.svg"
 ---

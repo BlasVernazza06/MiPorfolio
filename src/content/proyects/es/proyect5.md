@@ -1,5 +1,5 @@
 ---
-order: 2
+order: 4
 visible: true
 liveNow: false
 imgInicio: "/images/StudyHubPic.png"

@@ -1,7 +1,7 @@
 ---
 hidden: false
 liveNow: false
-order: 1
+order: 6
 imgInicio: "/images/LearnixPhoto.png"
 title: Learnix
 description: Pagina de Cursos para el desarrollo de conocimientos en el sector IT. Con sistema de pagos y base de datos.
