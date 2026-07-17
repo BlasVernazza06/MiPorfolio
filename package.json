@@ -2,6 +2,13 @@
   "name": "miporfolio",
   "type": "module",
   "version": "0.0.1",
+  "description": "Portafolio moderno y profesional construido con Astro para desarrolladores",
+  "author": "Blas Vernazza <blasvernazza123@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BlasVernazza06/My-Portfolio.git"
+  },
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
