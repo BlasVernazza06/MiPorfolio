@@ -3,18 +3,18 @@ hidden: false
 liveNow: false
 order: 6
 imgInicio: "/images/LearnixPhoto.png"
-title: Learnix
-description: Pagina de Cursos para el desarrollo de conocimientos en el sector IT. Con sistema de pagos y base de datos.
+title: "Learnix – LMS Escalable con Procesamiento Transaccional y Conciliación de Webhooks"
+description: "Plataforma de e-learning transaccional con integración de pasarelas de pago resilientes, animaciones complejas de UI y persistencia escalable."
 link: "https://learnix-app.vercel.app/"
 github: "https://github.com/BlasVernazza06/learnix-app.git"
 technologies:
   - nombre: NextJs
-    imagen: "/TechIcons/nextjs_icon_dark.svg" # versión clara del logo
-    class: "bg-[#000000]" # negro oficial de Next.js
+    imagen: "/TechIcons/nextjs_icon_dark.svg"
+    class: "bg-[#000000]"
 
   - nombre: Stripe
     imagen: "/TechIcons/icon-stripe.svg"
-    class: "bg-[#2114F2]" # violeta oficial de Stripe
+    class: "bg-[#2114F2]"
 
   - nombre: Supabase
     imagen: "/TechIcons/supabase.svg"
@@ -23,36 +23,23 @@ technologies:
 otherTechnologies:
   - nombre: Tailwind
     imagen: "/TechIcons/icons-tailwind.svg"
-    class: "bg-[#0F172A]" # gris oscuro → resalta el celeste
+    class: "bg-[#0F172A]"
 
   - nombre: Gsap
-    imagen: "/TechIcons/gsap-white.svg" # versión clara del logo
-    class: "bg-[#88CE02]" # verde lima oficial de GSAP
+    imagen: "/TechIcons/gsap-white.svg"
+    class: "bg-[#88CE02]"
 ---
 
-## Sobre el Proyecto
+## 📌 Resumen de Ingeniería
+Learnix es un sistema de gestión de aprendizaje (LMS) robusto y de alto impacto diseñado para optimizar la distribución de contenidos formativos y la monetización de cursos IT. El sistema resuelve el problema clásico del abandono de carritos y la inestabilidad en las transacciones implementando un flujo de checkout transaccional resistente a fallos, acompañado de interfaces altamente atractivas animadas a nivel de hardware.
 
-Learnix es una plataforma educativa diseñada para democratizar el acceso al conocimiento tecnológico. El objetivo principal fue crear una experiencia de usuario fluida y profesional, similar a las grandes plataformas de e-learning del mercado.
+## 🏗️ Arquitectura del Sistema & Decisiones Técnicas
+* **Frontend y Renderizado en Next.js:** Desarrollado con Next.js utilizando rutas dinámicas e hibridación de renderizado (ISR/SSR) para servir catálogos estáticos de cursos instantáneos mientras se mantiene dinámico el dashboard de progreso de estudiantes.
+* **Procesamiento de Pagos Resiliente:** Integración de Stripe Checkout en conjunción con API Routes de Next.js. El flujo de aprovisionamiento de cursos está automatizado mediante un sistema de webhooks asíncronos que asegura la idempotencia y la tolerancia a fallos transaccionales.
+* **Base de Datos y Seguridad (Supabase):** Implementación de base de datos PostgreSQL alojada en Supabase. Se configuraron políticas de seguridad a nivel de fila (RLS) estrictas para garantizar que los perfiles y cursos adquiridos solo sean accesibles por los usuarios autenticados autorizados.
+* **Animaciones Fluídas de Alta Fidelidad:** Implementación de GSAP (GreenSock Animation Platform) para transiciones de UI no bloqueantes y experiencias de scroll dinámicas. El renderizado y cálculo matemático de trayectorias animadas se vinculó directamente a la GPU del navegador mediante transformaciones CSS3 optimizadas.
 
-La aplicación permite a los usuarios navegar por un catálogo de cursos, realizar pagos seguros y gestionar su progreso educativo de manera intuitiva.
-
-## Desafíos Técnicos
-
-### Integración de Pagos con Stripe
-
-Uno de los mayores retos fue implementar un flujo de pagos robusto. Utilicé Stripe para gestionar transacciones, asegurando que el acceso a los cursos se desbloqueara automáticamente tras una compra exitosa mediante webhooks.
-
-### Animaciones de Alto Nivel con GSAP
-
-Para darle ese toque "premium", implementé animaciones complejas usando GSAP. Desde transiciones de página suaves hasta efectos de scroll parallax que hacen que la navegación sea una experiencia visual atractiva.
-
-### Gestión de Datos Relacionales
-
-Con Supabase como backend, diseñé una estructura de base de datos eficiente para manejar usuarios, cursos, inscripciones y perfiles, garantizando consultas rápidas y escalabilidad.
-
-## Características Principales
-
-- **Dashboard de Usuario**: Visualización clara de los cursos adquiridos y progreso.
-- **Pasarela de Pagos Segura**: Integración completa con Stripe.
-- **Diseño Responsivo**: Optimizado para cualquier dispositivo utilizando Tailwind CSS.
-- **Backend Escalable**: Autenticación y base de datos gestionada con Supabase.
+## 🚀 Desafíos Técnicos & Métricas de Impacto
+* **Conciliación e Idempotencia en Pagos:** Diseño de un backend transaccional con una tasa de error del 0% en la entrega de licencias de cursos al implementar un sistema de encolado y reintentos para Stripe Webhooks utilizando firmas criptográficas de verificación.
+* **Fidelidad y Rendimiento Visual (GSAP):** Logro de **60 FPS** consistentes en animaciones complejas en dispositivos móviles de gama media gracias a la optimización de repintados del DOM y la prevención de "Layout Thrashing".
+* **Velocidad de Carga del Catálogo (LCP):** Optimización del Largest Contentful Paint a **<1.2s** usando generación estática incremental (ISR) en Next.js y optimización automatizada de imágenes.

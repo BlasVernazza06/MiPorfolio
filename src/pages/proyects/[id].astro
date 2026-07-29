@@ -189,7 +189,7 @@ const activeCategories = Object.entries(categoriesMap)
             >
               {title}
             </h1>
-            <p class="text-base md:text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed font-normal">
+            <p class="text-sm md:text-base text-zinc-600 dark:text-zinc-400 leading-relaxed font-normal">
               {description}
             </p>
           </div>
@@ -350,13 +350,13 @@ const activeCategories = Object.entries(categoriesMap)
     @apply text-xl mt-8 mb-4 font-outfit font-bold text-zinc-800 dark:text-zinc-200 tracking-tight;
   }
   .prose p {
-    @apply mb-6 text-zinc-600 dark:text-zinc-400 leading-relaxed text-base md:text-lg;
+    @apply mb-6 text-zinc-600 dark:text-zinc-400 leading-relaxed text-sm md:text-base;
   }
   .prose ul {
-    @apply list-disc pl-6 space-y-3 mb-6 text-zinc-600 dark:text-zinc-400 text-base md:text-lg;
+    @apply list-disc pl-6 space-y-3 mb-6 text-zinc-600 dark:text-zinc-400 text-sm md:text-base;
   }
   .prose ol {
-    @apply list-decimal pl-6 space-y-3 mb-6 text-zinc-600 dark:text-zinc-400 text-base md:text-lg;
+    @apply list-decimal pl-6 space-y-3 mb-6 text-zinc-600 dark:text-zinc-400 text-sm md:text-base;
   }
   .prose li::marker {
     @apply text-emerald-500 dark:text-emerald-400;
