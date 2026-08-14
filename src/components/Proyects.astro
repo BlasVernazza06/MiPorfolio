@@ -19,93 +19,171 @@ const proyects = proyectsVisible.map((item) => ({
 }));
 ---
 
-<div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-6" id="project-grid">
   {
-    proyects.map((proyecto) => (
-      <article class="group relative flex flex-col h-full rounded-[2.5rem] bg-white/50 dark:bg-zinc-900/50 backdrop-blur-sm border border-zinc-200/50 dark:border-zinc-800/50 overflow-hidden transition-all duration-700 hover:-translate-y-3 hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] dark:hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.5)]">
-        <!-- Decorative Overlay (pointer-events-none es CLAVE aquí) -->
-        <div class="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+    proyects.map((proyecto, i) => (
+      <article class="project-card group relative flex flex-col rounded-2xl border overflow-hidden transition-all duration-500 hover:-translate-y-1 hover:shadow-xl">
 
+        <!-- Número de proyecto — placa editorial -->
+        <div class="project-index absolute top-5 left-5 z-20 font-mono text-[11px] font-bold tracking-[0.25em] text-muted-foreground/40 group-hover:text-amber-500/70 transition-colors duration-300 select-none">
+          {String(i + 1).padStart(2, "0")}
+        </div>
+
+        <!-- Imagen con proporción fija -->
         <a
           href={`${prefix}/proyects/${proyecto.id}`}
-          class="block relative overflow-hidden aspect-video mx-4 mt-4 rounded-[1.8rem] shadow-inner bg-zinc-200/20 dark:bg-zinc-800/20 z-10"
+          class="block relative overflow-hidden"
+          style="aspect-ratio: 16/9;"
+          tabindex="0"
         >
           <img
             src={proyecto.imgInicio}
             alt={proyecto.title}
-            class="w-full h-full object-cover transition-transform duration-1000 cubic-bezier(0.16, 1, 0.3, 1) group-hover:scale-110"
+            class="w-full h-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04]"
             loading="eager"
             decoding="async"
             fetchpriority="high"
           />
-          <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors duration-700" />
+          <!-- Overlay que desaparece en hover -->
+          <div class="absolute inset-0 bg-foreground/10 dark:bg-foreground/20 group-hover:opacity-0 transition-opacity duration-500"></div>
+
+
 
           {proyecto.liveNow && (
-            <div class="absolute top-4 right-4 flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-xl border border-white/20 text-white text-[9px] font-black uppercase tracking-[0.2em]">
-              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+            <div class="absolute top-4 right-4 z-10 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-background/80 backdrop-blur-sm border border-border/50 text-foreground text-[9px] font-black uppercase tracking-[0.2em]">
+              <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
               {t.projectDetail.live}
             </div>
           )}
         </a>
 
-        <div class="flex flex-col flex-grow p-10 pt-8 relative z-10">
-          <header class="mb-5">
-            <a href={`${prefix}/proyects/${proyecto.id}`}>
-              <h3 class="text-3xl font-black text-zinc-900 dark:text-zinc-50 tracking-tighter group-hover:text-emerald-500 transition-colors duration-300 font-outfit">
+        <!-- Contenido inferior -->
+        <div class="flex flex-col flex-grow p-5 pt-4">
+          <header class="mb-2">
+            <a href={`${prefix}/proyects/${proyecto.id}`} tabindex="-1">
+              <h3 class="project-title text-xl font-extrabold text-foreground tracking-tight transition-colors duration-300 font-syne leading-tight">
                 {proyecto.title}
               </h3>
             </a>
           </header>
 
-          <p class="text-[15px] text-zinc-600 dark:text-zinc-400 leading-relaxed mb-10 flex-grow font-medium">
+          <p class="text-[14px] text-muted-foreground leading-relaxed mb-6 flex-grow font-normal">
             {proyecto.description}
           </p>
 
-          <div class="space-y-8">
-            <div class="flex flex-wrap gap-3">
-              {proyecto.technologies.slice(0, 6).map((tech) => (
-                <div class="flex items-center gap-2 px-3 py-2 rounded-xl bg-white dark:bg-zinc-900 border border-zinc-100 dark:border-zinc-800 shadow-sm transition-transform hover:scale-105">
-                  <img
-                    src={tech.imagen}
-                    alt={tech.nombre}
-                    class="size-5 object-contain"
-                  />
-                  <span class="text-xs font-semibold text-zinc-700 dark:text-zinc-300">
-                    {tech.nombre}
-                  </span>
-                </div>
-              ))}
-            </div>
+          <!-- Tecnologías -->
+          <div class="flex flex-wrap gap-2 mb-6">
+            {proyecto.technologies.slice(0, 5).map((tech) => (
+              <div class="tech-pill flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-muted/60 border border-border/50 transition-all duration-200 hover:border-amber-500/30">
+                <img
+                  src={tech.imagen}
+                  alt={tech.nombre}
+                  class="size-3.5 object-contain"
+                />
+                <span class="text-[11px] font-semibold text-foreground/70">
+                  {tech.nombre}
+                </span>
+              </div>
+            ))}
+          </div>
 
-            <div class="flex items-center gap-4 pt-6 border-t border-zinc-100/50 dark:border-zinc-800/50">
-              {proyecto.liveNow ? (
-                <a
-                  href={proyecto.link}
-                  target="_blank"
-                  class="flex-1 inline-flex items-center justify-center gap-2 px-6 py-4 bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 rounded-2xl font-black text-[11px] uppercase tracking-widest transition-all duration-300 hover:bg-emerald-600 dark:hover:bg-emerald-400 hover:scale-[1.02] shadow-lg shadow-zinc-900/10 dark:shadow-white/5"
-                >
-                  <Demo class="size-4" />
-                  <span>Demo</span>
-                </a>
-              ) : (
-                <div class="flex-1 inline-flex items-center justify-center gap-2 px-6 py-4 bg-zinc-100 dark:bg-zinc-800 text-zinc-400 dark:text-zinc-500 rounded-2xl font-black text-[11px] uppercase tracking-widest cursor-not-allowed">
-                  <Demo class="size-4 opacity-50" />
-                  <span>{t.projectDetail.notAvailable}</span>
-                </div>
-              )}
-
+          <!-- Acciones -->
+          <div class="flex items-center gap-3 pt-5 border-t border-border/50">
+            {proyecto.liveNow ? (
               <a
-                href={proyecto.github}
+                href={proyecto.link}
                 target="_blank"
-                class="inline-flex items-center justify-center p-4 text-zinc-400 hover:text-emerald-500 bg-zinc-100/50 dark:bg-zinc-800/50 rounded-2xl transition-all duration-300 hover:bg-emerald-500/10"
-                aria-label="GitHub Repository"
+                class="btn-demo group/btn flex-1 inline-flex items-center justify-center gap-2 font-bold text-[11px] uppercase tracking-[0.2em] transition-all duration-300 hover:scale-[1.02] active:scale-95"
               >
-                <Github3 class="size-5" />
+                <Demo class="size-3.5 transition-transform group-hover/btn:translate-x-0.5" />
+                <span>Demo</span>
               </a>
-            </div>
+            ) : (
+              <div class="flex-1 inline-flex items-center justify-center gap-2 py-2.5 bg-muted/50 text-muted-foreground/50 rounded-md font-bold text-[11px] uppercase tracking-[0.2em] cursor-not-allowed">
+                <Demo class="size-3.5 opacity-40" />
+                <span>{t.projectDetail.notAvailable}</span>
+              </div>
+            )}
+
+            <a
+              href={proyecto.github}
+              target="_blank"
+              class="btn-github p-2.5 rounded-md text-muted-foreground transition-all duration-300 active:scale-90"
+              aria-label="GitHub Repository"
+            >
+              <Github3 class="size-4.5" />
+            </a>
           </div>
         </div>
+
       </article>
     ))
   }
 </div>
+
+<style>
+  /* Card base */
+  .project-card {
+    background: oklch(1 0.003 58);
+    border-color: oklch(0.88 0.025 52);
+  }
+  :global(.dark) .project-card {
+    background: oklch(0.14 0.014 38);
+    border-color: oklch(0.22 0.020 38);
+  }
+  .project-card:hover {
+    border-color: oklch(0.65 0.18 40 / 0.45);
+    box-shadow: 0 12px 40px oklch(0.65 0.18 40 / 0.08);
+  }
+  :global(.dark) .project-card:hover {
+    border-color: oklch(0.72 0.17 44 / 0.35);
+    box-shadow: 0 12px 40px oklch(0.65 0.18 40 / 0.14);
+  }
+
+  /* Título */
+  .project-card:hover .project-title {
+    color: oklch(0.55 0.16 36);
+  }
+  :global(.dark) .project-card:hover .project-title {
+    color: oklch(0.72 0.17 44);
+  }
+
+  /* Botón Demo */
+  .btn-demo {
+    padding: 0.625rem 1.25rem;
+    background: oklch(0.72 0.17 44);
+    color: oklch(0.10 0.012 38);
+    border-radius: 0.375rem;
+  }
+  :global(.dark) .btn-demo {
+    background: oklch(0.72 0.17 44);
+    color: oklch(0.10 0.012 38);
+  }
+  .btn-demo:hover {
+    background: oklch(0.64 0.17 42);
+    color: oklch(0.10 0.012 38);
+  }
+  :global(.dark) .btn-demo:hover {
+    background: oklch(0.64 0.17 42);
+  }
+
+  /* Botón GitHub */
+  .btn-github {
+    background: oklch(0.94 0.015 56);
+    border: 1px solid oklch(0.88 0.025 52);
+  }
+  :global(.dark) .btn-github {
+    background: oklch(0.17 0.016 38);
+    border-color: oklch(0.22 0.020 38);
+  }
+  .btn-github:hover {
+    color: oklch(0.65 0.18 40);
+    background: oklch(0.90 0.03 52);
+    border-color: oklch(0.65 0.18 40 / 0.3);
+  }
+  :global(.dark) .btn-github:hover {
+    color: oklch(0.72 0.17 44);
+    background: oklch(0.20 0.018 38);
+    border-color: oklch(0.72 0.17 44 / 0.25);
+  }
+</style>
