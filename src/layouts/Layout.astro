@@ -70,10 +70,10 @@ const { title, lang = "es" } = Astro.props;
     <!-- Background Safeguard -->
     <style is:inline>
       html.dark {
-        background-color: #09090b;
+        background-color: #1a1008;
       }
       html {
-        background-color: #fbfcff;
+        background-color: #fdf8f3;
       }
     </style>
 
@@ -87,21 +87,21 @@ const { title, lang = "es" } = Astro.props;
     <link
       rel="preload"
       as="style"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300;1,9..40,400&display=swap"
     />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300;1,9..40,400&display=swap"
       rel="stylesheet"
     />
   </head>
   <body
-    class="text-zinc-900 dark:text-zinc-100 selection:bg-emerald-500/30 overflow-x-hidden"
+    class="text-foreground bg-background selection:bg-amber-500/25 dark:selection:bg-amber-500/30 overflow-x-hidden transition-colors duration-300"
   >
     <!-- Scroll Progress Bar -->
     <div
       id="progress-bar"
-      class="fixed top-0 left-0 h-[3px] bg-gradient-to-r from-emerald-400 to-emerald-600 z-[9999] transition-all duration-300 pointer-events-none"
-      style="width: 0%;"
+      class="fixed top-0 left-0 h-[2px] z-[9999] transition-all duration-300 pointer-events-none"
+      style="width: 0%; background: linear-gradient(to right, oklch(0.72 0.17 44), oklch(0.55 0.16 36));"
       transition:persist
     >
     </div>
@@ -112,23 +112,25 @@ const { title, lang = "es" } = Astro.props;
       transition:persist
     >
       <!-- Base Color Base -->
-      <div class="absolute inset-0 bg-[#fbfcff] dark:bg-[#09090b]"></div>
+      <div class="absolute inset-0 bg-background"></div>
 
-      <!-- Mesh Gradients for Atmosphere -->
-      <div class="absolute inset-0 opacity-40 dark:opacity-60">
-        <div class="absolute top-[-10%] right-[10%] w-[50%] h-[50%] bg-emerald-100 dark:bg-emerald-900/20 blur-[120px] rounded-full"></div>
-        <div class="absolute bottom-[0%] left-[-5%] w-[40%] h-[40%] bg-blue-50 dark:bg-blue-900/10 blur-[100px] rounded-full"></div>
+      <!-- Mesh Gradients — Orange Ember Atmosphere (muy sutiles) -->
+      <div class="absolute inset-0 pointer-events-none">
+        <!-- Orbe principal — naranja cálido superior derecha -->
+        <div class="absolute top-[-20%] right-[-10%] w-[60%] h-[70%] rounded-full animate-blob-slow" style="background: radial-gradient(circle, oklch(0.72 0.17 44 / 0.10) 0%, transparent 60%); filter: blur(60px);"></div>
+        <!-- Orbe secundario — ámbar inferior izquierda -->
+        <div class="absolute bottom-[-15%] left-[-10%] w-[55%] h-[60%] rounded-full animate-blob-slow animation-delay-2000" style="background: radial-gradient(circle, oklch(0.55 0.16 36 / 0.07) 0%, transparent 60%); filter: blur(70px);"></div>
       </div>
 
       <!-- Noise Texture for tactile feel -->
-      <div class="absolute inset-0 opacity-[0.02] dark:opacity-[0.04] mix-blend-overlay pointer-events-none" style="background-image: url('https://grainy-gradients.vercel.app/noise.svg');"></div>
+      <div class="absolute inset-0 opacity-[0.02] dark:opacity-[0.03] mix-blend-overlay pointer-events-none" style="background-image: url('https://grainy-gradients.vercel.app/noise.svg');"></div>
     
     </div>
 
     <Aside lang={lang} />
     <Header lang={lang} />
     <CommandPalette client:load lang={lang} />
-    <main class="relative">
+    <main class="relative pt-14">
       <slot />
     </main>
     <Footer lang={lang} />
@@ -138,13 +140,19 @@ const { title, lang = "es" } = Astro.props;
         color-scheme: light dark;
       }
 
+      /* Focus Outline accessibility */
+      *:focus-visible {
+        outline: 2px solid oklch(0.72 0.17 44);
+        outline-offset: 4px;
+      }
+
       /* View Transitions: Quitamos la animación de salida */
       ::view-transition-old(root) {
         animation: none;
         display: none;
       }
 
-      /* Opcional: Ajustamos la velocidad de entrada para que se sienta más "pro" */
+      /* Opcional: Ajustamos la velocidad de entrada para que se sient más "pro" */
       ::view-transition-new(root) {
         animation-duration: 0.4s;
         animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -155,10 +163,11 @@ const { title, lang = "es" } = Astro.props;
       }
 
       body {
-        font-family: "Inter", sans-serif;
+        font-family: "DM Sans", sans-serif;
         min-height: 100dvh;
         overscroll-behavior: none;
         -webkit-font-smoothing: antialiased;
+        font-optical-sizing: auto;
       }
 
       h1,
@@ -167,7 +176,8 @@ const { title, lang = "es" } = Astro.props;
       h4,
       h5,
       h6 {
-        font-family: "Outfit", sans-serif;
+        font-family: "Syne", sans-serif;
+        letter-spacing: -0.025em;
       }
 
       @media (prefers-reduced-motion: reduce) {
@@ -218,17 +228,20 @@ const { title, lang = "es" } = Astro.props;
 
       /* Custom Scrollbar */
       ::-webkit-scrollbar {
-        width: 8px;
+        width: 6px;
       }
       ::-webkit-scrollbar-track {
         background: transparent;
       }
       ::-webkit-scrollbar-thumb {
-        background: rgba(16, 185, 129, 0.2);
+        background: oklch(0.65 0.18 40 / 0.3);
         border-radius: 20px;
       }
       ::-webkit-scrollbar-thumb:hover {
-        background: rgba(16, 185, 129, 0.4);
+        background: oklch(0.72 0.17 44 / 0.5);
+      }
+      ::selection {
+        background: oklch(0.72 0.17 44 / 0.25);
       }
 
       /* Background Animations */
