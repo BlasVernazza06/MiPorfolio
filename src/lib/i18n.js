@@ -19,7 +19,7 @@ export const translations = {
       lang: "Click para cambiar a Inglés 🇬🇧"
     },
     start: {
-      openToWork: "Open to work",
+      openToWork: "Disponible para trabajar",
       creating: "CREANDO",
       solutions: "Soluciones",
       digital: "DIGITALES.",
@@ -28,10 +28,11 @@ export const translations = {
       projects: "Proyectos",
       role1: "01 / Full Stack",
       role1Desc: "Sistemas escalables con Node, NestJS y bases de datos robustas.",
-      role2: "02 / Mobile",
+      role2: "02 / Móvil",
       role2Desc: "Experiencias nativas fluidas con React Native y Expo.",
-      role3: "03 / UI Design",
-      role3Desc: "Interfaces modernas con Tailwind, GSAP y enfoque en performance."
+      role3: "03 / Diseño UI",
+      role3Desc: "Interfaces modernas con Tailwind, GSAP y enfoque en performance.",
+      studio: "Estudio de Diseño y Código"
     },
     about: {
       title: "Sobre Mí",
@@ -128,7 +129,8 @@ export const translations = {
       role2: "02 / Mobile",
       role2Desc: "Smooth native experiences with React Native and Expo.",
       role3: "03 / UI Design",
-      role3Desc: "Modern interfaces with Tailwind, GSAP, and focus on performance."
+      role3Desc: "Modern interfaces with Tailwind, GSAP, and focus on performance.",
+      studio: "Design & Code Studio"
     },
     about: {
       title: "About Me",
