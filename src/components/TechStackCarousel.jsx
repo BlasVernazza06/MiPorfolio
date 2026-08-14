@@ -1,92 +1,100 @@
-import React from "react";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
+import React, { useState } from "react";
 
 export default function TechStackCards({ skills }) {
-  const chunkArray = (array, size) => {
-    const chunks = [];
-    for (let i = 0; i < array.length; i += size) {
-      chunks.push(array.slice(i, i + size));
-    }
-    return chunks;
-  };
-
   return (
-    <div className="w-full space-y-12">
-
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-        {skills.map((tech, index) => {
-          const techChunks = chunkArray(tech.technologies, 9);
-          
-          return (
-            <div
-              key={index}
-              className="p-10 rounded-[2.5rem] bg-white/40 dark:bg-zinc-900/40 backdrop-blur-md border border-zinc-200/50 dark:border-zinc-800/50 transition-all duration-700 hover:-translate-y-2 hover:shadow-2xl hover:shadow-emerald-500/5 group relative overflow-hidden"
-            >
-              <div className="absolute top-0 right-0 size-24 bg-gradient-to-bl from-emerald-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
-              
-              <div className="flex flex-col gap-10">
-                <div className="flex items-center gap-6">
-                  <h3 className="text-3xl font-black tracking-tighter text-zinc-900 dark:text-zinc-50 group-hover:text-emerald-500 transition-colors">
-                    {tech.title}
-                  </h3>
-                  <div className="h-px flex-grow mx-4 bg-zinc-100 dark:bg-zinc-800"></div>
-                  <span className="text-xs font-bold text-zinc-400 dark:text-zinc-600 uppercase tracking-widest">
-                    Stack
-                  </span>
-                </div>
-
-                <Carousel 
-                  className="w-full"
-                  opts={{
-                    align: "start",
-                    loop: true,
-                  }}
-                >
-                  <CarouselContent>
-                    {techChunks.map((chunk, chunkIdx) => (
-                      <CarouselItem key={chunkIdx} className="basis-full">
-                        <div className="grid grid-cols-3 gap-6 py-6">
-                          {chunk.map((t, idx) => (
-                            <div
-                              key={idx}
-                              className="flex flex-col items-center gap-4 group/item"
-                            >
-                              <div className="p-3 rounded-2xl bg-zinc-50 dark:bg-zinc-800/50 group-hover/item:bg-white dark:group-hover/item:bg-zinc-700 transition-all duration-300 group-hover/item:scale-110 group-hover/item:shadow-lg group-hover/item:shadow-emerald-500/20">
-                                <img 
-                                  src={t.imagen} 
-                                  alt={t.nombre} 
-                                  className="h-10 w-10 md:h-12 md:w-12 object-contain transition-all duration-500"
-                                />
-                              </div>
-                              <span className="text-zinc-400 dark:text-zinc-500 text-[10px] font-black uppercase tracking-widest group-hover/item:text-zinc-900 dark:group-hover/item:text-zinc-100 transition-colors">
-                                {t.nombre}
-                              </span>
-                            </div>
-                          ))}
-                        </div>
-                      </CarouselItem>
-                    ))}
-                  </CarouselContent>
-
-                  {techChunks.length > 1 && (
-                    <div className="flex justify-end gap-3 mt-10">
-                      <CarouselPrevious className="static translate-y-0 h-12 w-12 rounded-2xl bg-zinc-100 dark:bg-zinc-800/50 border border-zinc-200/50 dark:border-zinc-700/50 hover:bg-emerald-500/10 text-zinc-500 hover:text-emerald-500 transition-all" />
-                      <CarouselNext className="static translate-y-0 h-12 w-12 rounded-2xl bg-zinc-100 dark:bg-zinc-800/50 border border-zinc-200/50 dark:border-zinc-700/50 hover:bg-emerald-500/10 text-zinc-500 hover:text-emerald-500 transition-all" />
-                    </div>
-                  )}
-                </Carousel>
-              </div>
+    <div className="w-full">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {skills.map((tech, index) => (
+          <div
+            key={index}
+            className="skill-card p-6 md:p-8 rounded-xl border transition-all duration-500 hover:shadow-lg"
+          >
+            {/* Cabecera de la Card */}
+            <div className="flex items-center justify-between mb-6 pb-4 border-b border-current/10">
+              <h3 className="text-xl font-extrabold tracking-tight font-syne skill-title transition-colors duration-300">
+                {tech.title}
+              </h3>
+              <span className="text-[9px] font-black uppercase tracking-[0.25em] opacity-45">
+                Stack
+              </span>
             </div>
-          );
-        })}
+
+            {/* Grid de Tecnologías (Sólido, visible y responsive) */}
+            <div className="grid grid-cols-4 sm:grid-cols-5 gap-3.5">
+              {tech.technologies.map((t, idx) => (
+                <div
+                  key={idx}
+                  className="group/item relative flex flex-col items-center justify-center p-3 rounded-lg border tech-icon-box transition-all duration-300 hover:-translate-y-0.5"
+                >
+                  <img
+                    src={t.imagen}
+                    alt={t.nombre}
+                    className="size-8 md:size-9 object-contain transition-all duration-300 group-hover/item:scale-110"
+                    loading="lazy"
+                  />
+                  
+                  {/* Tooltip flotante premium al hover del item */}
+                  <div className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 opacity-0 pointer-events-none scale-95 group-hover/item:opacity-100 group-hover/item:scale-100 transition-all duration-200 z-30">
+                    <div className="px-2 py-1 rounded bg-zinc-950/90 dark:bg-zinc-900/90 text-white dark:text-zinc-100 text-[10px] font-bold tracking-tight shadow-md whitespace-nowrap border border-white/10 dark:border-white/5 backdrop-blur-sm">
+                      {t.nombre}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
       </div>
+
+      <style>{`
+        /* ── MODO CLARO ── */
+        .skill-card {
+          background: oklch(1 0.003 58);
+          border-color: oklch(0.88 0.025 52);
+          color: oklch(0.14 0.018 42);
+        }
+        .skill-card:hover {
+          border-color: oklch(0.65 0.18 40 / 0.35);
+          box-shadow: 0 10px 30px oklch(0.65 0.18 40 / 0.06);
+        }
+        .skill-card:hover .skill-title {
+          color: oklch(0.55 0.16 36);
+        }
+
+        .tech-icon-box {
+          background: oklch(0.97 0.010 56);
+          border-color: oklch(0.88 0.025 52 / 0.6);
+        }
+        .tech-icon-box:hover {
+          background: oklch(1 0.003 58);
+          border-color: oklch(0.65 0.18 40 / 0.4);
+          box-shadow: 0 4px 12px oklch(0.65 0.18 40 / 0.06);
+        }
+
+        /* ── MODO OSCURO ── */
+        :global(.dark) .skill-card {
+          background: oklch(0.14 0.014 38);
+          border-color: oklch(0.22 0.020 38);
+          color: oklch(0.95 0.008 52);
+        }
+        :global(.dark) .skill-card:hover {
+          border-color: oklch(0.72 0.17 44 / 0.3);
+          box-shadow: 0 10px 30px oklch(0.65 0.18 40 / 0.12);
+        }
+        :global(.dark) .skill-card:hover .skill-title {
+          color: oklch(0.72 0.17 44);
+        }
+
+        :global(.dark) .tech-icon-box {
+          background: oklch(0.12 0.012 38);
+          border-color: oklch(0.22 0.020 38 / 0.6);
+        }
+        :global(.dark) .tech-icon-box:hover {
+          background: oklch(0.16 0.014 38);
+          border-color: oklch(0.72 0.17 44 / 0.35);
+          box-shadow: 0 4px 12px oklch(0.72 0.17 44 / 0.1);
+        }
+      `}</style>
     </div>
   );
 }
-
