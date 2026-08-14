@@ -11,46 +11,139 @@ const certifies = certifiesRaw
   .map((item) => item.data)
 ---
 
-<div class="space-y-16">
-    <header class="max-w-4xl">
-        <p class="text-base md:text-lg text-zinc-500 dark:text-zinc-400 leading-relaxed font-medium">
-            {t.certifies.headerPrefix}<span class="text-emerald-500 font-black tracking-tighter uppercase italic">{t.certifies.headerHighlight}</span>{t.certifies.headerSuffix}
+<div class="space-y-12">
+    <header class="max-w-2xl">
+        <p class="text-base md:text-lg text-muted-foreground leading-relaxed font-normal">
+            {t.certifies.headerPrefix}<span class="cert-highlight font-black tracking-tight uppercase">{t.certifies.headerHighlight}</span>{t.certifies.headerSuffix}
         </p>
     </header>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 pt-4 leading-none">
-        {certifies.map((certifie) => (
-            <a 
-                href={certifie.pdf} 
-                target="_blank" 
-                class="group relative flex flex-col p-10 rounded-[2.5rem] bg-white/40 dark:bg-zinc-900/40 backdrop-blur-md border border-zinc-200/50 dark:border-zinc-800/50 transition-all duration-700 hover:-translate-y-2 hover:shadow-2xl hover:shadow-emerald-500/5 active:scale-[0.98] overflow-hidden"
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        {certifies.map((certifie, i) => (
+            <a
+                href={certifie.pdf}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="cert-card group relative flex flex-col p-7 rounded-2xl border overflow-hidden transition-all duration-300 active:scale-[0.98] hover:-translate-y-0.5 hover:shadow-lg"
             >
-                <!-- SpotLight Effect Layer -->
-                <div class="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
-                
-                <div class="relative z-10 flex flex-col h-full">
-                    <div class="flex items-start justify-between mb-10">
-                        <div class="p-4 rounded-2xl bg-emerald-500/5 text-emerald-600 dark:text-emerald-400 group-hover:bg-emerald-500/10 transition-all duration-500 group-hover:scale-110">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-award"><path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"/><circle cx="12" cy="8" r="6"/></svg>
-                        </div>
-                        <span class="text-[9px] font-black uppercase tracking-[0.3em] text-zinc-400 group-hover:text-emerald-500 transition-colors">Verified_ID</span>
-                    </div>
 
-                    <div class="space-y-4 flex-grow">
-                        <h3 class="text-2xl font-black text-zinc-900 dark:text-zinc-50 tracking-tighter leading-tight group-hover:text-emerald-500 transition-colors">
-                            {certifie.title}
-                        </h3>
-                        <p class="text-[15px] text-zinc-500 dark:text-zinc-400 leading-relaxed font-medium font-normal">
-                            {certifie.description}
-                        </p>
-                    </div>
 
-                    <div class="mt-10 flex items-center gap-2 text-[11px] font-black uppercase tracking-widest text-zinc-900 dark:text-zinc-100">
-                        <span>{t.certifies.view}</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right group-hover:translate-x-1.5 transition-transform"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-                    </div>
+                <!-- Número -->
+                <span class="cert-number block text-[10px] font-black uppercase tracking-[0.3em] mb-6 select-none transition-colors duration-300">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+
+                <!-- Icono de certificado -->
+                <div class="cert-icon mb-6 size-10 flex items-center justify-center rounded-lg border border-border transition-all duration-300 group-hover:border-amber-500/40">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="cert-icon-svg transition-colors duration-300">
+                      <path d="m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526"/>
+                      <circle cx="12" cy="8" r="6"/>
+                    </svg>
+                </div>
+
+                <div class="flex-grow space-y-2 mb-8">
+                    <h3 class="cert-title text-[17px] font-extrabold text-foreground tracking-tight leading-snug font-syne transition-colors duration-300">
+                        {certifie.title}
+                    </h3>
+                    <p class="text-[13px] text-muted-foreground leading-relaxed font-normal">
+                        {certifie.description}
+                    </p>
+                </div>
+
+                <div class="flex items-center gap-1.5 cert-cta transition-all duration-300">
+                    <span class="text-[10px] font-black uppercase tracking-[0.25em]">{t.certifies.view}</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300 group-hover:translate-x-1">
+                      <path d="M5 12h14"/>
+                      <path d="m12 5 7 7-7 7"/>
+                    </svg>
                 </div>
             </a>
         ))}
     </div>
 </div>
+
+<style>
+  /* Highlight del header */
+  .cert-highlight {
+    color: oklch(0.65 0.18 40);
+  }
+  :global(.dark) .cert-highlight {
+    color: oklch(0.72 0.17 44);
+  }
+
+  /* Card base */
+  .cert-card {
+    background: oklch(1 0.003 58);
+    border-color: oklch(0.88 0.025 52);
+  }
+  :global(.dark) .cert-card {
+    background: oklch(0.14 0.014 38);
+    border-color: oklch(0.22 0.020 38);
+  }
+  .cert-card:hover {
+    border-color: oklch(0.65 0.18 40 / 0.4);
+    box-shadow: 0 8px 28px oklch(0.65 0.18 40 / 0.07);
+  }
+  :global(.dark) .cert-card:hover {
+    border-color: oklch(0.72 0.17 44 / 0.35);
+    box-shadow: 0 8px 28px oklch(0.65 0.18 40 / 0.12);
+  }
+
+  /* Número */
+  .cert-number {
+    color: oklch(0.80 0.03 52);
+  }
+  :global(.dark) .cert-number {
+    color: oklch(0.35 0.018 38);
+  }
+  .cert-card:hover .cert-number {
+    color: oklch(0.65 0.18 40);
+  }
+  :global(.dark) .cert-card:hover .cert-number {
+    color: oklch(0.72 0.17 44);
+  }
+
+  /* Icono */
+  .cert-icon {
+    background: oklch(0.96 0.012 56);
+    color: oklch(0.55 0.025 42);
+  }
+  :global(.dark) .cert-icon {
+    background: oklch(0.17 0.016 38);
+    color: oklch(0.55 0.022 48);
+  }
+  .cert-card:hover .cert-icon-svg {
+    color: oklch(0.65 0.18 40);
+  }
+  :global(.dark) .cert-card:hover .cert-icon-svg {
+    color: oklch(0.72 0.17 44);
+  }
+  .cert-card:hover .cert-icon {
+    background: oklch(0.93 0.035 52);
+  }
+  :global(.dark) .cert-card:hover .cert-icon {
+    background: oklch(0.22 0.020 38);
+  }
+
+  /* Título hover */
+  .cert-card:hover .cert-title {
+    color: oklch(0.55 0.16 36);
+  }
+  :global(.dark) .cert-card:hover .cert-title {
+    color: oklch(0.72 0.17 44);
+  }
+
+  /* CTA arrow */
+  .cert-cta {
+    color: oklch(0.60 0.02 42);
+  }
+  :global(.dark) .cert-cta {
+    color: oklch(0.50 0.022 48);
+  }
+  .cert-card:hover .cert-cta {
+    color: oklch(0.65 0.18 40);
+  }
+  :global(.dark) .cert-card:hover .cert-cta {
+    color: oklch(0.72 0.17 44);
+  }
+</style>

@@ -5,58 +5,64 @@ const { lang = "es" } = Astro.props;
 const t = getTranslations(lang);
 ---
 
-<div class="space-y-12">
-  <header class="max-w-4xl">
-    <p class="text-base md:text-lg text-zinc-500 dark:text-zinc-400 leading-relaxed font-medium">
-      {t.about.headerPrefix}<span class="text-emerald-500 font-black tracking-tighter uppercase italic">{t.about.strategy}</span>{t.about.headerSuffix}
+<div class="space-y-10">
+  <header class="max-w-2xl">
+    <p class="text-base md:text-lg text-muted-foreground leading-relaxed font-normal">
+      {t.about.headerPrefix}<span class="about-highlight font-black tracking-tight uppercase">{t.about.strategy}</span>{t.about.headerSuffix}
     </p>
   </header>
 
-  <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-stretch">
+  <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-stretch">
     <!-- Bio Card -->
     <div
-      class="md:col-span-12 lg:col-span-8 p-8 md:p-10 rounded-3xl bg-white/50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 backdrop-blur-sm relative overflow-hidden group"
+      class="md:col-span-12 lg:col-span-8 p-8 md:p-10 rounded-2xl bg-card border border-border relative overflow-hidden group"
     >
-      <div
-        class="absolute -right-20 -top-20 w-64 h-64 bg-emerald-500/5 rounded-full blur-3xl group-hover:bg-emerald-500/10 transition-colors duration-500"
-      >
-      </div>
+      <!-- Accent corner -->
+      <div class="absolute top-0 right-0 w-24 h-24 pointer-events-none" style="background: radial-gradient(circle at top right, oklch(0.65 0.18 40 / 0.06), transparent 70%);"></div>
 
-      <div
-        class="relative space-y-6 text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed font-medium"
-      >
+      <div class="relative space-y-5 text-[16px] text-muted-foreground leading-relaxed font-normal">
         <p>
-          {t.about.bio1Prefix}<span class="text-emerald-600 dark:text-emerald-400 font-bold">{t.about.bio1Highlight}</span>{t.about.bio1Suffix}
+          {t.about.bio1Prefix}<span class="about-accent font-semibold">{t.about.bio1Highlight}</span>{t.about.bio1Suffix}
         </p>
         <p>
-          {t.about.bio2Prefix}<span class="px-2 py-0.5 rounded-md bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 font-bold">TypeScript</span>{t.about.bio2Suffix}
+          {t.about.bio2Prefix}<span class="inline-block px-2 py-0.5 rounded-md bg-muted text-foreground font-semibold text-sm">TypeScript</span>{t.about.bio2Suffix}
         </p>
         <p>
-          {t.about.bio3Prefix}<span class="italic text-emerald-500 font-bold">{t.about.bio3Highlight}</span>{t.about.bio3Suffix}
+          {t.about.bio3Prefix}<span class="about-accent italic font-semibold">{t.about.bio3Highlight}</span>{t.about.bio3Suffix}
         </p>
       </div>
     </div>
 
     <!-- Image Card -->
     <div
-      class="md:col-span-12 lg:col-span-4 rounded-3xl overflow-hidden relative group aspect-[4/5] lg:aspect-auto"
+      class="md:col-span-12 lg:col-span-4 rounded-2xl overflow-hidden relative group aspect-[4/5] lg:aspect-auto"
     >
       <img
         src="/images/BlasPhoto.jpg"
         alt="Blas Vernazza"
-        class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+        class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
       />
-      <div
-        class="absolute inset-0 bg-gradient-to-t from-emerald-900/40 to-transparent opacity-60"
-      >
-      </div>
-      <div class="absolute bottom-6 left-6 right-6">
-        <div
-          class="p-4 rounded-2xl bg-white/10 dark:bg-black/20 backdrop-blur-md border border-white/20"
-        >
-          <p class="text-white text-sm font-medium">📍 {t.about.location}</p>
+      <div class="absolute inset-0" style="background: linear-gradient(to top, oklch(0.14 0.018 42 / 0.5), transparent 50%);"></div>
+      <div class="absolute bottom-5 left-5 right-5">
+        <div class="inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-background/80 backdrop-blur-sm border border-border/60">
+          <span class="text-foreground text-sm font-medium">📍 {t.about.location}</span>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<style>
+  .about-highlight {
+    color: oklch(0.65 0.18 40);
+  }
+  :global(.dark) .about-highlight {
+    color: oklch(0.72 0.17 44);
+  }
+  .about-accent {
+    color: oklch(0.55 0.16 36);
+  }
+  :global(.dark) .about-accent {
+    color: oklch(0.72 0.17 44);
+  }
+</style>
