@@ -3,7 +3,7 @@ hidden: false
 liveNow: false
 order: 6
 imgInicio: "/images/LearnixPhoto.png"
-title: "Learnix – Scalable LMS with Transactional Processing and Webhook Reconciliation"
+title: "Learnix – Scalable LMS Platform"
 description: "Transactional e-learning platform with resilient payment gateway integrations, high-performance UI animations, and scalable persistence."
 link: "https://learnix-app.vercel.app/"
 github: "https://github.com/BlasVernazza06/learnix-app.git"

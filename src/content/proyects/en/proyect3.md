@@ -3,7 +3,7 @@ hidden: false
 liveNow: true
 order: 3
 imgInicio: "/images/MelonsApp.png"
-title: "MelonApp – Collaborative Kanban Workspace with Real-Time State-Tree Synchronization"
+title: "MelonApp – Collaborative Kanban Workspace"
 description: "Agile management platform featuring an optimized drag-and-drop engine, bidirectional state synchronization, and real-time database subscriptions."
 link: "https://melonsapp.netlify.app/"
 github: "https://github.com/BlasVernazza06/Melon.git"

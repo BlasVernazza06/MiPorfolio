@@ -3,7 +3,7 @@ hidden: false
 liveNow: false
 order: 6
 imgInicio: "/images/LearnixPhoto.png"
-title: "Learnix – LMS Escalable con Procesamiento Transaccional y Conciliación de Webhooks"
+title: "Learnix – Plataforma LMS Escalable"
 description: "Plataforma de e-learning transaccional con integración de pasarelas de pago resilientes, animaciones complejas de UI y persistencia escalable."
 link: "https://learnix-app.vercel.app/"
 github: "https://github.com/BlasVernazza06/learnix-app.git"

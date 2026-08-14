@@ -3,7 +3,7 @@ hidden: false
 liveNow: false
 order: 8
 imgInicio: "/images/claw_cli_mockup.png"
-title: "Koko CLI – High-Performance Offline Scaffolding Engine in Go"
+title: "Koko CLI – Go Project Scaffolder"
 description: "High-performance, zero-dependency command line tool for microservices scaffolding and local monorepo synchronization."
 link: "https://github.com/BlasVernazza06/koko-cli"
 github: "https://github.com/BlasVernazza06/koko-cli"

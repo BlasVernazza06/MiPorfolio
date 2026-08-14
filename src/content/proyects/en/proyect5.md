@@ -3,7 +3,7 @@ order: 4
 visible: true
 liveNow: false
 imgInicio: "/images/StudyHubPic.png"
-title: "StudyHub – Real-Time Collaborative Workspace & Synchronous Editing"
+title: "StudyHub – Real-Time Collaboration Hub"
 description: "Educational hub unifying rich text editing, distributed instant messaging, and cloud storage in a highly reactive environment."
 link: "#"
 github: "https://github.com/BlasVernazza06/StudyHub.git"

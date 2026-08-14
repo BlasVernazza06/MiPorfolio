@@ -3,7 +3,7 @@ order: 2
 visible: true
 liveNow: true
 imgInicio: "/images/JavaProyect.png"
-title: "Enterprise Sales System – Java Backend with Layered Architecture & SQL Optimization"
+title: "Enterprise Sales – Layered Java Backend"
 description: "Enterprise billing and inventory service developed under DAO/DTO design patterns, strict ACID transaction controls, and validated REST APIs."
 link: "https://github.com/BlasVernazza06/EntregaProyectoFinal-Vernazza"
 github: "https://github.com/BlasVernazza06/EntregaProyectoFinal-Vernazza"

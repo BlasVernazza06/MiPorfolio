@@ -3,7 +3,7 @@ order: 5
 visible: false
 liveNow: true
 imgInicio: "/images/ClonDeSpotify.png"
-title: "Spotify Clone – Persistent Audio Architecture via View Transitions"
+title: "Spotify Clone – Persistent Audio Player"
 description: "High-fidelity audio player clone built on SSG, native View Transitions for seamless playback, and highly reactive layouts."
 link: "#"
 github: "https://github.com/BlasVernazza06/Clon-de-Spotify.git"

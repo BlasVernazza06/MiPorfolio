@@ -3,7 +3,7 @@ hidden: false
 liveNow: true
 order: 1
 imgInicio: "/images/memo.ai"
-title: "Memo.ai – Plataforma RAG Híbrida y Procesamiento de Lenguaje Natural Asíncrono"
+title: "Memo.ai – Plataforma RAG y de IA Híbrida"
 description: "Ecosistema de aprendizaje avanzado con arquitectura de microservicios, procesamiento asíncrono de documentos e indexación semántica en base de datos vectorial."
 link: "https://memo-ai-web.vercel.app/"
 github: "https://github.com/BlasVernazza06/memo-ai"

@@ -3,7 +3,7 @@ order: 2
 visible: true
 liveNow: true
 imgInicio: "/images/JavaProyect.png"
-title: "Enterprise Sales System – Backend en Java con Separación de Capas y Optimización SQL"
+title: "Enterprise Sales – Backend Java en Capas"
 description: "Servicio backend empresarial desarrollado bajo patrones DAO/DTO, control transaccional estricto (ACID) y APIs RESTful validadas."
 link: "https://github.com/BlasVernazza06/EntregaProyectoFinal-Vernazza"
 github: "https://github.com/BlasVernazza06/EntregaProyectoFinal-Vernazza"

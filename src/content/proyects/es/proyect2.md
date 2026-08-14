@@ -3,7 +3,7 @@ visible: false
 liveNow: false
 order: 5
 imgInicio: "/images/proyect1AeroViajes.webp"
-title: "AeroViajes – E-commerce de Viajes con Filtrado Predictivo y Arquitectura de Estado Desacoplada"
+title: "AeroViajes – E-Commerce de Viajes"
 description: "Plataforma de catálogo de viajes y comercio electrónico que implementa filtrados en tiempo real O(1), modularidad React e interfaces de alta fidelidad."
 link: "https://aeroviajeapp.netlify.app/"
 github: "https://github.com/BlasVernazza06/PreEntrega-Final-React-Vernazza.git"
