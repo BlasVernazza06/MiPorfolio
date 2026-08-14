@@ -60,24 +60,24 @@ export default function ThemeToggle() {
     <div className={`relative ${menuOpen ? 'menu-open' : ''}`} ref={menuRef}>
       <button
         aria-label="Elige el tema"
-        className="appearance-none border-none flex items-center justify-center p-2.5 rounded-full text-zinc-500 dark:text-zinc-400 hover:text-emerald-500 dark:hover:text-emerald-400 hover:bg-emerald-500/10 dark:hover:bg-emerald-400/10 transition-all duration-[400ms] cubic-bezier(0.175, 0.885, 0.32, 1.275) hover:scale-115 cursor-pointer bg-transparent"
+        className="flex items-center justify-center size-10 rounded-lg border border-transparent text-[oklch(0.45_0.025_42)] dark:text-[oklch(0.75_0.012_52)] hover:text-[oklch(0.65_0.18_40)] dark:hover:text-[oklch(0.72_0.17_44)] hover:bg-[oklch(0.65_0.18_40_/_0.06)] dark:hover:bg-[oklch(0.72_0.17_44_/_0.08)] hover:border-[oklch(0.65_0.18_40_/_0.15)] dark:hover:border-[oklch(0.72_0.17_44_/_0.2)] transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer bg-transparent"
         onClick={() => setMenuOpen(v => !v)}
         type="button"
       >
-        <CurrentIcon className="w-5 h-5 transition-all" />
+        <CurrentIcon className="w-[18px] h-[18px] transition-all" />
       </button>
       {menuOpen && (
         <div
           className="absolute z-[1001]
             md:top-0 md:left-full md:ml-3 
             bottom-12 mb-4 md:bottom-auto left-1/2 -translate-x-1/2 md:translate-x-0 md:-translate-y-12
-            w-[7.5rem] rounded-xl border border-zinc-200/80 bg-white/95 dark:bg-zinc-950/95 dark:border-zinc-800/80 shadow-2xl backdrop-blur-md animate-scale-up p-1 text-xs"
+            w-[7.5rem] rounded-xl border border-[oklch(0.88_0.025_52)] dark:border-[oklch(0.22_0.020_38)] bg-[oklch(1_0.003_58_/_0.95)] dark:bg-[oklch(0.14_0.014_38_/_0.95)] shadow-2xl backdrop-blur-md animate-scale-up p-1 text-xs"
         >
           <ul>
             {THEMES.map(({ name, icon: Icon }) => (
               <li
                 key={name}
-                className="flex items-center gap-2 px-2 py-1 cursor-pointer text-zinc-600 dark:text-zinc-400 hover:bg-emerald-500/10 dark:hover:bg-emerald-400/10 hover:text-emerald-600 dark:hover:text-emerald-400 rounded-lg transition-colors font-semibold"
+                className="flex items-center gap-2 px-2 py-1.5 cursor-pointer text-[oklch(0.45_0.025_42)] dark:text-[oklch(0.75_0.012_52)] hover:bg-[oklch(0.72_0.17_44_/_0.1)] hover:text-[oklch(0.65_0.18_40)] dark:hover:text-[oklch(0.72_0.17_44)] rounded-lg transition-colors font-semibold"
                 onClick={() => handleThemeChange(name)}
               >
                 <Icon className="w-3.5 h-3.5" />
