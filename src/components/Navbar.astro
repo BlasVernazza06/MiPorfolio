@@ -15,13 +15,23 @@ const navItems = [
 ];
 ---
 
-<header class="fixed top-6 z-50 flex items-center justify-center w-full px-4 group/nav">
-  <nav class="flex items-center gap-1 p-1.5 rounded-2xl border border-transparent transition-all duration-500 hover:border-zinc-200/50 dark:hover:border-zinc-800/50">
-    <div class="absolute inset-0 bg-white/20 dark:bg-zinc-900/20 backdrop-blur-md rounded-2xl shadow-sm -z-10 opacity-0 group-hover/nav:opacity-100 transition-opacity duration-300"></div>
+<header class="navbar-root fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 md:px-10 h-14 transition-all duration-300">
+
+  <!-- Logo / Marca -->
+  <a href={`${prefix}/#Inicio`} class="navbar-logo flex items-center gap-2.5 shrink-0 group" aria-label="Ir al inicio">
+    <!-- Punto naranja vivo -->
+    <span class="navbar-dot size-2.5 rounded-full transition-all duration-300 group-hover:scale-125" style="background: oklch(0.72 0.17 44);"></span>
+    <span class="text-xl md:text-2xl font-black uppercase tracking-[0.1em] text-foreground/90 group-hover:text-foreground transition-colors font-syne leading-none">
+      BV
+    </span>
+  </a>
+
+  <!-- Desktop nav — links como texto limpio -->
+  <nav class="hidden md:flex items-center gap-0" aria-label="Navegación principal">
     {
       navItems.map((link) => (
         <a
-          class="px-4 py-2 text-[13px] font-bold text-zinc-500/80 dark:text-zinc-400/80 hover:text-emerald-600 dark:hover:text-white transition-all duration-300 rounded-xl hover:bg-emerald-500/5 dark:hover:bg-white/5 tracking-tight uppercase"
+          class="navbar-link relative px-4 py-4 text-[11px] font-bold text-muted-foreground uppercase tracking-[0.18em] transition-colors duration-200 hover:text-foreground"
           aria-label={link.label}
           href={link.url}
         >
@@ -30,46 +40,132 @@ const navItems = [
       ))
     }
   </nav>
+
+  <!-- Mobile: botón hamburguesa -->
+  <button
+    id="mobile-nav-toggle"
+    aria-label="Abrir menú de navegación"
+    class="md:hidden flex items-center justify-center size-9 rounded-md border border-border/50 bg-card/60 backdrop-blur-sm text-foreground hover:text-amber-500 hover:border-amber-500/30 active:scale-90 transition-all duration-200"
+  >
+    <svg id="icon-menu" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="4" x2="20" y1="8" y2="8"/>
+      <line x1="4" x2="20" y1="16" y2="16"/>
+    </svg>
+    <svg id="icon-close" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="hidden">
+      <path d="M18 6 6 18"/><path d="m6 6 12 12"/>
+    </svg>
+  </button>
+
+  <!-- Mobile panel -->
+  <div
+    id="mobile-nav-panel"
+    class="md:hidden absolute top-14 left-0 right-0 border-t border-border/40 bg-background/95 backdrop-blur-xl flex flex-col divide-y divide-border/30 translate-y-[-100%] opacity-0 pointer-events-none transition-all duration-300 origin-top"
+  >
+    {
+      navItems.map((link) => (
+        <a
+          class="mobile-link px-6 py-4 text-[11px] font-bold text-muted-foreground uppercase tracking-[0.2em] hover:text-amber-600 dark:hover:text-amber-400 hover:bg-amber-500/4 transition-colors text-left"
+          aria-label={link.label}
+          href={link.url}
+        >
+          {link.title}
+        </a>
+      ))
+    }
+  </div>
+
 </header>
 
 <style>
-  nav {
-    animation: nav-reveal 0.5s linear both;
-    animation-timeline: scroll();
-    animation-range: 0 150px;
+  /* El navbar toma fondo al hacer scroll */
+  .navbar-root {
+    background: transparent;
+    border-bottom: 1px solid transparent;
   }
 
-  @keyframes nav-reveal {
-    to {
-      background-color: rgba(255, 255, 255, 0.6);
-      border-color: rgba(228, 228, 231, 0.4);
-      backdrop-filter: blur(12px);
-      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
-      padding-left: 0.75rem;
-      padding-right: 0.75rem;
-    }
+  .navbar-root.scrolled {
+    background: oklch(0.98 0.008 58 / 0.88);
+    border-bottom-color: oklch(0.88 0.025 52 / 0.6);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
   }
 
-  :global(.dark) nav {
-    animation: nav-reveal-dark 0.5s linear both;
-    animation-timeline: scroll();
-    animation-range: 0 150px;
+  :global(.dark) .navbar-root.scrolled {
+    background: oklch(0.10 0.012 38 / 0.92);
+    border-bottom-color: oklch(0.22 0.020 38 / 0.6);
   }
 
-  @keyframes nav-reveal-dark {
-    to {
-      background-color: rgba(9, 9, 11, 0.7);
-      border-color: rgba(63, 63, 70, 0.3);
-      backdrop-filter: blur(12px);
-      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.4);
-      padding-left: 0.75rem;
-      padding-right: 0.75rem;
-    }
+  /* Línea naranja bajo el link activo / hover */
+  .navbar-link::after {
+    content: '';
+    position: absolute;
+    bottom: 8px;
+    left: 1rem;
+    right: 1rem;
+    height: 1.5px;
+    background: oklch(0.65 0.18 40);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  @media (max-width: 640px) {
-    nav {
-      display: none;
-    }
+  .navbar-link:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+
+  /* Mobile panel open state */
+  #mobile-nav-panel.open {
+    translate: 0;
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
   }
 </style>
+
+<script>
+  function initNavbar() {
+    const root = document.querySelector(".navbar-root") as HTMLElement | null;
+    const toggleBtn = document.getElementById("mobile-nav-toggle");
+    const panel = document.getElementById("mobile-nav-panel");
+    const iconMenu = document.getElementById("icon-menu");
+    const iconClose = document.getElementById("icon-close");
+    const links = document.querySelectorAll(".mobile-link");
+
+    // Scroll detection
+    if (root) {
+      const onScroll = () => {
+        root.classList.toggle("scrolled", window.scrollY > 30);
+      };
+      window.addEventListener("scroll", onScroll, { passive: true });
+      onScroll();
+    }
+
+    // Toggle
+    if (toggleBtn && panel && iconMenu && iconClose) {
+      const open = () => {
+        panel.classList.add("open");
+        iconMenu.classList.add("hidden");
+        iconClose.classList.remove("hidden");
+      };
+      const close = () => {
+        panel.classList.remove("open");
+        iconMenu.classList.remove("hidden");
+        iconClose.classList.add("hidden");
+      };
+
+      toggleBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        panel.classList.contains("open") ? close() : open();
+      });
+
+      document.addEventListener("click", (e) => {
+        if (!panel.contains(e.target as Node) && e.target !== toggleBtn) close();
+      });
+
+      links.forEach((link) => link.addEventListener("click", close));
+    }
+  }
+
+  document.addEventListener("astro:page-load", initNavbar);
+</script>
