@@ -26,12 +26,12 @@ const prefix = "";
 
 // Extrae el color hexadecimal de la clase de color (ej. bg-[#2114F2] -> #2114F2)
 const getHexColor = (classStr) => {
-  if (!classStr) return '#10b981';
+  if (!classStr) return '#f97316';
   const match = classStr.match(/#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})/);
-  return match ? `#${match[1]}` : '#10b981';
+  return match ? `#${match[1]}` : '#f97316';
 };
 
-const themeColor = technologies.length > 0 ? getHexColor(technologies[0].class) : '#10b981';
+const themeColor = technologies.length > 0 ? getHexColor(technologies[0].class) : '#f97316';
 
 // Función para determinar si el color es claro (contraste y accesibilidad)
 const isLightColor = (hex) => {
@@ -315,8 +315,6 @@ const activeCategories = Object.entries(categoriesMap)
 </Layout>
 
 <style is:global>
-  @reference "../../styles/global.css";
-
   @keyframes fadeInUp {
     from {
       opacity: 0;
@@ -342,41 +340,139 @@ const activeCategories = Object.entries(categoriesMap)
     animation: shimmer 1.2s ease-out;
   }
 
-  /* Estilos prose personalizados para un estilo premium tipo blog */
+  /* Estilos prose personalizados para el artículo */
   .prose h2 {
-    @apply text-2xl md:text-3xl mt-12 mb-6 font-syne font-extrabold text-zinc-900 dark:text-white border-b border-zinc-100 dark:border-zinc-800/80 pb-2 tracking-tight;
+    font-family: var(--font-syne), "Syne", sans-serif;
+    font-weight: 800;
+    font-size: 1.5rem;
+    line-height: 2rem;
+    margin-top: 3rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    letter-spacing: -0.025em;
+    border-bottom: 1px solid var(--border);
+    color: var(--foreground);
   }
+  @media (min-width: 768px) {
+    .prose h2 {
+      font-size: 1.875rem;
+      line-height: 2.25rem;
+    }
+  }
+
   .prose h3 {
-    @apply text-xl mt-8 mb-4 font-syne font-bold text-zinc-800 dark:text-zinc-200 tracking-tight;
+    font-family: var(--font-syne), "Syne", sans-serif;
+    font-weight: 700;
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    letter-spacing: -0.025em;
+    color: var(--foreground);
   }
+
   .prose p {
-    @apply mb-6 text-zinc-600 dark:text-zinc-400 leading-relaxed text-sm md:text-base;
+    margin-bottom: 1.5rem;
+    font-size: 0.875rem;
+    line-height: 1.625;
+    color: var(--muted-foreground);
   }
+  @media (min-width: 768px) {
+    .prose p {
+      font-size: 1rem;
+      line-height: 1.75;
+    }
+  }
+
   .prose ul {
-    @apply list-disc pl-6 space-y-3 mb-6 text-zinc-600 dark:text-zinc-400 text-sm md:text-base;
+    list-style-type: disc;
+    padding-left: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--muted-foreground);
+    font-size: 0.875rem;
+    line-height: 1.625;
   }
+  @media (min-width: 768px) {
+    .prose ul {
+      font-size: 1rem;
+    }
+  }
+  .prose ul > li + li {
+    margin-top: 0.75rem;
+  }
+
   .prose ol {
-    @apply list-decimal pl-6 space-y-3 mb-6 text-zinc-600 dark:text-zinc-400 text-sm md:text-base;
+    list-style-type: decimal;
+    padding-left: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--muted-foreground);
+    font-size: 0.875rem;
+    line-height: 1.625;
   }
+  @media (min-width: 768px) {
+    .prose ol {
+      font-size: 1rem;
+    }
+  }
+  .prose ol > li + li {
+    margin-top: 0.75rem;
+  }
+
   .prose li::marker {
-    @apply text-emerald-500 dark:text-emerald-400;
+    color: var(--primary);
   }
+
   .prose strong {
-    @apply text-emerald-600 dark:text-emerald-400 font-extrabold;
+    font-weight: 800;
+    color: var(--primary);
   }
+
   .prose blockquote {
-    @apply pl-6 border-l-4 border-emerald-500 dark:border-emerald-400 italic text-zinc-700 dark:text-zinc-300 bg-zinc-50 dark:bg-zinc-900/40 py-2 pr-4 rounded-r-xl my-6;
+    padding-left: 1.5rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-right: 1rem;
+    border-left: 4px solid var(--primary);
+    font-style: italic;
+    color: var(--foreground);
+    background-color: var(--muted);
+    border-top-right-radius: 0.75rem;
+    border-bottom-right-radius: 0.75rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
   }
+
   .prose code {
-    @apply bg-zinc-100 dark:bg-zinc-800/80 px-1.5 py-0.5 rounded text-sm font-mono text-zinc-900 dark:text-zinc-100 font-semibold;
+    background-color: var(--muted);
+    color: var(--foreground);
+    padding: 0.125rem 0.375rem;
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+    font-family: monospace;
+    font-weight: 600;
   }
+
   .prose code::before, .prose code::after {
     content: "" !important;
   }
+
   .prose pre {
-    @apply bg-zinc-900 dark:bg-zinc-950 p-4 rounded-2xl overflow-x-auto border border-zinc-800 shadow-xl my-6;
+    background-color: oklch(0.12 0.014 38);
+    color: #f4f4f5;
+    padding: 1rem;
+    border-radius: 1rem;
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
   }
+
   .prose pre code {
-    @apply bg-transparent p-0 rounded-none text-zinc-100 font-normal;
+    background-color: transparent !important;
+    padding: 0 !important;
+    border-radius: 0 !important;
+    color: #f4f4f5;
+    font-weight: 400;
   }
 </style>
