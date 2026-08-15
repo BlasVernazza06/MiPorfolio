@@ -1,0 +1,217 @@
+---
+import { getTranslations } from "@/lib/i18n";
+
+const { lang = "es" } = Astro.props;
+const t = getTranslations(lang);
+const prefix = lang === "en" ? "/en" : "";
+
+const actions = [
+  { id: "inicio", title: t.nav.inicio, icon: "home", url: `${prefix}/#Inicio` },
+  { id: "proyectos", title: t.nav.proyectos, icon: "code", url: `${prefix}/#Proyects` },
+  { id: "experiencia", title: t.nav.experiencia, icon: "briefcase", url: `${prefix}/#Experiencia` },
+  { id: "skills", title: t.nav.skills, icon: "cpu", url: `${prefix}/#Skills` },
+  { id: "sobre-mi", title: t.nav.sobreMi, icon: "user", url: `${prefix}/#Sobre-mi` },
+  { id: "certificados", title: t.nav.certificados, icon: "award", url: `${prefix}/#Certificados` },
+  { id: "github", title: "GitHub", icon: "external-link", url: "https://github.com/BlasVernazza06", external: true },
+];
+---
+
+<div
+  id="command-palette-overlay"
+  class="fixed inset-0 z-[10000] hidden items-start justify-center pt-[15vh] px-4"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Paleta de comandos"
+>
+  <!-- Backdrop -->
+  <div id="command-palette-backdrop" class="absolute inset-0 bg-zinc-950/50 dark:bg-black/60 backdrop-blur-sm transition-opacity"></div>
+
+  <!-- Modal Box -->
+  <div
+    id="command-palette-box"
+    class="relative w-full max-w-xl bg-white dark:bg-zinc-900 border border-zinc-200/80 dark:border-zinc-800/80 shadow-2xl rounded-2xl overflow-hidden animate-scale-up"
+  >
+    <!-- Search Header -->
+    <div class="flex items-center px-4 py-3.5 border-b border-zinc-100 dark:border-zinc-800">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-zinc-400 mr-3 shrink-0"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      <input
+        id="command-palette-input"
+        type="text"
+        placeholder={lang === "en" ? "Where do you want to go? (Esc to exit)" : "¿A dónde quieres ir? (Esc para salir)"}
+        class="flex-1 bg-transparent border-none outline-none text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-400 text-sm font-medium"
+        autocomplete="off"
+        spellcheck="false"
+      />
+      <div class="flex items-center gap-1.5 px-2 py-1 bg-zinc-100 dark:bg-zinc-800 rounded-lg border border-zinc-200/60 dark:border-zinc-700/60">
+        <span class="text-[10px] font-bold text-zinc-500">ESC</span>
+      </div>
+    </div>
+
+    <!-- Results List -->
+    <div id="command-palette-list" class="max-h-[300px] overflow-y-auto p-2 space-y-1">
+      {
+        actions.map((action, idx) => (
+          <a
+            href={action.url}
+            target={action.external ? "_blank" : "_self"}
+            rel={action.external ? "noopener noreferrer" : undefined}
+            data-index={idx}
+            data-title={action.title.toLowerCase()}
+            class="command-item group flex items-center justify-between px-3 py-2.5 rounded-xl transition-colors cursor-pointer text-zinc-600 dark:text-zinc-400 hover:bg-amber-500/10 hover:text-amber-600 dark:hover:text-amber-400 aria-selected:bg-amber-500/15 aria-selected:text-amber-600 dark:aria-selected:text-amber-400 font-medium text-sm"
+          >
+            <div class="flex items-center gap-3">
+              <div class="p-2 rounded-lg bg-zinc-100 dark:bg-zinc-800 text-zinc-500 dark:text-zinc-400 group-hover:bg-amber-500/20 group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">
+                {action.icon === "home" && <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>}
+                {action.icon === "code" && <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>}
+                {action.icon === "briefcase" && <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>}
+                {action.icon === "cpu" && <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="16" height="16" x="4" y="4" rx="2"></rect><rect width="6" height="6" x="9" y="9" rx="1"></rect><path d="M15 2v2"></path><path d="M15 20v2"></path><path d="M2 15h2"></path><path d="M2 9h2"></path><path d="M20 15h2"></path><path d="M20 9h2"></path><path d="M9 2v2"></path><path d="M9 20v2"></path></svg>}
+                {action.icon === "user" && <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>}
+                {action.icon === "award" && <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"></circle><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"></path></svg>}
+                {action.icon === "external-link" && <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6"></path><path d="M10 14 21 3"></path><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path></svg>}
+              </div>
+              <span class="font-medium">{action.title}</span>
+            </div>
+            <span class="text-[10px] font-bold uppercase tracking-widest opacity-0 group-hover:opacity-60 transition-opacity">↵</span>
+          </a>
+        ))
+      }
+      <div id="command-palette-empty" class="hidden py-8 text-center text-zinc-400 text-sm">
+        {lang === "en" ? "No results found" : "No se encontraron resultados"}
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="px-4 py-3 bg-zinc-50 dark:bg-zinc-900/50 border-t border-zinc-100 dark:border-zinc-800 flex items-center justify-between text-xs text-zinc-400">
+      <div class="flex gap-3 text-[11px]">
+        <span><kbd class="font-bold bg-zinc-200 dark:bg-zinc-800 px-1 py-0.5 rounded text-[9px]">↓↑</kbd> {lang === "en" ? "Navigate" : "Navegar"}</span>
+        <span><kbd class="font-bold bg-zinc-200 dark:bg-zinc-800 px-1 py-0.5 rounded text-[9px]">↵</kbd> {lang === "en" ? "Select" : "Seleccionar"}</span>
+      </div>
+      <span class="text-[10px] font-medium opacity-60">Blas Portfolio</span>
+    </div>
+  </div>
+</div>
+
+<script>
+  function setupCommandPalette() {
+    const overlay = document.getElementById("command-palette-overlay");
+    const backdrop = document.getElementById("command-palette-backdrop");
+    const input = document.getElementById("command-palette-input") as HTMLInputElement | null;
+    const emptyMsg = document.getElementById("command-palette-empty");
+    const items = document.querySelectorAll<HTMLAnchorElement>(".command-item");
+
+    let selectedIndex = 0;
+
+    function getVisibleItems() {
+      return Array.from(items).filter((el) => !el.classList.contains("hidden"));
+    }
+
+    function updateSelection() {
+      const visible = getVisibleItems();
+      visible.forEach((el, idx) => {
+        if (idx === selectedIndex) {
+          el.setAttribute("aria-selected", "true");
+          el.scrollIntoView({ block: "nearest" });
+        } else {
+          el.removeAttribute("aria-selected");
+        }
+      });
+    }
+
+    function openPalette() {
+      if (!overlay) return;
+      overlay.classList.remove("hidden");
+      overlay.classList.add("flex");
+      if (input) {
+        input.value = "";
+        filterItems("");
+        setTimeout(() => input.focus(), 50);
+      }
+      selectedIndex = 0;
+      updateSelection();
+    }
+
+    function closePalette() {
+      if (!overlay) return;
+      overlay.classList.add("hidden");
+      overlay.classList.remove("flex");
+    }
+
+    function filterItems(query: string) {
+      const clean = query.trim().toLowerCase();
+      let hasMatches = false;
+      items.forEach((item) => {
+        const title = item.getAttribute("data-title") || "";
+        const matches = title.includes(clean);
+        item.classList.toggle("hidden", !matches);
+        if (matches) hasMatches = true;
+      });
+      if (emptyMsg) {
+        emptyMsg.classList.toggle("hidden", !hasMatches && clean.length > 0);
+      }
+      selectedIndex = 0;
+      updateSelection();
+    }
+
+    // Escucha el evento global emitido por el botón de búsqueda del Aside
+    window.addEventListener("toggle-command-palette", () => {
+      if (overlay?.classList.contains("hidden")) {
+        openPalette();
+      } else {
+        closePalette();
+      }
+    });
+
+    // Atajos de teclado (Ctrl+K, Cmd+K, Escape)
+    document.addEventListener("keydown", (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        if (overlay?.classList.contains("hidden")) {
+          openPalette();
+        } else {
+          closePalette();
+        }
+      } else if (e.key === "Escape" && !overlay?.classList.contains("hidden")) {
+        e.preventDefault();
+        closePalette();
+      }
+    });
+
+    if (backdrop) {
+      backdrop.addEventListener("click", closePalette);
+    }
+
+    if (input) {
+      input.addEventListener("input", (e) => {
+        filterItems((e.target as HTMLInputElement).value);
+      });
+
+      input.addEventListener("keydown", (e) => {
+        const visible = getVisibleItems();
+        if (!visible.length) return;
+
+        if (e.key === "ArrowDown") {
+          e.preventDefault();
+          selectedIndex = (selectedIndex + 1) % visible.length;
+          updateSelection();
+        } else if (e.key === "ArrowUp") {
+          e.preventDefault();
+          selectedIndex = (selectedIndex - 1 + visible.length) % visible.length;
+          updateSelection();
+        } else if (e.key === "Enter") {
+          e.preventDefault();
+          const target = visible[selectedIndex];
+          if (target) {
+            target.click();
+            closePalette();
+          }
+        }
+      });
+    }
+
+    items.forEach((item) => {
+      item.addEventListener("click", closePalette);
+    });
+  }
+
+  document.addEventListener("astro:page-load", setupCommandPalette);
+</script>
