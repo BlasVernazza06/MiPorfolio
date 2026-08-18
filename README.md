@@ -54,14 +54,25 @@ pnpm dev
 
 ## 📦 Estructura del Proyecto
 
-```
+```text
 src/
-├── assets/      # Recursos estáticos
-├── components/  # Componentes reutilizables
-├── content/     # Contenido del sitio
-├── layouts/     # Plantillas de diseño
-└── pages/       # Páginas de la aplicación
+├── assets/      # Recursos estáticos y multimedia
+├── components/  # Componentes de interfaz reutilizables
+├── content/     # Contenido y esquemas de datos
+├── layouts/     # Plantillas y layouts principales
+├── lib/         # Utilidades y funciones auxiliares
+├── pages/       # Rutas y páginas de la aplicación
+└── styles/      # Estilos globales y configuración de temas
 ```
+
+## 📜 Scripts Disponibles
+
+| Comando | Descripción |
+| :--- | :--- |
+| `pnpm dev` | Inicia el servidor de desarrollo en local |
+| `pnpm build` | Compila la aplicación para producción |
+| `pnpm preview` | Previsualiza el build de producción localmente |
+| `pnpm astro` | Ejecuta comandos de la CLI de Astro |
 
 ## 📄 Licencia
 
