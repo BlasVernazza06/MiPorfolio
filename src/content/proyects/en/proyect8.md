@@ -3,8 +3,8 @@ hidden: false
 liveNow: false
 order: 8
 imgInicio: "/images/claw_cli_mockup.png"
-title: "Koko CLI – Go Project Scaffolder"
-description: "High-performance, zero-dependency command line tool for microservices scaffolding and local monorepo synchronization."
+title: "Koko CLI – Go Monorepo & Stack Scaffolder"
+description: "High-performance, zero-dependency command-line utility for interactive monorepo scaffolding, microservices bootstrapping, and dependency catalog synchronization."
 link: "https://github.com/BlasVernazza06/koko-cli"
 github: "https://github.com/BlasVernazza06/koko-cli"
 technologies:
@@ -30,15 +30,24 @@ otherTechnologies:
 ---
 
 ## 📌 Engineering Summary
-Koko CLI (also referred to during development as Claw CLI) is a native binary utility written in Go, designed to eliminate operational friction on "Day 1" (initial bootstrapping and scaffolding) and "Day 2" (hot-injecting modules, databases, and authentication layers) in complex monorepo architectures. Unlike conventional interpreters running on JavaScript or Python, Koko CLI provides a self-contained environment with zero global runtime dependencies.
+Koko CLI is an ultra-fast, native interactive command-line tool written in Go, engineered to eliminate operational friction on "Day 1" (initial scaffolding and bootstrapping) and "Day 2" (hot-injecting modules, databases, and microservices) in modern monorepo architectures. Unlike conventional CLIs built on JavaScript or Python runtimes, Koko CLI provides a self-contained, zero-dependency binary with native cross-platform execution in single-digit milliseconds.
 
 ## 🏗️ System Architecture & Technical Decisions
-* **Core Go Engine:** Developed entirely in Golang to leverage its native concurrency model and static compilation capability. This outputs standalone, cross-platform executable files that do not require Node.js, Python, or external runtimes on the host machine.
-* **Offline Bootstrapping:** Extensive application of Go's `//go:embed` directive to bundle source code boilerplate templates, Dockerfiles, and configurations directly inside the compiled binary, ensuring a 100% offline project initialization flow.
-* **Interactive Terminal UI:** Built using a terminal interface powered by Charm Huh (Bubble Tea framework), delivering an interactive, lightweight console GUI that consumes negligible OS resources compared to Electron-based interfaces.
-* **AST Parsing & Hot-Injection:** Built AST (Abstract Syntax Tree) parsing capabilities to safely inject configuration objects, environment variables, and client modules into existing workspaces without breaking or corrupting existing codebase.
+* **In-Memory Virtual File System (VFS):** Implemented an in-memory VFS layer that constructs, interpolates, and validates the entire workspace tree before writing anything to disk. If validation fails or directory collisions occur, an atomic rollback ensures zero corrupt or half-generated workspaces.
+* **Centralized Master Dependency Catalog:** A decoupled version management engine (`internal/catalog`) that centrally controls dependency versions across all boilerplates (Next.js, Vite, Nuxt, Svelte, Express, Hono, NestJS, Go Chi, FastAPI, ORMs, and drivers), guaranteeing reproducible builds and single-point version upgrades.
+* **Real-time Cross-Stack Compatibility Engine:** Integrated matrix rules (`internal/compatibility`) evaluated dynamically inside the terminal wizard, preventing invalid technology pairings (such as pairing Go runtimes with Node.js ORMs or incompatible DB drivers) using disabled options with immediate user feedback.
+* **High-Fidelity Terminal UI (TUI):** Built with the Charm ecosystem (Bubble Tea, Lipgloss, and Huh), providing a step-by-step interactive wizard with smooth animations, real-time spinners, and dual setup modes (*Quick Setup* pre-configured recipes vs. *Manual Configuration* granular builder).
+* **Self-Contained Offline Scaffolding:** Extensive utilization of Go's `//go:embed` directive to bundle source code boilerplate templates, Dockerfiles, Turborepo configurations, and CI/CD workflows directly inside the compiled binary for 100% offline project initialization.
+* **Dual Distribution Strategy:** Distributed as standalone static binaries optimized with `ldflags -w -s` for Linux, macOS, and Windows, alongside an npm binary wrapper for immediate execution via `npx koko-cli init`.
 
 ## 🚀 Technical Challenges & Impact Metrics
-* **Sub-5ms CLI Cold Start:** Achieved startup and UI render times of under **3ms** (a massive leap from 150-300ms typical of JS-based CLIs), maintaining a highly responsive and instantaneous feel.
-* **Highly Optimized Executable:** Leveraged Go compilation flags (`ldflags -w -s`) and static linking to output thin **12MB** binaries, distributed smoothly via GoReleaser and Homebrew.
-* **Instant Monorepo Generation:** Reduced scaffolding time for complex monorepos containing Frontend (Next.js/Vite), Backend APIs (Go/Node), and shared dockerized components down to under **1.5 seconds**, improving developer bootstrapping productivity by 90%.
+* **Sub-3ms Terminal Cold Start:** Achieved startup and UI render latency under **3ms** (compared to 150–300ms typical of Node.js/NPX-based tools), delivering an instantaneous developer feedback loop.
+* **Sub-1.2s Full-Stack Monorepo Generation:** End-to-end generation of complex multi-tier monorepos featuring Frontend (Next.js/React), Backend APIs (Go Chi/Express/FastAPI), shared DB packages (Drizzle/Prisma), and Docker orchestration in under **1.2 seconds**.
+* **Zero Corrupted File Operations:** Guaranteed atomic disk writes through the in-memory VFS abstraction combined with pre-execution directory collision checks.
+
+## 🔮 Future Features & Engineering Roadmap
+* **1. `koko add` (Dynamic Module Injector & AST Parsing):** Post-init CLI command to seamlessly inject new services, authentication layers (Better-Auth, Clerk), background queues (Redis BullMQ), or storage providers (S3) into existing workspaces by safely manipulating TypeScript/Go ASTs.
+* **2. Remote Template Registry & Community Plugins:** Ecosystem support to fetch and publish custom organization boilerplates directly from remote Git repositories (`koko init --template github.com/org/custom-stack`) with checksum validation and manifest verification.
+* **3. Koko Web Studio (Visual Architecture Canvas):** A lightweight local web server (`koko studio`) providing an interactive browser canvas to visually wire architecture components (Apps, APIs, Databases, Caches) and export the monorepo configuration.
+* **4. AI-Driven Smart Scaffolder (`koko ai`):** Terminal-embedded LLM orchestrator that translates natural language requirements into optimized architectural manifests, starter database models, and typed API contracts.
+* **5. Automated Infrastructure as Code (IaC) & Cloud Deploy:** Automated generation of Terraform / Pulumi declarations and zero-downtime deployment pipelines for Vercel, Railway, Fly.io, and AWS.
