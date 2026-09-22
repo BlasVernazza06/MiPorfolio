@@ -1,5 +1,5 @@
 ---
-order: 2
+order: 3
 visible: true
 liveNow: true
 imgInicio: "/images/JavaProyect.png"

@@ -2,7 +2,7 @@
 hidden: false
 liveNow: true
 order: 1
-imgInicio: "/images/memo.ai"
+imgInicio: "/images/image.png"
 title: "Memo.ai – Plataforma RAG y de IA Híbrida"
 description: "Ecosistema de aprendizaje avanzado con arquitectura de microservicios, procesamiento asíncrono de documentos e indexación semántica en base de datos vectorial."
 link: "https://memo-ai-web.vercel.app/"

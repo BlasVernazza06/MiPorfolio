@@ -218,6 +218,7 @@
     --color-accent-foreground: var(--accent-foreground);
     --color-destructive: var(--destructive);
     --color-border: var(--border);
+    --color-border-subtle: var(--border-subtle);
     --color-input: var(--input);
     --color-ring: var(--ring);
     --color-sidebar: var(--sidebar);
@@ -272,21 +273,23 @@
     --secondary:          oklch(0.94 0.02 55);
     --secondary-foreground: oklch(0.40 0.08 38);
     --muted:              oklch(0.94 0.015 56);
-    --muted-foreground:   oklch(0.50 0.025 42);
+    --muted-foreground:   oklch(0.46 0.030 42);   /* contraste nítido WCAG AA */
     --accent:             oklch(0.92 0.025 55);
     --accent-foreground:  oklch(0.40 0.08 38);
     --destructive:        oklch(0.577 0.245 27.325);
-    --border:             oklch(0.88 0.025 52);
-    --input:              oklch(0.88 0.025 52);
+    --destructive-foreground: oklch(0.99 0.005 58);
+    --border:             oklch(0.86 0.022 52);   /* contorno limpio y equilibrado */
+    --border-subtle:      oklch(0.92 0.015 55);
+    --input:              oklch(0.86 0.022 52);
     --ring:               oklch(0.65 0.18 40);
-    --sidebar: oklch(0.98 0.008 58);
+    --sidebar:            oklch(0.98 0.008 58);
     --sidebar-foreground: oklch(0.14 0.018 42);
-    --sidebar-primary: oklch(0.55 0.16 36);
+    --sidebar-primary:    oklch(0.55 0.16 36);
     --sidebar-primary-foreground: oklch(0.99 0.005 58);
-    --sidebar-accent: oklch(0.94 0.02 55);
+    --sidebar-accent:     oklch(0.94 0.02 55);
     --sidebar-accent-foreground: oklch(0.40 0.08 38);
-    --sidebar-border: oklch(0.88 0.025 52);
-    --sidebar-ring: oklch(0.65 0.18 40);
+    --sidebar-border:     oklch(0.86 0.022 52);
+    --sidebar-ring:       oklch(0.65 0.18 40);
 }
 
 /* ─────────────────────────────────────────
@@ -304,21 +307,23 @@
     --secondary:          oklch(0.18 0.018 38);
     --secondary-foreground: oklch(0.92 0.008 52);
     --muted:              oklch(0.17 0.016 38);
-    --muted-foreground:   oklch(0.58 0.022 48);
+    --muted-foreground:   oklch(0.66 0.022 48);   /* pizarra con calidez ámbar WCAG AA */
     --accent:             oklch(0.18 0.018 38);
     --accent-foreground:  oklch(0.95 0.008 52);
     --destructive:        oklch(0.704 0.191 22.216);
-    --border:             oklch(0.22 0.020 38);
-    --input:              oklch(0.22 0.020 38);
+    --destructive-foreground: oklch(0.99 0.005 58);
+    --border:             oklch(0.28 0.022 40);   /* bordes nítidos y definidos */
+    --border-subtle:      oklch(0.20 0.018 40);
+    --input:              oklch(0.28 0.022 40);
     --ring:               oklch(0.72 0.17 44);
-    --sidebar: oklch(0.14 0.014 38);
+    --sidebar:            oklch(0.14 0.014 38);
     --sidebar-foreground: oklch(0.95 0.008 52);
-    --sidebar-primary: oklch(0.72 0.17 44);
+    --sidebar-primary:    oklch(0.72 0.17 44);
     --sidebar-primary-foreground: oklch(0.10 0.012 38);
-    --sidebar-accent: oklch(0.18 0.018 38);
+    --sidebar-accent:     oklch(0.18 0.018 38);
     --sidebar-accent-foreground: oklch(0.92 0.008 52);
-    --sidebar-border: oklch(0.22 0.020 38);
-    --sidebar-ring: oklch(0.72 0.17 44);
+    --sidebar-border:     oklch(0.28 0.022 40);
+    --sidebar-ring:       oklch(0.72 0.17 44);
 }
 
 @layer base {
@@ -331,17 +336,46 @@
 }
 
 /* ─────────────────────────────────────────
-   TRANSICIÓN SUAVE GLOBAL DE TEMA
+   ADAPTIVE TECH ICONS (DARK / LIGHT MODE)
 ───────────────────────────────────────── */
-html.theme-transitioning,
-html.theme-transitioning *,
-html.theme-transitioning *::before,
-html.theme-transitioning *::after {
-    transition: background-color 0.35s cubic-bezier(0.4, 0, 0.2, 1),
-                border-color 0.35s cubic-bezier(0.4, 0, 0.2, 1),
-                color 0.35s cubic-bezier(0.4, 0, 0.2, 1),
-                fill 0.35s cubic-bezier(0.4, 0, 0.2, 1),
-                stroke 0.35s cubic-bezier(0.4, 0, 0.2, 1),
-                box-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
-    transition-delay: 0s !important;
+.dark img[src*="expressjs"],
+.dark img[src*="better-auth"],
+.dark img[src*="icons-prisma"],
+.dark img[src*="nextjs_icon_dark"],
+.dark img[src*="clerk-light"],
+.dark img[src*="gsap-black"],
+.dark img[src*="icon-shadcn-ui.svg"],
+.dark img[src*="resend"],
+.dark img[src*="icons-github"],
+.dark img[src*="icons-terminal"] {
+    filter: invert(1) brightness(1.25);
+}
+
+html:not(.dark) img[src*="icon-vercel_dark"],
+html:not(.dark) img[src*="icon-railway_dark"],
+html:not(.dark) img[src*="turborepo-icon-dark"],
+html:not(.dark) img[src*="gsap-white"] {
+    filter: invert(1);
+}
+
+/* ─────────────────────────────────────────
+   SCROLLBAR TEMÁTICO PERSONALIZADO
+───────────────────────────────────────── */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: oklch(0.65 0.18 40 / 0.4) transparent;
+}
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, oklch(0.72 0.17 44 / 0.4), oklch(0.55 0.16 36 / 0.5));
+    border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(180deg, oklch(0.72 0.17 44 / 0.7), oklch(0.55 0.16 36 / 0.8));
 }

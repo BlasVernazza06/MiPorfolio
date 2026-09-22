@@ -1,7 +1,7 @@
 ---
 visible: false
 liveNow: false
-order: 5
+order: 6
 imgInicio: "/images/proyect1AeroViajes.webp"
 title: "AeroViajes – Travel E-Commerce"
 description: "Travel catalog and e-commerce platform implementing real-time O(1) client-side search indexing, modular React, and premium UI layouts."

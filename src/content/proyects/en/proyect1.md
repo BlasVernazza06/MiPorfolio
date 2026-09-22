@@ -1,7 +1,7 @@
 ---
 hidden: false
 liveNow: false
-order: 6
+order: 8
 imgInicio: "/images/LearnixPhoto.png"
 title: "Learnix – Scalable LMS Platform"
 description: "Transactional e-learning platform with resilient payment gateway integrations, high-performance UI animations, and scalable persistence."

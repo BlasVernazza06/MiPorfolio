@@ -27,13 +27,11 @@ const experiences = [
 
 <div class="flex flex-col gap-6">
   {experiences.map((exp) => (
-    <div class="exp-card relative grid grid-cols-1 md:grid-cols-[160px_1fr] overflow-hidden rounded-2xl border transition-all duration-300 group">
-
-
+    <div class="exp-card relative grid grid-cols-1 md:grid-cols-[160px_1fr] overflow-hidden rounded-2xl border transition-[box-shadow,border-color] duration-200 group">
 
       <!-- Columna izquierda: índice + fecha -->
-      <div class="exp-left flex md:flex-col items-start md:items-start gap-3 p-6 md:p-8 border-b md:border-b-0 md:border-r border-current/10">
-        <div class="exp-index text-[11px] font-black uppercase tracking-[0.3em] select-none opacity-40">
+      <div class="exp-left flex md:flex-col items-start md:items-start gap-3 p-6 md:p-8 border-b md:border-b-0 md:border-r border-border">
+        <div class="exp-index text-[11px] font-black uppercase tracking-[0.3em] select-none text-muted-foreground">
           {exp.index}
         </div>
         <time class="exp-date text-[11px] font-black uppercase tracking-[0.2em] leading-tight block">
@@ -44,22 +42,22 @@ const experiences = [
       <!-- Columna derecha: contenido -->
       <div class="p-6 md:p-8">
         <header class="mb-4">
-          <h3 class="exp-title text-2xl md:text-3xl font-extrabold tracking-tight leading-tight mb-1.5 transition-colors duration-300" style="font-family: 'Syne', sans-serif;">
+          <h3 class="exp-title text-2xl md:text-3xl font-extrabold tracking-tight leading-tight mb-1.5 transition-colors duration-200" style="font-family: 'Syne', sans-serif;">
             {exp.title}
           </h3>
-          <p class="text-sm font-medium italic opacity-60">
+          <p class="text-sm font-medium italic text-muted-foreground">
             {exp.company}
           </p>
         </header>
 
-        <p class="text-[15px] leading-relaxed mb-6 opacity-70 font-normal max-w-xl">
+        <p class="text-[15px] leading-relaxed mb-6 text-muted-foreground font-normal max-w-xl">
           {exp.description}
         </p>
 
         <!-- Pills -->
         <div class="flex flex-wrap gap-2 mb-4">
           {exp.technologies.map((tech) => (
-            <span class="exp-pill px-2.5 py-1 rounded-md text-[10px] font-black uppercase tracking-widest border transition-colors duration-200">
+            <span class="exp-pill px-2.5 py-1 rounded-md text-[10px] font-black uppercase tracking-widest border transition-colors duration-150">
               {tech}
             </span>
           ))}
@@ -70,7 +68,7 @@ const experiences = [
             href={exp.link}
             target="_blank"
             rel="noopener noreferrer"
-            class="exp-link inline-flex items-center gap-1.5 text-[11px] font-black uppercase tracking-[0.2em] transition-all duration-200 hover:gap-2.5"
+            class="exp-link inline-flex items-center gap-1.5 text-[11px] font-black uppercase tracking-[0.2em] transition-[gap,color] duration-150 hover:gap-2.5"
           >
             <span>Fiverr Profile</span>
             <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7h10v10"/><path d="M7 17 17 7"/></svg>
@@ -84,17 +82,13 @@ const experiences = [
 <style>
   /* ── LIGHT MODE ── */
   .exp-card {
-    background: oklch(1 0.003 58);
-    border-color: oklch(0.88 0.025 52);
-    color: oklch(0.14 0.018 42);
-  }
-
-  .exp-stripe {
-    background: oklch(0.88 0.025 52);
+    background: var(--card);
+    border-color: var(--border);
+    color: var(--foreground);
   }
 
   .exp-left {
-    background: oklch(0.97 0.010 56);
+    background: var(--muted);
   }
 
   .exp-date {
@@ -102,13 +96,13 @@ const experiences = [
   }
 
   .exp-title {
-    color: oklch(0.14 0.018 42);
+    color: var(--foreground);
   }
 
   .exp-pill {
-    background: oklch(0.94 0.020 55);
-    color: oklch(0.40 0.06 40);
-    border-color: oklch(0.86 0.030 52);
+    background: var(--card);
+    color: var(--muted-foreground);
+    border-color: var(--border);
   }
 
   .exp-link {
@@ -123,9 +117,6 @@ const experiences = [
     border-color: oklch(0.65 0.18 40 / 0.5);
     box-shadow: 0 8px 32px oklch(0.65 0.18 40 / 0.08);
   }
-  .exp-card:hover .exp-stripe {
-    background: oklch(0.65 0.18 40);
-  }
   .exp-card:hover .exp-title {
     color: oklch(0.55 0.16 36);
   }
@@ -136,13 +127,9 @@ const experiences = [
 
   /* ── DARK MODE ── */
   :global(.dark) .exp-card {
-    background: oklch(0.14 0.014 38);
-    border-color: oklch(0.22 0.020 38);
-    color: oklch(0.95 0.008 52);
-  }
-
-  :global(.dark) .exp-stripe {
-    background: oklch(0.22 0.020 38);
+    background: var(--card);
+    border-color: var(--border);
+    color: var(--foreground);
   }
 
   :global(.dark) .exp-left {
@@ -154,13 +141,13 @@ const experiences = [
   }
 
   :global(.dark) .exp-title {
-    color: oklch(0.95 0.008 52);
+    color: var(--foreground);
   }
 
   :global(.dark) .exp-pill {
-    background: oklch(0.17 0.016 38);
-    color: oklch(0.65 0.012 48);
-    border-color: oklch(0.26 0.020 38);
+    background: oklch(0.16 0.014 38);
+    color: var(--muted-foreground);
+    border-color: var(--border);
   }
 
   :global(.dark) .exp-link {
@@ -171,17 +158,14 @@ const experiences = [
   }
 
   :global(.dark) .exp-card:hover {
-    border-color: oklch(0.72 0.17 44 / 0.4);
-    box-shadow: 0 8px 32px oklch(0.65 0.18 40 / 0.12);
-  }
-  :global(.dark) .exp-card:hover .exp-stripe {
-    background: oklch(0.72 0.17 44);
+    border-color: oklch(0.72 0.17 44 / 0.45);
+    box-shadow: 0 8px 32px oklch(0.65 0.18 40 / 0.14);
   }
   :global(.dark) .exp-card:hover .exp-title {
     color: oklch(0.72 0.17 44);
   }
   :global(.dark) .exp-card:hover .exp-pill {
-    border-color: oklch(0.72 0.17 44 / 0.3);
+    border-color: oklch(0.72 0.17 44 / 0.4);
     color: oklch(0.72 0.17 44);
   }
 </style>

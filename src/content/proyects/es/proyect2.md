@@ -1,7 +1,7 @@
 ---
 visible: false
 liveNow: false
-order: 5
+order: 6
 imgInicio: "/images/proyect1AeroViajes.webp"
 title: "AeroViajes – E-Commerce de Viajes"
 description: "Plataforma de catálogo de viajes y comercio electrónico que implementa filtrados en tiempo real O(1), modularidad React e interfaces de alta fidelidad."

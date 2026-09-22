@@ -15,10 +15,10 @@ const prefix = lang === "en" ? "/en" : "";
   que compartimenta la información como una revista de arquitectura o software de diseño de lujo.
   Bordajes rectos y limpios con radios de esquina muy reducidos (rounded-xl exterior, rounded-lg interior).
 -->
-<div class="editorial-grid w-full rounded-xl overflow-hidden border border-border/50 transition-all duration-500">
+<div class="editorial-grid w-full rounded-xl overflow-hidden border border-border">
 
   <!-- Fila 1: Barra de Estado & Título de Rol -->
-  <div class="grid grid-cols-1 lg:grid-cols-12 border-b border-border/50">
+  <div class="grid grid-cols-1 lg:grid-cols-12 border-b border-border">
     <!-- Estado disponible -->
     <div class="lg:col-span-8 p-6 flex items-center justify-between">
       <div class="flex items-center gap-3">
@@ -33,7 +33,7 @@ const prefix = lang === "en" ? "/en" : "";
     </div>
     
     <!-- Etiqueta de Rol derecha -->
-    <div class="lg:col-span-4 p-6 border-t lg:border-t-0 lg:border-l border-border/50 flex items-center">
+    <div class="lg:col-span-4 p-6 border-t lg:border-t-0 lg:border-l border-border flex items-center">
       <span class="text-[10px] font-black uppercase tracking-[0.25em] text-amber-600 dark:text-amber-400">
         {t.start.studio}
       </span>
@@ -41,7 +41,7 @@ const prefix = lang === "en" ? "/en" : "";
   </div>
 
   <!-- Fila 2: Nombre Monumental & Pilares -->
-  <div class="grid grid-cols-1 lg:grid-cols-12 border-b border-border/50">
+  <div class="grid grid-cols-1 lg:grid-cols-12 border-b border-border">
     <!-- Columna Nombre -->
     <div class="lg:col-span-8 p-6 md:p-10 flex flex-col justify-center relative overflow-hidden bg-gradient-to-br from-amber-500/[0.02] to-transparent">
       
@@ -57,15 +57,15 @@ const prefix = lang === "en" ? "/en" : "";
     </div>
 
     <!-- Columna Pilares (Foco de especialidad) -->
-    <div class="lg:col-span-4 border-t lg:border-t-0 lg:border-l border-border/50 divide-y divide-border/50 flex flex-col justify-stretch">
+    <div class="lg:col-span-4 border-t lg:border-t-0 lg:border-l border-border divide-y divide-border flex flex-col justify-stretch">
       {[
         { label: t.start.role1, desc: t.start.role1Desc },
         { label: t.start.role2, desc: t.start.role2Desc },
         { label: t.start.role3, desc: t.start.role3Desc },
       ].map((item, index) => (
-        <div class="p-6 flex-1 flex flex-col justify-center group hover:bg-amber-500/[0.02] transition-colors duration-300">
+        <div class="p-6 flex-1 flex flex-col justify-center group hover:bg-amber-500/[0.04] transition-colors duration-200">
           <div class="flex items-center justify-between mb-2">
-            <span class="text-[10px] font-mono text-muted-foreground/40 group-hover:text-amber-500/70 transition-colors duration-300">0{index + 1}</span>
+            <span class="text-[10px] font-mono text-muted-foreground group-hover:text-amber-500 transition-colors duration-200">0{index + 1}</span>
             <span class="text-[10px] font-black uppercase tracking-[0.2em] text-amber-600 dark:text-amber-400">{item.label}</span>
           </div>
           <p class="text-[12px] text-muted-foreground leading-relaxed font-normal">{item.desc}</p>
@@ -84,17 +84,17 @@ const prefix = lang === "en" ? "/en" : "";
     </div>
 
     <!-- Botones de Acción -->
-    <div class="lg:col-span-4 p-6 border-t lg:border-t-0 lg:border-l border-border/50 flex flex-col sm:flex-row lg:flex-col gap-3 justify-center">
+    <div class="lg:col-span-4 p-6 border-t lg:border-t-0 lg:border-l border-border flex flex-col sm:flex-row lg:flex-col gap-3 justify-center">
       <SocialPill
         href="/files/Curriculum Vitae.pdf"
-        class="cta-grid-primary group flex items-center justify-center gap-2.5 py-3.5 px-6 font-bold text-[11px] uppercase tracking-[0.2em] transition-all duration-300 rounded-lg active:scale-95"
+        class="cta-grid-primary group flex items-center justify-center gap-2.5 py-3.5 px-6 font-bold text-[11px] uppercase tracking-[0.2em] transition-transform duration-200 rounded-lg active:scale-95"
       >
         <File className="size-4" />
         <span>{t.start.cv}</span>
       </SocialPill>
       <SocialPill
         href={`${prefix}/#Proyects`}
-        class="cta-grid-secondary flex items-center justify-center gap-2.5 py-3.5 px-6 font-bold text-[11px] uppercase tracking-[0.2em] transition-all duration-300 rounded-lg active:scale-95"
+        class="cta-grid-secondary flex items-center justify-center gap-2.5 py-3.5 px-6 font-bold text-[11px] uppercase tracking-[0.2em] transition-transform duration-200 rounded-lg active:scale-95"
       >
         <Github3 class="size-4" />
         <span>{t.start.projects}</span>
@@ -147,22 +147,22 @@ const prefix = lang === "en" ? "/en" : "";
   /* CTA Secundario (Contorno fino) */
   .cta-grid-secondary {
     background: transparent;
-    color: oklch(0.50 0.025 42);
-    border: 1px solid oklch(0.85 0.025 52);
+    color: var(--foreground);
+    border: 1px solid var(--border);
   }
   :global(.dark) .cta-grid-secondary {
-    color: oklch(0.75 0.012 52);
-    border-color: oklch(0.24 0.020 38);
+    color: var(--foreground);
+    border-color: var(--border);
   }
   .cta-grid-secondary:hover {
     border-color: oklch(0.65 0.18 40);
     color: oklch(0.55 0.16 36);
-    background: oklch(0.65 0.18 40 / 0.04);
+    background: oklch(0.65 0.18 40 / 0.06);
   }
   :global(.dark) .cta-grid-secondary:hover {
     border-color: oklch(0.72 0.17 44);
     color: oklch(0.72 0.17 44);
-    background: oklch(0.72 0.17 44 / 0.04);
+    background: oklch(0.72 0.17 44 / 0.08);
   }
 
   @keyframes ember-pulse {

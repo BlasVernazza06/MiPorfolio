@@ -70,10 +70,10 @@ const { title, lang = "es" } = Astro.props;
     <!-- Background Safeguard -->
     <style is:inline>
       html.dark {
-        background-color: #1a1008;
+        background-color: oklch(0.10 0.012 38);
       }
       html {
-        background-color: #fdf8f3;
+        background-color: oklch(0.98 0.008 58);
       }
     </style>
 
@@ -95,12 +95,12 @@ const { title, lang = "es" } = Astro.props;
     />
   </head>
   <body
-    class="text-foreground bg-background selection:bg-amber-500/25 dark:selection:bg-amber-500/30 overflow-x-hidden transition-colors duration-300"
+    class="text-foreground bg-background selection:bg-amber-500/25 dark:selection:bg-amber-500/30 overflow-x-hidden"
   >
     <!-- Scroll Progress Bar -->
     <div
       id="progress-bar"
-      class="fixed top-0 left-0 h-[2px] z-[9999] transition-all duration-300 pointer-events-none"
+      class="fixed top-0 left-0 h-[2px] z-[9999] transition-[width] duration-150 ease-out pointer-events-none"
       style="width: 0%; background: linear-gradient(to right, oklch(0.72 0.17 44), oklch(0.55 0.16 36));"
       transition:persist
     >
